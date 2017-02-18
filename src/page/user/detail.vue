@@ -26,7 +26,7 @@
 
 </style>
 <script>
-  import AppHeader from '../../components/app-header.vue'
+  import AppHeader from 'components/app-header.vue'
   export default{
     data () {
       return {

@@ -4,6 +4,7 @@
       <el-carousel :autoplay="false" style="height:100vh;">
         <el-carousel-item v-for="item in 4" style="height:100%;">
           <h3>{{ item }}</h3>
+          <img src="../assets/logo.png"/>
         </el-carousel-item>
       </el-carousel>
     </section>

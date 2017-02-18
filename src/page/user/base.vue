@@ -89,9 +89,9 @@
 
 </style>
 <script>
-  import AppHeader from '../../components/app-header.vue'
-  import * as mutations from '../../store/user/mutation-types'
-  import ChooseBox from '../../components/choose-box.vue'
+  import AppHeader from 'components/app-header.vue'
+  import * as mutations from 'store/user/mutation-types'
+  import ChooseBox from 'components/choose-box.vue'
 
   function ajax (store, params) {
     return store.dispatch('FETCH_LIST_DATA', {

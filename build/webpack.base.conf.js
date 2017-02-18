@@ -18,7 +18,8 @@ module.exports = {
   output: {
     path: config.build.assetsRoot,
     publicPath: process.env.NODE_ENV === 'production' ? config.build.assetsPublicPath : config.dev.assetsPublicPath,
-    filename: '[name].js'
+    filename: '[name].js',
+    chunkFilename: '[name].js'
   },
   resolve: {
     extensions: ['', '.js', '.vue', '.json'],
@@ -27,7 +28,8 @@ module.exports = {
       'vue$': 'vue/dist/vue.common.js',
       'src': path.resolve(__dirname, '../src'),
       'assets': path.resolve(__dirname, '../src/assets'),
-      'components': path.resolve(__dirname, '../src/components')
+      'components': path.resolve(__dirname, '../src/components'),
+      'store': path.resolve(__dirname, '../src/store')
     }
   },
   resolveLoader: {
@@ -85,22 +87,7 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
-      },
-      // {
-      //   test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
-      //   loader: 'file-loader'
-      // },
-      // {
-      //   test: /\.(png|jpe?g|gif|svg)(\?\S*)?$/,
-      //   loader: 'file-loader',
-      //   query: {
-      //     name: '[name].[ext]?[hash]'
-      //   }
-      // },
-      // {
-      //   test: /\.css/,
-      //   loader: "style!css"
-      // },
+      }
     ],
     devServer: {
       historyApiFallback: true,
