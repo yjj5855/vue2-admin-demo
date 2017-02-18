@@ -23,6 +23,9 @@ Vue.use(ElementUI)
 const routes = [
   {
     path: '/',
+    beforeEnter: (to, from, next) => {
+      next('/login')
+    },
     component: resolve => {
       require.ensure(['./page/app.vue'], () => {
         resolve(require('./page/app.vue'))
@@ -48,6 +51,8 @@ const routes = [
 ]
 
 const router = new VueRouter({
+  // mode: 'history',
+  scrollBehavior: () => ({ y: 0 }),
   routes
 })
 

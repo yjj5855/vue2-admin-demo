@@ -97,10 +97,10 @@ module.exports = {
       //     name: '[name].[ext]?[hash]'
       //   }
       // },
-      {
-        test: /\.css/,
-        loader: ExtractTextPlugin.extract("style-loader", "css-loader")
-      },
+      // {
+      //   test: /\.css/,
+      //   loader: "style!css"
+      // },
     ],
     devServer: {
       historyApiFallback: true,
