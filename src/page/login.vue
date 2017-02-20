@@ -1,6 +1,6 @@
 <template>
-  <transition name="fade">
-    <div style="position: absolute;top: 0; right: 0;bottom: 0;left: 0;height: 100vh;width: 100%">
+  <transition name="fade" mode="in-out">
+    <div style="background: #f0f3f3;position: absolute;top: 0; right: 0;bottom: 0;left: 0;height: 100vh;width: 100%">
       <el-row type="flex">
         <section class="flex-1">
           <el-carousel :autoplay="false" style="height:100vh;">
@@ -62,6 +62,14 @@
   .el-carousel__item:nth-child(2n+1) {
     background-color: #d3dce6;
   }
+
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s
+  }
+  .fade-enter, .fade-leave-active {
+    opacity: 0
+  }
+
 </style>
 <script>
   export default{
@@ -82,7 +90,7 @@
     },
     methods: {
       onSubmit () {
-        this.$router.replace('/')
+        this.$router.replace('/user/base')
       }
     }
   }
