@@ -31,7 +31,6 @@
       <el-table
         v-loading="userBase.loading"
         element-loading-text="拼命加载中"
-
         :data="userBase.respData.list"
         border
         style="width: 100%;margin-bottom: 10px;">

@@ -12,6 +12,7 @@ import './main.css'
 
 import homeRouter from './page/home'
 import userRouter from './page/user'
+import demoRouter from './page/demo'
 
 require('promise.prototype.finally').shim()
 
@@ -24,7 +25,8 @@ const routes = [
   {
     path: '/',
     beforeEnter: (to, from, next) => {
-      next('/login')
+      // next('/login')
+      next()
     },
     component: resolve => {
       require.ensure(['./page/app.vue'], () => {
@@ -33,7 +35,8 @@ const routes = [
     },
     children: [
       homeRouter,
-      ...userRouter
+      ...userRouter,
+      ...demoRouter
     ]
   },
   {

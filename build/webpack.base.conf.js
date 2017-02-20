@@ -21,6 +21,10 @@ module.exports = {
     filename: '[name].js',
     chunkFilename: '[name].js'
   },
+  externals: {
+    requestAnimationFrame: 'window.requestAnimationFrame',
+    TWEEN: 'window.TWEEN'
+  },
   resolve: {
     extensions: ['', '.js', '.vue', '.json'],
     fallback: [path.join(__dirname, '../node_modules')],

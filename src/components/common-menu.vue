@@ -1,5 +1,5 @@
 <template>
-  <el-menu :router="true" theme="dark" default-active="/" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
+  <el-menu :router="true" :unique-opened="true" theme="dark" default-active="/" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
     <el-menu-item index="/"><i class="el-icon-menu"></i>首页</el-menu-item>
     <el-submenu index="/user">
       <template slot="title">
@@ -9,12 +9,20 @@
       </template>
       <el-menu-item-group>
         <el-menu-item index="/user/base">员工基本信息</el-menu-item>
-        <el-menu-item index="/user/2">选项2</el-menu-item>
-        <el-menu-item index="/user/3">选项3</el-menu-item>
+      </el-menu-item-group>
+    </el-submenu>
+    <el-submenu index="/demo">
+      <template slot="title">
+        <!--<el-menu-item index="/user">-->
+        <i class="el-icon-message"></i>demo
+        <!--</el-menu-item>-->
+      </template>
+      <el-menu-item-group>
+        <el-menu-item index="/demo">过渡状态</el-menu-item>
       </el-menu-item-group>
     </el-submenu>
 
-    <el-menu-item index="3"><i class="el-icon-setting"></i>导航三</el-menu-item>
+    <el-menu-item index="/login"><i class="el-icon-setting"></i>退出登录</el-menu-item>
   </el-menu>
 </template>
 <style>
