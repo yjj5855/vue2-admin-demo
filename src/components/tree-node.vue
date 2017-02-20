@@ -10,7 +10,10 @@
        @dragenter.stop="handleDragEnter"
        @dragleave.stop="handleDragLeave"
        @dragend.prevent="handleDragEnd">
-    {{ node.name }}
+    <div class="tree-node-name">
+      {{ node.name }}&emsp;
+      <span class="tree-node-action" v-if="node.name">操作按钮</span>
+    </div>
     <div class="tree-node-children">
       <tree-node v-for="(child, $index) in children"
                  :vm="myVm" @on-myVm-change="setMyVm" :node="child" :idx="$index">
@@ -30,6 +33,12 @@
   }
   .tree-node-children { /* 层次缩进 */
     margin-left: 2em;
+  }
+  .tree-node-name .tree-node-action{
+    display: none;
+  }
+  .tree-node-name:hover .tree-node-action{
+    display: inline-block;
   }
 </style>
 <script>
