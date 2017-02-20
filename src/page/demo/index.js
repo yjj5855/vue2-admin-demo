@@ -7,5 +7,13 @@ export default [
         resolve(require('./index.vue'))
       }, 'demo')
     }
+  },
+  {
+    path: '/tree',
+    component: resolve => {
+      require.ensure(['./tree.vue'], () => {
+        resolve(require('./tree.vue'))
+      }, 'demo')
+    }
   }
 ]

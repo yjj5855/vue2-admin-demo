@@ -81,7 +81,11 @@
       </el-row>
     </div>
 
-    <choose-box ref="chooseBox" @confirm="chooseEnd"></choose-box>
+    <choose-box
+      ref="chooseBox"
+      :choose-list="['BM', 'YG_STATUS']"
+      @confirm="chooseEnd">
+    </choose-box>
   </div>
 </template>
 <style>

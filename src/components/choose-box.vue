@@ -1,18 +1,19 @@
 <template>
   <el-dialog title="筛选" v-model="show">
     <el-form>
-      <el-form-item label="部门" :label-width="formLabelWidth">
+
+      <el-form-item label="部门" :label-width="formLabelWidth" v-if="chooseList.indexOf('BM') >= 0">
         <el-select v-model="department" placeholder="全部">
           <el-option label="区域一" value="shanghai"></el-option>
           <el-option label="区域二" value="beijing"></el-option>
         </el-select>
       </el-form-item>
 
-      <el-form-item label="状态" :label-width="formLabelWidth">
-        <el-checkbox v-model="zhuangtai.status0" :true-label="0" :false-label="''">合同未签订</el-checkbox>
-        <el-checkbox v-model="zhuangtai.status1" :true-label="1" :false-label="''">试用期</el-checkbox>
-        <el-checkbox v-model="zhuangtai.status2" :true-label="2" :false-label="''">正式</el-checkbox>
-        <el-checkbox v-model="zhuangtai.status3" :true-label="3" :false-label="''">离职</el-checkbox>
+      <el-form-item label="状态" :label-width="formLabelWidth" v-if="chooseList.indexOf('YG_STATUS') >= 0">
+        <el-checkbox v-model="YG_STATUS.status0" :true-label="0" :false-label="''">合同未签订</el-checkbox>
+        <el-checkbox v-model="YG_STATUS.status1" :true-label="1" :false-label="''">试用期</el-checkbox>
+        <el-checkbox v-model="YG_STATUS.status2" :true-label="2" :false-label="''">正式</el-checkbox>
+        <el-checkbox v-model="YG_STATUS.status3" :true-label="3" :false-label="''">离职</el-checkbox>
       </el-form-item>
 
 
@@ -28,6 +29,7 @@
 </style>
 <script>
   const LIST = {
+    BM: 'BM', // 部门
     YG_STATUS: 'YG_STATUS', // 员工状态
     HT_STATUS: 'HT_STATUS', // 合同状态
     ZG_STATUS: 'ZG_STATUS', // 招工状态
@@ -43,11 +45,15 @@
         }
       }
     },
+    mounted () {
+      console.log(this.chooseList)
+      console.log(this.chooseList.indexOf('BM'))
+    },
     data () {
       return {
         show: false,
         department: '', // 部门
-        zhuangtai: {
+        YG_STATUS: {
           status0: 0,
           status1: 1,
           status2: 2,
@@ -65,7 +71,12 @@
         if (flag === false) {
           return
         }
-        this.$emit('confirm', {department: this.department, ...this.zhuangtai})
+        const self = this
+        this.$emit('confirm', {
+          ...(self.chooseList.indexOf('BM') >= 0 ? {department: self.department} : {}),
+          ...(self.chooseList.indexOf('YG_STATUS') >= 0 ? self.YG_STATUS : {})
+
+        })
       }
     }
   }
