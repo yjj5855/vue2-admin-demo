@@ -22,29 +22,33 @@
 
 
       <time-slider-button
+              :tooltip="'top'"
               label="上班时间"
-              :maxValue="value2"
-              v-model="value1"
+              v-model="value[0]"
+              :maxValue="value[1]"
               ref="button1">
       </time-slider-button>
       <time-slider-button
+              :tooltip="'bottom'"
               label="午休开始"
-              :minValue="value1"
-              :maxValue="value3"
-              v-model="value2"
+              :minValue="value[0]"
+              v-model="value[1]"
+              :maxValue="value[2]"
               ref="button1">
       </time-slider-button>
       <time-slider-button
+              :tooltip="'top'"
               label="午休结束"
-              :minValue="value2"
-              :maxValue="value4"
-              v-model="value3"
+              :minValue="value[1]"
+              v-model="value[2]"
+              :maxValue="value[3]"
               ref="button1">
       </time-slider-button>
       <time-slider-button
+              :tooltip="'bottom'"
               label="下班时间"
-              :minValue="value3"
-              v-model="value4"
+              :minValue="value[2]"
+              v-model="value[3]"
               ref="button1">
       </time-slider-button>
       </div>
@@ -60,11 +64,6 @@
   export default{
     data () {
       return {
-        value1: 0,
-        value2: 0,
-        value3: 0,
-        value4: 0,
-
         precision: 0,
         dragging: false
       }
@@ -100,7 +99,6 @@
     },
     watch: {
       value (val, oldVal) {
-        console.log(val)
         if (this.dragging ||
                 Array.isArray(val) &&
                 Array.isArray(oldVal) &&
@@ -115,26 +113,21 @@
         return parseInt(getStyle(this.$refs.slider, 'width'), 10)
       },
       shangwuBarWidth () {
-        return `${100 * (this.value2 - this.value1) / (this.max - this.min)}%`
+        return `${100 * (this.value[1] - this.value[0]) / (this.max - this.min)}%`
       },
       shangwuBarLeft () {
-        return `${100 * (this.value1 - this.min) / (this.max - this.min)}%`
+        return `${100 * (this.value[0] - this.min) / (this.max - this.min)}%`
       },
       xiawuBarWidth () {
-        return `${100 * (this.value4 - this.value3) / (this.max - this.min)}%`
+        return `${100 * (this.value[3] - this.value[2]) / (this.max - this.min)}%`
       },
       xiawuBarLeft () {
-        return `${100 * (this.value3 - this.min) / (this.max - this.min)}%`
+        return `${100 * (this.value[2] - this.min) / (this.max - this.min)}%`
       }
     },
     methods: {
       setValues () {
-        const val = this.value
-        console.log(val)
-        this.value1 = val[0]
-        this.value2 = val[1]
-        this.value3 = val[2]
-        this.value4 = val[3]
+        this.$emit('input', this.value)
       },
       onSliderClick (event) {
         if (this.disabled || this.dragging) return
@@ -147,11 +140,7 @@
 
     },
     mounted () {
-      console.log(new Date(1439 * 60 * 1000 - 28800000).Format('HH:mm'))
-      this.value1 = this.value[0]
-      this.value2 = this.value[1]
-      this.value3 = this.value[2]
-      this.value4 = this.value[3]
+//      console.log(new Date(1439 * 60 * 1000 - 28800000).Format('HH:mm'))
       let precisions = [this.min, this.max, this.step].map(item => {
         let decimal = ('' + item).split('.')[1]
         return decimal ? decimal.length : 0

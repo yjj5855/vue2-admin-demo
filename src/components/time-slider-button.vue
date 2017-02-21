@@ -7,7 +7,7 @@
           :class="{ 'hover': hovering, 'dragging': dragging }"
           :style="{ left: currentPosition }"
           ref="button">
-    <el-tooltip placement="top" ref="tooltip">
+    <el-tooltip :placement="tooltip" ref="tooltip">
       <span slot="content">{{label}} {{ val2time }}</span>
       <div class="el-slider__button" :class="{ 'hover': hovering, 'dragging': dragging }"></div>
     </el-tooltip>
@@ -35,8 +35,11 @@
       minValue: {
         type: Number,
         default: 0
+      },
+      tooltip: {
+        type: String,
+        default: 'top'
       }
-
     },
     data () {
       return {
@@ -83,7 +86,7 @@
         this.$refs.tooltip && (this.$refs.tooltip.showPopper = true)
       },
       hideTooltip () {
-        this.$refs.tooltip && (this.$refs.tooltip.showPopper = false)
+        this.$refs.tooltip && (this.$refs.tooltip.showPopper = true)
       },
       handleMouseEnter () {
 //        console.log('handleMouseEnter')
