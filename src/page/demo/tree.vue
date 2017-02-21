@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <tree-node :vm="vm" :node="treeData"></tree-node>
+  <div style="background: #fff">
+    <tree-node :vm="vm" :node="treeData" @on-node-change="onNodeChange"></tree-node>
   </div>
 </template>
 <style>
@@ -54,6 +54,11 @@
       TreeNode
     },
     methods: {
+      onNodeChange (rootNode) {
+        console.log(JSON.parse(JSON.stringify(rootNode)))
+      }
+    },
+    created () {
 
     }
   }

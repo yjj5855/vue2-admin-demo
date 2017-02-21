@@ -15,5 +15,13 @@ export default [
         resolve(require('./tree.vue'))
       }, 'demo')
     }
+  },
+  {
+    path: '/wifi',
+    component: resolve => {
+      require.ensure(['./wifi.vue'], () => {
+        resolve(require('./wifi.vue'))
+      }, 'demo')
+    }
   }
 ]

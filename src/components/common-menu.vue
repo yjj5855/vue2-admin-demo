@@ -20,6 +20,7 @@
       <el-menu-item-group>
         <el-menu-item index="/demo">过渡状态</el-menu-item>
         <el-menu-item index="/tree">树形结构拖动</el-menu-item>
+        <el-menu-item index="/wifi">动态标签</el-menu-item>
       </el-menu-item-group>
     </el-submenu>
 

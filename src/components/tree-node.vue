@@ -10,12 +10,21 @@
        @dragenter.stop="handleDragEnter"
        @dragleave.stop="handleDragLeave"
        @dragend.prevent="handleDragEnd">
-    <div class="tree-node-name">
-      {{ node.name }}&emsp;
-      <span class="tree-node-action" v-if="node.name">操作按钮</span>
+    <div class="tree-node-name" :class="{ 'has-name': node.name }">
+      <span @click.stop.parent="hideChildren = !hideChildren">
+        <span v-if="node.name && node.children && node.children.length > 0" class="el-tree-node__expand-icon" :class="{ expanded: !hideChildren }"></span>
+        <span class="el-tree-node__label">{{ node.name }}</span>
+      </span>
+      <span class="tree-node-action" v-if="node.name">
+        <el-button-group>
+          <el-button type="primary" size="mini" icon="plus" @click="showDialog('add')"></el-button>
+          <el-button type="primary" size="mini" icon="edit" @click="showDialog('edit')"></el-button>
+          <el-button type="primary" size="mini" icon="delete" @click="showDialog('delete')"></el-button>
+        </el-button-group>
+      </span>
     </div>
     <div class="tree-node-children">
-      <tree-node v-for="(child, $index) in children"
+      <tree-node v-for="(child, $index) in children" v-show="!hideChildren"
                  :vm="myVm" @on-myVm-change="setMyVm" :node="child" :idx="$index">
       </tree-node>
     </div>
@@ -23,22 +32,35 @@
 </template>
 <style scoped>
   .tree-node { /* 普通节点 */
-    display: list-item;
-    list-style: none;
-    border-left: 1px dashed gray;
+    /*display: list-item;*/
+    /*list-style: none;*/
+    /*border-left: 1px dashed #ccc;*/
   }
   .tree-node.empty-node { /* 空节点 */
-    height: .5em;
+    height: 8px;
     list-style-type: none;
   }
   .tree-node-children { /* 层次缩进 */
-    margin-left: 2em;
+    margin-left: 1.5em;
   }
   .tree-node-name .tree-node-action{
+    margin-left: 15px;
+    font-size: 14px;
     display: none;
+  }
+  .tree-node-name.has-name{
+    min-height: 22px;
+    line-height: 22px;
+  }
+  .tree-node-name.has-name:hover{
+    background: #eee;
   }
   .tree-node-name:hover .tree-node-action{
     display: inline-block;
+    height: 14px;
+  }
+  .el-tree-node__label{
+    margin-left: 5px;
   }
 </style>
 <script>
@@ -52,7 +74,9 @@
     },
     data: function () {
       return {
-        myVm: this.vm
+        myVm: this.vm,
+        hideChildren: false,
+        unwatchRootNode: () => {}
       }
     },
     watch: {
@@ -61,6 +85,17 @@
       },
       myVm (val, oldVal) {
         this.$emit('on-myVm-change', val) // ③组件内对myResult变更后向外部发送事件通知
+      }
+    },
+    created () {
+      if (typeof this.idx === 'undefined') {
+        this.unwatchRootNode = this.$watch('node', val => { this.$emit('on-node-change', val) }, { deep: true })
+      }
+    },
+    beforeDestroy () {
+      if (typeof this.idx === 'undefined') {
+        console.log('销毁监听')
+        this.unwatchRootNode()
       }
     },
     computed: {
@@ -130,6 +165,67 @@
       },
       setMyVm (val) {
         this.myVm = val
+      },
+
+      showDialog (type, node) {
+        this.myVm = this
+        switch (type) {
+          case 'add':
+            this.$prompt(`请输入部门名称`, '提示', {
+              confirmButtonText: '确定',
+              cancelButtonText: '取消'
+            }).then(({ value }) => {
+              if (!this.node.children) Vue.set(this.node, 'children', []) // 须用 $set 引入双向绑定
+              this.node.children.push({name: value})
+              this.$message({
+                type: 'success',
+                message: `新增了部门【${value}】`
+              })
+            }).catch(() => {
+              this.$message({
+                type: 'info',
+                message: '取消输入'
+              })
+            })
+            break
+          case 'edit':
+            let oldName = this.node.name
+            this.$prompt(`请输入部门【${oldName}】的新名称`, '提示', {
+              confirmButtonText: '确定',
+              cancelButtonText: '取消'
+            }).then(({ value }) => {
+              this.node.name = value
+              this.$message({
+                type: 'success',
+                message: `部门【${oldName}】改为了: 【${value}】`
+              })
+            }).catch(() => {
+              this.$message({
+                type: 'info',
+                message: '取消输入'
+              })
+            })
+            break
+          case 'delete':
+            this.$confirm('此操作将永久删除该部门, 是否继续?', '提示', {
+              confirmButtonText: '确定',
+              cancelButtonText: '取消',
+              type: 'warning'
+            }).then(() => {
+              let index = this.myVm.$parent.node.children.indexOf(this.myVm.node)
+              this.myVm.$parent.node.children.splice(index, 1)
+              this.$message({
+                type: 'success',
+                message: '删除成功!'
+              })
+            }).catch(() => {
+              this.$message({
+                type: 'info',
+                message: '已取消删除'
+              })
+            })
+            break
+        }
       }
     }
   }
