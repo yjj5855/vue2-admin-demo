@@ -2,7 +2,7 @@
   <div style="min-height: 300px;margin: 15px 30px;padding: 8px;background: #fff;">
     <el-row>
       <el-col :span="24">
-        <time-slider v-model="timeRange"></time-slider>
+        <time-slider v-model="timeRange" :step="10"></time-slider>
 
         <el-slider v-model="value1"></el-slider>
       </el-col>

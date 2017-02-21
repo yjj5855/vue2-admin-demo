@@ -22,24 +22,28 @@
 
 
       <time-slider-button
-              :min="0"
-              :max="value2"
               label="上班时间"
+              :maxValue="value2"
               v-model="value1"
               ref="button1">
       </time-slider-button>
       <time-slider-button
               label="午休开始"
+              :minValue="value1"
+              :maxValue="value3"
               v-model="value2"
               ref="button1">
       </time-slider-button>
       <time-slider-button
               label="午休结束"
+              :minValue="value2"
+              :maxValue="value4"
               v-model="value3"
               ref="button1">
       </time-slider-button>
       <time-slider-button
               label="下班时间"
+              :minValue="value3"
               v-model="value4"
               ref="button1">
       </time-slider-button>
@@ -85,6 +89,10 @@
       disabled: {
         type: Boolean,
         default: false
+      },
+      step: {
+        type: Number,
+        default: 1
       }
     },
     components: {
@@ -144,7 +152,7 @@
       this.value2 = this.value[1]
       this.value3 = this.value[2]
       this.value4 = this.value[3]
-      let precisions = [0, 100, 1].map(item => {
+      let precisions = [this.min, this.max, this.step].map(item => {
         let decimal = ('' + item).split('.')[1]
         return decimal ? decimal.length : 0
       })

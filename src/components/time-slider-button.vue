@@ -60,7 +60,7 @@
         return this.$parent.min
       },
       step () {
-        return 1
+        return this.$parent.step
       },
       precision () {
         return this.$parent.precision
@@ -149,7 +149,11 @@
         const steps = Math.round(newPosition / lengthPerStep)
         let value = steps * lengthPerStep * (this.max - this.min) * 0.01 + this.min
         value = parseFloat(value.toFixed(this.precision))
-        console.log(value)
+        if (value > this.maxValue - 30) {
+          return
+        } else if (value < this.minValue + 30) {
+          return
+        }
         this.$emit('input', value)
         this.$refs.tooltip && this.$refs.tooltip.updatePopper()
         if (!this.dragging && this.value !== this.oldValue) {
