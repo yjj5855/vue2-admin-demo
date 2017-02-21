@@ -55,7 +55,7 @@ module.exports = {
         include: [
           path.join(projectRoot, 'src')
         ],
-        exclude: /node_modules|plugins/
+        exclude: /node_modules|plugins|libs/
       }
     ],
     loaders: [

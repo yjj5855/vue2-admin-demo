@@ -23,5 +23,13 @@ export default [
         resolve(require('./wifi.vue'))
       }, 'demo')
     }
+  },
+  {
+    path: '/time',
+    component: resolve => {
+      require.ensure(['./time.vue'], () => {
+        resolve(require('./time.vue'))
+      }, 'demo')
+    }
   }
 ]
