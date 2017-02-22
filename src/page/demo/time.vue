@@ -2,6 +2,7 @@
   <div style="min-height: 300px;margin: 15px 30px;padding: 8px;background: #fff;">
     <el-row>
       <el-col :span="6">
+        <div>上班时间</div>
         <el-time-select
                 :editable="false"
                 :clearable="false"
@@ -11,6 +12,7 @@
         </el-time-select>
       </el-col>
       <el-col :span="6">
+        <div>午休开始</div>
         <el-time-select
                 :editable="false"
                 :clearable="false"
@@ -20,6 +22,7 @@
         </el-time-select>
       </el-col>
       <el-col :span="6">
+        <div>午休结束</div>
         <el-time-select
                 :editable="false"
                 :clearable="false"
@@ -29,6 +32,7 @@
         </el-time-select>
       </el-col>
       <el-col :span="6">
+        <div>下班时间</div>
         <el-time-select
                 :editable="false"
                 :clearable="false"
