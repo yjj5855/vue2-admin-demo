@@ -1,6 +1,6 @@
 <template>
   <div style="background: #fff">
-    <tree-node :vm="vm" :node="treeData" @on-node-change="onNodeChange"></tree-node>
+    <tree-node v-model="vm" :node="treeData" @on-node-change="onNodeChange"></tree-node>
   </div>
 </template>
 <style>
