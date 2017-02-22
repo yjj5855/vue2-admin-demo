@@ -65,6 +65,9 @@
 </style>
 <script>
   import Vue from 'vue'
+
+  let myVm = null
+  myVm
   export default {
     name: 'tree-node', // 递归组件需指明 name
     props: {
@@ -168,7 +171,6 @@
       },
 
       showDialog (type, node) {
-        this.myVm = this
         switch (type) {
           case 'add':
             this.$prompt(`请输入部门名称`, '提示', {
@@ -212,8 +214,8 @@
               cancelButtonText: '取消',
               type: 'warning'
             }).then(() => {
-              let index = this.myVm.$parent.node.children.indexOf(this.myVm.node)
-              this.myVm.$parent.node.children.splice(index, 1)
+              let index = this.$parent.node.children.indexOf(this.node)
+              this.$parent.node.children.splice(index, 1)
               this.$message({
                 type: 'success',
                 message: '删除成功!'

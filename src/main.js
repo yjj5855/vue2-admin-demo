@@ -34,7 +34,7 @@ const routes = [
       }, 'app')
     },
     children: [
-      homeRouter,
+      ...homeRouter,
       ...userRouter,
       ...demoRouter
     ]
