@@ -7,6 +7,9 @@ import 'fastclick'
 import 'raven-js'
 import axios from 'axios'
 import ElementUI from 'element-ui'
+
+import ThemeSetting from './components/theme-setting/theme.vue'
+
 import 'element-ui/lib/theme-default/index.css'
 import './main.css'
 
@@ -60,8 +63,19 @@ const router = new VueRouter({
 })
 
 sync(store, router)
-
-new Vue({
+window.App = new Vue({
   router,
   store
 }).$mount('#app')
+
+// 等一会再初始化 优化性能
+setTimeout(() => {
+  let themeSetting = new Vue({
+    ...ThemeSetting,
+    store
+  }).$mount('#theme-setting')
+  document.addEventListener('click', () => {
+    themeSetting.active = false
+  })
+}, 5000)
+

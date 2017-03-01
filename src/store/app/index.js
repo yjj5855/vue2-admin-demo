@@ -5,7 +5,8 @@ import {
   DDCONFIG_ERROR,
   UPDATE_CODE,
   LOGIN_SUCCESS,
-  LOGIN_ERROR
+  LOGIN_ERROR,
+  THEME_CHANGE
 } from './mutation-types'
 import * as actions from './actions'
 
@@ -17,7 +18,11 @@ const state = {
   ddConfigStatus: null,
   code: null,
 
-  user: null
+  user: null,
+
+  themeColors: {
+
+  }
 }
 
 const mutations = {
@@ -43,6 +48,9 @@ const mutations = {
   },
   [LOGIN_ERROR] (state, user) {
     state.user = false
+  },
+  [THEME_CHANGE] (state, colors) {
+    state.themeColors = JSON.parse(JSON.stringify(colors))
   }
 }
 

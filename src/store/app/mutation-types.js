@@ -12,3 +12,5 @@ export const UPDATE_CODE = 'UPDATE_CODE' // 更新免登录CODE
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS' // 免登录成功
 
 export const LOGIN_ERROR = 'LOGIN_ERROR' // 免登录失败
+
+export const THEME_CHANGE = 'THEME_CHANGE' // 主题修改

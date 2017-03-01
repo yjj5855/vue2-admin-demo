@@ -12,16 +12,16 @@
 </template>
 <style>
   .el-tabs__item.is-active{
-    background-color: #fff;
+    background-color: #fff!important;;
   }
   .el-tabs__header{
-    margin-bottom: 0;
+    margin-bottom: 0!important;
   }
   .el-tabs__content{
-    padding: 15px;
-    background-color: #fff;
-    border: 1px solid #d1dbe5;
-    border-top: none;
+    padding: 15px!important;
+    background-color: #fff!important;
+    border: 1px solid #d1dbe5!important;
+    border-top: none!important;
   }
 
 </style>

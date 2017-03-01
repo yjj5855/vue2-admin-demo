@@ -1,5 +1,5 @@
 <template>
-  <el-menu :router="true" :unique-opened="true" theme="dark" default-active="/" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
+  <el-menu :router="true" :unique-opened="true" theme="light" default-active="/" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
     <el-menu-item index="/"><i class="el-icon-menu"></i>首页</el-menu-item>
     <el-submenu index="/user">
       <template slot="title">
@@ -38,6 +38,9 @@
 </style>
 <script>
   export default {
+    data: function () {
+      return {}
+    },
     methods: {
       handleOpen (key, keyPath) {
         this.$router.push(key)
@@ -45,6 +48,8 @@
       handleClose (key, keyPath) {
         console.log(key, keyPath)
       }
+    },
+    mounted () {
     }
   }
 </script>
