@@ -151,6 +151,7 @@
   import objectAssign from 'object-assign'
 
   const themePath = '//unpkg.com/element-ui/lib/theme-default'
+//  const themePath = 'theme'
   export default {
     name: 'theme-setting',
     data () {
@@ -199,8 +200,8 @@
           this.colors.info, this.colors.success, this.colors.warning, this.colors.danger))
 
         this.writeNewStyle()
-        console.log(this.$store)
         this.$store.commit('THEME_CHANGE', this.colors)
+        this.active = false
       },
       writeNewStyle () {
         let cssText = this.originalStyle
@@ -212,8 +213,15 @@
           style.innerText = cssText
           document.head.appendChild(style)
         } else {
-          document.head.lastChild.innerText = cssText
+          const style = document.createElement('style')
+          style.innerText = cssText
+          document.head.appendChild(style)
         }
+
+        cssText = cssText.replace(/(\n|\t|\s)*/ig, '$1')
+        cssText = cssText.replace(/\n|\t|\s(\{|\}|,|:|;)/ig, '$1')
+        cssText = cssText.replace(/(\{|\}|,|:|;)\s/ig, '$1')
+        window.localStorage.setItem('themeCss', cssText)
       },
       getStyleTemplate (data) {
         const colorMap = {
@@ -310,9 +318,18 @@
       this.getFontFiles()
     },
     mounted () {
-      setTimeout(() => {
+      this.$nextTick(() => {
         this.originalStylesheetCount = document.styleSheets.length
-      }, 2000)
+
+        if (window.localStorage.getItem('themeColors')) {
+          const themeColors = JSON.parse(window.localStorage.getItem('themeColors'))
+          this.colors.primary = themeColors.primary
+          this.colors.info = themeColors.info
+          this.colors.success = themeColors.success
+          this.colors.warning = themeColors.warning
+          this.colors.danger = themeColors.danger
+        }
+      })
     }
   }
 </script>

@@ -63,10 +63,21 @@ const router = new VueRouter({
 })
 
 sync(store, router)
-window.App = new Vue({
+const App = new Vue({
   router,
   store
 }).$mount('#app')
+
+App.$nextTick(() => {
+  // setTimeout(() => {
+  let cssText = window.localStorage.getItem('themeCss')
+  if (cssText) {
+    const style = document.createElement('style')
+    style.innerText = cssText
+    document.head.appendChild(style)
+  }
+  // }, 300)
+})
 
 // 等一会再初始化 优化性能
 setTimeout(() => {

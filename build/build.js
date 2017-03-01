@@ -23,6 +23,11 @@ rm('-rf', assetsPath)
 mkdir('-p', assetsPath)
 cp('-R', 'static/*', assetsPath)
 
+var themePath = path.join(config.build.assetsRoot)
+rm('-rf', themePath)
+mkdir('-p', themePath)
+cp('-R', 'theme/fonts', themePath)
+
 webpack(webpackConfig, function (err, stats) {
   spinner.stop()
   if (err) throw err

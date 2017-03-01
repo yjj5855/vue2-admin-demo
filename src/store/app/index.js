@@ -20,9 +20,7 @@ const state = {
 
   user: null,
 
-  themeColors: {
-
-  }
+  themeColors: JSON.parse(window.localStorage.getItem('themeColors')) || {}
 }
 
 const mutations = {
@@ -50,7 +48,10 @@ const mutations = {
     state.user = false
   },
   [THEME_CHANGE] (state, colors) {
-    state.themeColors = JSON.parse(JSON.stringify(colors))
+    const themeColors = JSON.stringify(colors)
+    state.themeColors = JSON.parse(themeColors)
+
+    window.localStorage.setItem('themeColors', themeColors)
   }
 }
 

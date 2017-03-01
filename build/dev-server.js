@@ -57,7 +57,7 @@ var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsS
 app.use(staticPath, express.static('./static'))
 
 //原始样式库
-var themePath = path.posix.join('/', 'theme')
+var themePath = path.posix.join(config.dev.assetsPublicPath, config.dev.themeSubDirectory)
 app.use(themePath, express.static('./theme'))
 
 var uri = 'http://localhost:' + port
