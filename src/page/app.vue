@@ -20,7 +20,8 @@
 </template>
 <style scoped>
   .page-content{
-    padding: 20px;
+    padding: 0 20px;
+    background: #fff;
   }
 
   .top-enter-active {

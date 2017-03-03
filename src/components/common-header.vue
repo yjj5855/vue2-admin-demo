@@ -72,7 +72,7 @@
   export default {
     data: function () {
       return {
-        pathList: []
+
       }
     },
     components: {

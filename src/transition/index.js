@@ -1,4 +1,4 @@
-import * as shuidi from './shuidi'
+// import * as shuidi from './shuidi'
 export default {
-  ...shuidi
+  // ...shuidi
 }
