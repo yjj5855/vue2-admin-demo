@@ -7,6 +7,7 @@ import 'fastclick'
 import 'raven-js'
 import axios from 'axios'
 import ElementUI from 'element-ui'
+import './transition'
 
 import ThemeSetting from './components/theme-setting/theme.vue'
 

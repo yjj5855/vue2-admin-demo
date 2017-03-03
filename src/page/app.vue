@@ -11,7 +11,7 @@
         </transition>
 
         <transition name="right" appear v-if="!destroy">
-          <el-col :span="20">
+          <el-col :span="20" class="page-content">
             <router-view></router-view>
           </el-col>
         </transition>
@@ -19,6 +19,10 @@
     </div>
 </template>
 <style scoped>
+  .page-content{
+    padding: 20px;
+  }
+
   .top-enter-active {
     animation: top-in .5s;
   }

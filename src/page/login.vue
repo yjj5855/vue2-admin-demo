@@ -118,7 +118,7 @@
     },
     methods: {
       onSubmit () {
-        this.$router.replace('/user/base')
+        this.$router.replace('/')
       }
     }
   }
