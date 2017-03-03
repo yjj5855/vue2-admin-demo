@@ -1,8 +1,6 @@
 
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import store from './store'
-import { sync } from 'vuex-router-sync'
 import 'fastclick'
 import 'raven-js'
 import axios from 'axios'
@@ -11,8 +9,6 @@ import 'element-ui/lib/theme-default/index.css'
 import './main.css'
 
 import homeRouter from './page/home'
-import userRouter from './page/user'
-import demoRouter from './page/demo'
 
 require('promise.prototype.finally').shim()
 
@@ -24,28 +20,14 @@ Vue.use(ElementUI)
 const routes = [
   {
     path: '/',
-    beforeEnter: (to, from, next) => {
-      // next('/login')
-      next()
-    },
     component: resolve => {
       require.ensure(['./page/app.vue'], () => {
         resolve(require('./page/app.vue'))
       }, 'app')
     },
     children: [
-      homeRouter,
-      ...userRouter,
-      ...demoRouter
+      homeRouter
     ]
-  },
-  {
-    path: '/login',
-    component: resolve => {
-      require.ensure(['./page/login.vue'], () => {
-        resolve(require('./page/login.vue'))
-      }, 'login')
-    }
   },
   {
     path: '*',
@@ -59,9 +41,6 @@ const router = new VueRouter({
   routes
 })
 
-sync(store, router)
-
 new Vue({
-  router,
-  store
+  router
 }).$mount('#app')
