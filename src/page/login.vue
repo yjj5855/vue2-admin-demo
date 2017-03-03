@@ -4,13 +4,15 @@
       <el-row type="flex">
         <section class="flex-1">
           <el-carousel :autoplay="false" style="height:100vh;">
-            <el-carousel-item v-for="item in 4" style="height:100%;">
-              <h3>{{ item }}</h3>
-              <img src="../assets/logo.png"/>
+            <el-carousel-item v-for="item in img_list" :style="{'background-image': `url(${item})`}" style="height:100%;background-size: cover;">
+              <div class="img-cover"></div>
+              <!--<div style="color: #fff;font-size: 50px;font-weight: 100;">-->
+                <!--已有<animated-integer v-bind:value="count_company"></animated-integer>+企业使用班步-->
+              <!--</div>-->
             </el-carousel-item>
           </el-carousel>
         </section>
-        <section style="width: 400px;">
+        <section class="login-box">
           <header style="padding-top: 100px;">
             <h1 style="text-align: center;">欢迎使用班步SaaS平台</h1>
           </header>
@@ -56,11 +58,11 @@
     height: 100vh;
   }
   .el-carousel__item:nth-child(2n) {
-    background-color: #99a9bf;
+    background-color: #4b515d;
   }
 
   .el-carousel__item:nth-child(2n+1) {
-    background-color: #d3dce6;
+    background-color: #3a3c40;
   }
 
   .fade-enter-active, .fade-leave-active {
@@ -70,12 +72,35 @@
     opacity: 0
   }
 
+  .login-box{
+    width: 400px;
+    position: absolute;
+    top: 0;
+    right: 100px;
+    bottom: 0;
+    z-index: 2;
+    background: rgba(255,255,255, 0.8);
+  }
+  .img-cover{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.4);
+  }
 </style>
 <script>
+  import AnimatedInteger from 'components/animated-integer'
   export default{
     data () {
       return {
         msg: 'hello vue',
+        count_company: 1000,
+        img_list: [
+          'https://demo.ibanbu.com/resources/img/bg1.jpg?76',
+          'https://demo.ibanbu.com/resources/img/bg2.jpg?76'
+        ],
         form: {
           name: '',
           region: '',
@@ -87,6 +112,9 @@
           desc: ''
         }
       }
+    },
+    components: {
+      AnimatedInteger
     },
     methods: {
       onSubmit () {
