@@ -19,9 +19,8 @@
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
 
-    font-family: 'Hiragino Sans GB';
     font-size: 20px;
-    font-weight: 100;
+    font-weight: 300;
     color: #474747;
   }
   circle {

@@ -1,36 +1,40 @@
 <template>
   <div class="bb-index">
-    <div>
+    <div id="xinzi">
       <el-row type="flex" align="middle" justify="space-between" class="box-header">
         <el-col :span="12" class="box-header__title">
           薪资占比
         </el-col>
-        <div>
-          <i class="el-icon-view"></i>
-          <i class="el-icon-close"></i>
-        </div>
+        <!--右侧动作组件-->
+        <action-icon full-screen="xinzi"/>
       </el-row>
       <el-row :gutter="30"  style="padding: 40px 88px;">
         <el-col :span="4" v-for="item in svgList">
           <div style="padding: 0 10px"><svg-circle></svg-circle></div>
-          <div style="text-align: center;color: #999">{{item}}</div>
+          <div style="font-weight: 300;text-align: center;color: #999">{{item}}</div>
         </el-col>
       </el-row>
     </div>
 
     <el-row :gutter="20">
       <el-col :span="8">
-        <div class="echarts-box">
+        <div class="echarts-box" id="chart-age">
           <el-row type="flex" align="middle" justify="space-between" class="box-header">
             <el-col :span="12" class="box-header__title">
               子公司员工年龄分布统计
             </el-col>
-            <div>
-              <i class="el-icon-view"></i>
-              <i class="el-icon-close"></i>
-            </div>
+
+            <!-- 操作按钮 可以绑定其他组件的事件 -->
+            <action-icon
+              :show-eye="true"
+              @on-eye-toggle="$refs.age && $refs.age.onEyeToggle(arguments)"
+
+              :full-screen="'chart-age'"
+               @on-full-screen="$refs.age && $refs.age.onFullScreen(arguments)">
+
+            </action-icon>
           </el-row>
-          <echarts :option="lineCharts"></echarts>
+          <echarts :option="lineCharts" ref="age"></echarts>
         </div>
       </el-col>
       <el-col :span="8">
@@ -39,10 +43,7 @@
             <el-col :span="12" class="box-header__title">
               子公司员工性别统计
             </el-col>
-            <div>
-              <i class="el-icon-view"></i>
-              <i class="el-icon-close"></i>
-            </div>
+            <action-icon />
           </el-row>
           <echarts :option="barCharts"></echarts>
         </div>
@@ -55,10 +56,7 @@
             <el-col :span="12" class="box-header__title">
               子公司列表
             </el-col>
-            <div>
-              <i class="el-icon-view"></i>
-              <i class="el-icon-close"></i>
-            </div>
+            <action-icon/>
           </el-row>
           <el-table
             height="350"
@@ -96,7 +94,8 @@
 </style>
 <script>
   import svgCircle from 'components/svg-circle.vue'
-  import echarts from 'components/echarts'
+  import echarts from 'components/echarts.vue'
+  import actionIcon from 'components/action-icon.vue'
   import { LineOrBarOption } from '../../libs/echarts-template'
   export default{
     data () {
@@ -155,10 +154,15 @@
     },
     components: {
       svgCircle,
-      echarts
+      echarts,
+      actionIcon
     },
     methods: {
+      onFullScreen () {
+        console.log(this.$refs)
 
+        this.$refs.age.onFullScreen()
+      }
     }
   }
 </script>

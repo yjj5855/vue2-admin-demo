@@ -17,6 +17,13 @@ npm run build
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
+# 编译兼容element的font-awesome
+```
+@fa-css-prefix:       el-icon-fa; //修改为兼容element的class名称
+
+
+lessc ./static/font-awesome-4.7.0/less/font-awesome.less > ./static/el-font-awesome.css
+```
 
 # 问题
 

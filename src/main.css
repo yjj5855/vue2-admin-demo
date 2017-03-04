@@ -1,6 +1,7 @@
 
 html{
-  font-family: arial, 'Hiragino Sans GB', 'Microsoft Yahei', 'SimSun', \5b8b\4f53, Tahoma, Arial, Helvetica, STHeiti;
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  /*font-family: arial, 'Hiragino Sans GB', 'Microsoft Yahei', 'SimSun', \5b8b\4f53, Tahoma, Arial, Helvetica, STHeiti;*/
 }
 body{
   min-width: 1366px;
@@ -9,7 +10,7 @@ body{
 }
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
-  font-weight: 100;
+  font-weight: 300;
   color: #242a30;
 }
 .el-pagination{
@@ -19,4 +20,15 @@ h1, h2, h3, h4, h5, h6 {
 .white-space{
   min-height: 15px;
   width: 100%;
+}
+
+
+/*fa icon*/
+[class^=el-icon-][class^="el-icon-fa"], [class*=" el-icon-"][class*=" el-icon-fa"]{
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome!important;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

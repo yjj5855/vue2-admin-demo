@@ -1,9 +1,9 @@
 <template>
   <div>
     <!--最顶部-->
-    <el-row type="flex" align="middle" justify="space-between" class="common-menu" :style="backgroundColor">
-      <el-col :span="12">
-        <div style="font-size: 24px;font-weight: 100;">人力资源智能云平台班步VIP版</div>
+    <el-row type="flex" align="middle"  class="common-menu" :style="backgroundColor">
+      <el-col style="flex: 1;">
+        <div style="font-size: 20px;font-weight: 300;">人力资源智能云平台班步VIP版</div>
         <div>
           <el-dropdown>
             <span class="el-dropdown-link">
@@ -20,10 +20,12 @@
         </div>
       </el-col>
 
+      <!--头像-->
+      <img class="avatar" src="../assets/logo.png"/>
       <el-dropdown>
-        <span class="el-dropdown-link">
-          用户XX<i class="el-icon-arrow-down el-icon--right"></i>
-        </span>
+      <span class="el-dropdown-link">
+        用户XX<i class="el-icon-arrow-down el-icon--right"></i>
+      </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>黄金糕</el-dropdown-item>
           <el-dropdown-item>狮子头</el-dropdown-item>
@@ -32,6 +34,8 @@
           <el-dropdown-item divided>蚵仔煎</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
+
+
     </el-row>
 
     <!--面包屑-吸顶-->
@@ -65,7 +69,11 @@
   .el-dropdown {
     color: #fff;
   }
-
+  .avatar{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
   .breadcrumb{
     height: 50px;
     padding: 0 20px;

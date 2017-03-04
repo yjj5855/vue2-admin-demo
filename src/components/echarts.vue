@@ -28,6 +28,7 @@
 </style>
 <script>
   import echarts from 'echarts'
+
   export default {
     props: {
       option: {
@@ -61,6 +62,14 @@
           this.chart.setOption(this.option, this.notMerge || false)
           this.loading = false
         }
+      },
+      onFullScreen (arg) {
+        let status = arg[0]
+        console.log('onFullScreen', status)
+      },
+      onEyeToggle (arg) {
+        let status = arg[0]
+        console.log('onEyeToggle', status)
       }
     }
   }
