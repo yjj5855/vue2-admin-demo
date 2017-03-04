@@ -122,25 +122,33 @@
       this.$store.commit('UPDATE_BREADCRUMB', [{name: '班步', path: '/'}, {name: '首页', path: '/'}])
 
       this.lineCharts = new LineOrBarOption({
-        xAxis: [{data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']}],
+        xAxis: [{data: new Array(12).fill('公司').map((item, index) => item + index)}],
         series: [
           {
-            name: '18-30',
-            stack: '岁数',
+            name: '18-30岁',
             type: 'line',
-            data: [820, 932, 901, 934, 1290, 1330, 1320, 790, 960, 899, 1100, 1080]
+            data: new Array(12).fill(800).map((item, index) => parseInt(item + item * Math.random()))
+          },
+          {
+            name: '30-50岁',
+            type: 'line',
+            data: new Array(12).fill(1000).map((item, index) => parseInt(item + item * Math.random()))
           }
         ]
       })
 
       this.barCharts = new LineOrBarOption({
-        xAxis: [{data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']}],
+        xAxis: [{data: new Array(12).fill('公司').map((item, index) => item + index)}],
         series: [
           {
-            name: '18-30',
-            stack: '岁数',
+            name: '男',
             type: 'bar',
-            data: [820, 932, 901, 934, 1290, 1330, 1320, 790, 960, 899, 1100, 1080]
+            data: new Array(12).fill(1000).map((item, index) => parseInt(item + item * Math.random()))
+          },
+          {
+            name: '女',
+            type: 'bar',
+            data: new Array(12).fill(800).map((item, index) => parseInt(item + item * Math.random()))
           }
         ]
       })

@@ -13,7 +13,8 @@ export class LineOrBarOption {
           shadowStyle: {
             color: 'rgba(0,0,0,.05)',
           }
-        }
+        },
+        formatter: '{b}<br />{a0}: {c0}人<br />{a1}: {c1}人'
       },
       legend: {
         data: []
@@ -73,8 +74,8 @@ export class LineOrBarOption {
       }
     })
 
-    const {start_color, end_color} = getRandomColor()
     option.series = series.map(item => {
+      const {start_color, end_color} = getRandomColor()
       return {
         name: item.name,
         type: item.type || 'line',
