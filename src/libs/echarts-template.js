@@ -50,6 +50,7 @@ export class LineOrBarOption {
       series: [ ]
     }
 
+
     option.xAxis = xAxis.map(item => {
       return {
         position: 'top',
