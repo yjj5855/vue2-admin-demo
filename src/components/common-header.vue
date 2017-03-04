@@ -3,7 +3,7 @@
     <!--最顶部-->
     <el-row type="flex" align="middle" justify="space-between" class="common-menu" :style="backgroundColor">
       <el-col :span="12">
-        <h2>人力资源智能云平台班步VIP版</h2>
+        <div style="font-size: 24px;font-weight: 100;">人力资源智能云平台班步VIP版</div>
         <div>
           <el-dropdown>
             <span class="el-dropdown-link">
