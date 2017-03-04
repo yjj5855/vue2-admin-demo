@@ -23,7 +23,8 @@ module.exports = {
   },
   externals: {
     requestAnimationFrame: 'window.requestAnimationFrame',
-    TWEEN: 'window.TWEEN'
+    TWEEN: 'window.TWEEN',
+    echarts: 'window.echarts'
   },
   resolve: {
     extensions: ['', '.js', '.vue', '.json'],

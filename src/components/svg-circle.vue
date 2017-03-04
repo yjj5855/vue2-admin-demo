@@ -2,7 +2,7 @@
   <div class="svg-box">
     <svg viewBox="0 0 440 440" style="width: 100%;height: 100%">
       <circle cx="220" cy="220" r="170" stroke-width="15" stroke="#EEEEEE" fill="none"></circle>
-      <circle cx="220" cy="220" r="170" stroke-width="15" stroke="#00A5E0" fill="none" ref="circle" transform="matrix(0,-1,1,0,0,440)" v-bind:stroke-dasharray="dasharray"></circle>
+      <circle cx="220" cy="220" r="170" stroke-width="15" v-bind:stroke="color" fill="none" ref="circle" transform="matrix(0,-1,1,0,0,440)" v-bind:stroke-dasharray="dasharray"></circle>
     </svg>
     <div class="text">
       <animated-integer v-bind:value="percentInt"></animated-integer>%
@@ -19,8 +19,10 @@
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
 
-    font-size: 30px;
+    font-family: 'Hiragino Sans GB';
+    font-size: 20px;
     font-weight: 100;
+    color: #474747;
   }
   circle {
     stroke-linecap: round;
@@ -31,6 +33,7 @@
 </style>
 <script>
   import animatedInteger from './animated-integer.vue'
+
   export default{
     props: {
       value: {
@@ -39,7 +42,8 @@
     },
     data () {
       return {
-        percent: 0
+        percent: 0,
+        color: 'hsla(' + Math.floor(Math.random() * (360)) + ', 60%, 50%, 1)'
       }
     },
     components: {
