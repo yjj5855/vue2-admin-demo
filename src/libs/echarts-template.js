@@ -81,12 +81,13 @@ export class LineOrBarOption {
         name: item.name,
         type: item.type || 'line',
         stack: item.stack,
-        label: {
-          normal: {
-            show: true,
-            position: 'top',
-          }
-        },
+        // 默认不在图表中显示每项的数值
+        // label: {
+        //   normal: {
+        //     show: true,
+        //     position: 'top',
+        //   }
+        // },
         itemStyle: {
           normal: {
             color: start_color

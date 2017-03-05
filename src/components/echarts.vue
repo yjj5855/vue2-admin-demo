@@ -65,11 +65,39 @@
       },
       onFullScreen (arg) {
         let status = arg[0]
-        console.log('onFullScreen', status)
+
+        setTimeout(() => {
+          if (status) {
+            this.chart.setOption({
+              dataZoom: [{
+                type: 'inside',
+                zoomLock: true,
+                start: 0,
+                end: 100
+              }]
+            })
+          } else {
+            this.chart.setOption(this.option)
+          }
+          this.chart.resize()
+        }, 100)
       },
       onEyeToggle (arg) {
         let status = arg[0]
-        console.log('onEyeToggle', status)
+
+        this.chart.setOption({
+          series: this.option.series.map(item => {
+            return {
+              ...item,
+              label: {
+                normal: {
+                  show: status,
+                  position: 'top'
+                }
+              }
+            }
+          })
+        })
       }
     }
   }
