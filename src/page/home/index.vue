@@ -131,7 +131,7 @@
       this.$store.commit('UPDATE_BREADCRUMB', [{name: '班步', path: '/'}, {name: '首页', path: '/'}])
 
       this.lineCharts = new LineOrBarOption({
-        xAxis: [{data: new Array(12).fill('公司').map((item, index) => item + index)}],
+        xAxis: [{data: new Array(12).fill('云才网络').map((item, index) => item + index)}],
         series: [
           {
             name: '18-30岁',

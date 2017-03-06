@@ -16,22 +16,17 @@ export class LineOrBarOption {
         },
         formatter: '{b}<br />{a0}: {c0}人<br />{a1}: {c1}人'
       },
-      // toolbox: {
-      //   feature: {
-      //     saveAsImage: {
-      //       show: true
-      //     }
-      //   }
-      // },
       legend: {
+        top: '2%',
+        right: 0,
         data: []
       },
-      grid: {
-        top: '15%',
-        left: '5%',
-        right: '5%',
-        bottom: '0%',
-      },
+      // grid: {
+      //   top: '10%',
+      //   left: '8%',
+      //   right: '8%',
+      //   bottom: '15%',
+      // },
       dataZoom: [{
         type: 'inside',
         zoomLock: true,
@@ -40,12 +35,12 @@ export class LineOrBarOption {
       }],
       xAxis: [],
       yAxis: [{
+        name: '单位（人）',
         type: 'value',
-        axisLabel: {
-          show: false
-        },
         axisLine: {
-          show: false
+          lineStyle: {
+            color: '#999'
+          }
         },
         axisTick: {
           show: false
@@ -60,21 +55,21 @@ export class LineOrBarOption {
 
     option.xAxis = xAxis.map(item => {
       return {
-        position: 'top',
+        position: 'bottom',
         type: 'category',
-        boundaryGap: false,
+        boundaryGap: true,
         data: item.data,
 
+
         axisLabel: {
-          margin: 20
+          margin: 10
         },
         axisLine: {
-          show: false
+          lineStyle: {
+            color: '#999'
+          }
         },
         axisTick: {
-          show: false
-        },
-        splitLine: {
           show: false
         },
 
@@ -84,10 +79,14 @@ export class LineOrBarOption {
 
     option.series = series.map(item => {
       const {start_color, end_color} = getRandomColor()
+
+      option.legend.data.push({name: item.name})
+
       return {
         name: item.name,
         type: item.type || 'line',
         stack: item.stack,
+        barMaxWidth: 15,
         // 默认不在图表中显示每项的数值
         // label: {
         //   normal: {
@@ -100,17 +99,18 @@ export class LineOrBarOption {
             color: start_color
           }
         },
-        areaStyle: {
-          normal: {
-            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-              offset: 0,
-              color: start_color // 0% 处的颜色
-            }, {
-              offset: 1,
-              color: end_color // 100% 处的颜色
-            }], false)
-          }
-        },
+
+        // areaStyle: {
+        //   normal: {
+        //     color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+        //       offset: 0,
+        //       color: start_color // 0% 处的颜色
+        //     }, {
+        //       offset: 1,
+        //       color: end_color // 100% 处的颜色
+        //     }], false)
+        //   }
+        // },
         data: item.data
       }
     })
