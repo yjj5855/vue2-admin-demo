@@ -9,10 +9,10 @@ export default [
     }
   },
   {
-    path: '/user/base',
+    path: '/user/list',
     component: resolve => {
-      require.ensure(['./base.vue'], () => {
-        resolve(require('./base.vue'))
+      require.ensure(['./list.vue'], () => {
+        resolve(require('./list.vue'))
       }, 'user')
     }
   },

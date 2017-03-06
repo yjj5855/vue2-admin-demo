@@ -9,7 +9,7 @@
             <i class="el-icon-fa-user"></i>员工管理
         </template>
         <el-menu-item-group>
-          <el-menu-item index="/user/base" :route="{path:'/user/base'}">花名册</el-menu-item>
+          <el-menu-item index="/user/list" :route="{path:'/user/list'}">花名册</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
       <el-submenu index="3">

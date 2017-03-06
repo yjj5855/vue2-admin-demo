@@ -13,10 +13,13 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 300;
   color: #242a30;
 }
+
+/*分页组件 没有padding*/
 .el-pagination{
-  padding: 0;
+  padding: 0!important;
 }
 
+/*留白*/
 .white-space{
   min-height: 15px;
   width: 100%;
