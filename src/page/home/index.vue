@@ -39,14 +39,22 @@
         </div>
       </el-col>
       <el-col :span="8">
-        <div class="echarts-box">
+        <div class="echarts-box" id="chart-xb">
           <el-row type="flex" align="middle" justify="space-between" class="box-header">
             <el-col :span="12" class="box-header__title">
               子公司员工性别统计
             </el-col>
-            <action-icon />
+            <action-icon
+              :show-eye="true"
+              @on-eye-toggle="$refs.xb && $refs.xb.onEyeToggle(arguments)"
+
+              :full-screen="'chart-xb'"
+              @on-full-screen="$refs.xb && $refs.xb.onFullScreen(arguments)"
+
+              :download-name="'chart-xb'">
+            </action-icon>
           </el-row>
-          <echarts :option="barCharts"></echarts>
+          <echarts :option="barCharts" ref="xb"></echarts>
         </div>
       </el-col>
 

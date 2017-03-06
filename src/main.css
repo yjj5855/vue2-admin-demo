@@ -22,6 +22,10 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
 }
 
+div[_echarts_instance_] div{
+  z-index: 2!important;
+}
+
 
 /*fa icon*/
 [class^=el-icon-][class^="el-icon-fa"], [class*=" el-icon-"][class*=" el-icon-fa"]{
