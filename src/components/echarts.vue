@@ -66,21 +66,19 @@
       onFullScreen (arg) {
         let status = arg[0]
 
-        setTimeout(() => {
-          if (status) {
-            this.chart.setOption({
-              dataZoom: [{
-                type: 'inside',
-                zoomLock: true,
-                start: 0,
-                end: 100
-              }]
-            })
-          } else {
-            this.chart.setOption(this.option)
-          }
-          this.chart.resize()
-        }, 100)
+        if (status) {
+          this.chart.setOption({
+            dataZoom: [{
+              type: 'inside',
+              zoomLock: true,
+              start: 0,
+              end: 100
+            }]
+          })
+        } else {
+          this.chart.setOption(this.option)
+        }
+        this.chart.resize()
       },
       onEyeToggle (arg) {
         let status = arg[0]

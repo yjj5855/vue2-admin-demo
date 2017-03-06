@@ -30,8 +30,9 @@
               @on-eye-toggle="$refs.age && $refs.age.onEyeToggle(arguments)"
 
               :full-screen="'chart-age'"
-               @on-full-screen="$refs.age && $refs.age.onFullScreen(arguments)">
+               @on-full-screen="$refs.age && $refs.age.onFullScreen(arguments)"
 
+              :download-name="'chart-age'">
             </action-icon>
           </el-row>
           <echarts :option="lineCharts" ref="age"></echarts>
@@ -86,7 +87,8 @@
   .box-header{
     height: 50px;
     border-bottom: 1px #eee solid;
-    color: #999
+    color: #999;
+    background: #fff;
   }
   .box-header__title{
     color: #474747

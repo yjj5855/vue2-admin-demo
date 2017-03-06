@@ -16,6 +16,13 @@ export class LineOrBarOption {
         },
         formatter: '{b}<br />{a0}: {c0}人<br />{a1}: {c1}人'
       },
+      // toolbox: {
+      //   feature: {
+      //     saveAsImage: {
+      //       show: true
+      //     }
+      //   }
+      // },
       legend: {
         data: []
       },
