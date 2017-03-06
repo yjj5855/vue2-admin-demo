@@ -1,7 +1,5 @@
 <template>
   <div>
-    <app-header :path-list="pathList"/>
-
     <div style="margin: 15px 30px;padding: 8px;background: #fff;">
       <el-row type="flex" align="middle" justify="space-between">
         <el-col :span="12" style="margin-bottom: 10px">
@@ -92,7 +90,6 @@
 
 </style>
 <script>
-  import AppHeader from 'components/app-header.vue'
   import * as mutations from 'store/user/mutation-types'
   import ChooseBox from 'components/choose-box.vue'
 
@@ -105,7 +102,6 @@
 
   export default{
     components: {
-      AppHeader,
       ChooseBox
     },
     data () {
@@ -122,7 +118,7 @@
     },
     created () {
       ajax(this.$store)
-      this.pathList = [{name: '首页', path: '/'}, {name: '员工管理', path: '/user'}, {name: '员工基本信息', path: '/user/base'}]
+      this.$store.commit('UPDATE_BREADCRUMB', [{name: '班步', path: '/'}, {name: '人员信息', path: '/user'}, {name: '花名册', path: '/user/base'}])
     },
     methods: {
       handleClick () {

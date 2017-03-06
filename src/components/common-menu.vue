@@ -1,28 +1,26 @@
 <template>
   <sticky :top="'50px'" :width="'16.66667%'" :z="2">
-    <el-menu :router="true" :unique-opened="true" theme="light" default-active="/" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
-      <el-menu-item index="/"><i class="el-icon-menu"></i>首页</el-menu-item>
-      <el-submenu index="/user">
+    <el-menu :unique-opened="true" theme="light" :default-active="$route.path" class="el-menu-vertical-demo" @select="handleSelect" @open="handleOpen" @close="handleClose">
+      <el-menu-item index="/" :route="{path:'/'}">
+        <i class="el-icon-fa-home"></i>首页
+      </el-menu-item>
+      <el-submenu index="2">
         <template slot="title">
-          <!--<el-menu-item index="/user">-->
-            <i class="el-icon-message"></i>员工管理
-          <!--</el-menu-item>-->
+            <i class="el-icon-fa-user"></i>员工管理
         </template>
         <el-menu-item-group>
-          <el-menu-item index="/user/base">员工基本信息</el-menu-item>
+          <el-menu-item index="/user/base" :route="{path:'/user/base'}">花名册</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
-      <el-submenu index="/demo">
+      <el-submenu index="3">
         <template slot="title">
-          <!--<el-menu-item index="/user">-->
           <i class="el-icon-message"></i>demo
-          <!--</el-menu-item>-->
         </template>
         <el-menu-item-group>
-          <el-menu-item index="/demo">过渡状态</el-menu-item>
-          <el-menu-item index="/tree">树形结构拖动</el-menu-item>
-          <el-menu-item index="/wifi">动态标签</el-menu-item>
-          <el-menu-item index="/time">上下班时间设置</el-menu-item>
+          <el-menu-item index="/demo" :route="{path:'/demo'}">过渡状态</el-menu-item>
+          <el-menu-item index="/tree" :route="{path:'/tree'}">树形结构拖动</el-menu-item>
+          <el-menu-item index="/wifi" :route="{path:'/wifi'}">动态标签</el-menu-item>
+          <el-menu-item index="/time" :route="{path:'/time'}">上下班时间设置</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
 
@@ -50,10 +48,14 @@
     },
     methods: {
       handleOpen (key, keyPath) {
-        this.$router.push(key)
+        console.log('handleOpen', key, keyPath)
       },
       handleClose (key, keyPath) {
-        console.log(key, keyPath)
+        console.log('handleClose', key, keyPath)
+      },
+      handleSelect (index, indexPath) {
+        console.log('handleSelect', typeof index)
+        this.$router.history.push(index)
       }
     },
     mounted () {

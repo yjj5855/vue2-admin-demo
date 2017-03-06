@@ -21,12 +21,12 @@ export class LineOrBarOption {
         right: 0,
         data: []
       },
-      // grid: {
-      //   top: '10%',
-      //   left: '8%',
-      //   right: '8%',
-      //   bottom: '15%',
-      // },
+      grid: {
+        // top: '10%',
+        // left: '8%',
+        // right: '8%',
+        bottom: '10%',
+      },
       dataZoom: [{
         type: 'inside',
         zoomLock: true,
@@ -86,7 +86,7 @@ export class LineOrBarOption {
         name: item.name,
         type: item.type || 'line',
         stack: item.stack,
-        barMaxWidth: 15,
+        barMaxWidth: 30,
         // 默认不在图表中显示每项的数值
         // label: {
         //   normal: {
