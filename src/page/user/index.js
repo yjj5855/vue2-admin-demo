@@ -17,7 +17,7 @@ export default [
     }
   },
   {
-    path: '/user/base/:id',
+    path: '/user/:id',
     component: resolve => {
       require.ensure(['./detail.vue'], () => {
         resolve(require('./detail.vue'))
