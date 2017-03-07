@@ -117,6 +117,7 @@
         element-loading-text="拼命加载中"
         :data="userBase.respData.list"
         border
+        @cell-click="handleCellClick"
         style="width: 100%;margin-bottom: 10px;">
 
         <!--联系人布局-->
@@ -377,6 +378,11 @@
       },
       handleSelect (item) {
         console.log(item)
+      },
+
+      handleCellClick (row, column, cell, event) {
+        console.log(row, column, cell, event)
+        this.$router.history.push('/user/1')
       }
     }
   }

@@ -92,15 +92,6 @@
   .bb-index{
 
   }
-  .box-header{
-    height: 50px;
-    border-bottom: 1px #eee solid;
-    color: #999;
-    background: #fff;
-  }
-  .box-header__title{
-    color: #474747
-  }
 </style>
 <script>
   import svgCircle from 'components/svg-circle.vue'
