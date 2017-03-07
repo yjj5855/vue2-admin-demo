@@ -5,7 +5,8 @@
       <circle cx="220" cy="220" r="170" stroke-width="15" v-bind:stroke="color" fill="none" ref="circle" transform="matrix(0,-1,1,0,0,440)" v-bind:stroke-dasharray="dasharray"></circle>
     </svg>
     <div class="text">
-      <animated-integer v-bind:value="percentInt"></animated-integer>%
+      <animated-integer v-bind:value="percentInt"></animated-integer>%<br/>
+      <slot></slot>
     </div>
   </div>
 </template>
@@ -19,6 +20,7 @@
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
 
+    text-align: center;
     font-size: 20px;
     font-weight: 300;
     color: #474747;

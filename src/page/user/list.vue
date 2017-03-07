@@ -106,7 +106,7 @@
         <i class="el-icon-fa-list" :class="{active: layout == 'table'}" @click="layout = 'table'"></i>
         <i class="el-icon-fa-address-book-o" :class="{active: layout != 'table'}" @click="layout = ''"></i>
         <el-col style="flex: 1;">
-          共20条记录
+          共 <span v-text="userBase.respData.total"></span> 条记录
         </el-col>
         <i class="el-icon-setting"></i>
       </el-row>
@@ -199,7 +199,7 @@
           :current-page="userBase.paramsData.currentPage"
           :page-sizes="[10, 20, 30, 40, 50]"
           :page-size="userBase.paramsData.pageSize"
-          layout="total, sizes, prev, pager, next"
+          layout="sizes, prev, pager, next"
           :total="userBase.respData.total">
         </el-pagination>
       </el-row>
@@ -276,7 +276,7 @@
     },
     created () {
       ajax(this.$store)
-      this.$store.commit('UPDATE_BREADCRUMB', [{name: '班步', path: '/'}, {name: '人员信息', path: '/user'}, {name: '花名册', path: '/user/base'}])
+      this.$store.commit('UPDATE_BREADCRUMB', [{name: '班步', path: '/'}, {name: '人员信息', path: '/user'}, {name: '花名册', path: '/user/list'}])
     },
     mounted () {
       this.restaurants = this.loadAll()
