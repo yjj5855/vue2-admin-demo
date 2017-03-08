@@ -22,13 +22,11 @@ var assetsPath = path.join(config.build.assetsRoot, config.build.assetsSubDirect
 
 rm('-rf', assetsPath)
 mkdir('-p', assetsPath)
-cp('-R', 'static/*', assetsPath)
 
-
-var themePath = path.join(config.build.assetsRoot)
-rm('-rf', themePath)
-mkdir('-p', themePath)
-cp('-R', 'theme/fonts', themePath)
+// var themePath = path.join(config.build.assetsRoot)
+// rm('-rf', themePath)
+// mkdir('-p', themePath)
+// cp('-R', 'theme/fonts', themePath)
 
 webpack(webpackConfig, function (err, stats) {
   spinner.stop()
@@ -40,4 +38,6 @@ webpack(webpackConfig, function (err, stats) {
     chunks: false,
     chunkModules: false
   }) + '\n')
+  cp('-R', 'static/*', assetsPath)
+  cp('-r', 'static/*', assetsPath)
 })
