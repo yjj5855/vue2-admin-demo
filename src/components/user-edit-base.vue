@@ -25,22 +25,25 @@
       <!--</el-form-item>-->
     <!--</el-form>-->
     <el-row :gutter="20" style="padding: 0 100px;">
-      <el-col :span="12" v-for="item in valueModel" class="item">
-        <el-row type="flex" align="middle">
-          <el-col :span="6" class="item-label">
-            <span v-text="item.label"></span>
-          </el-col>
-          <el-col :span="2"></el-col>
-          <el-col :span="16">
-            <el-input v-model="item.value" :disabled="!status"></el-input>
-          </el-col>
-        </el-row>
-      </el-col>
+      <draggable v-model="valueModel" :options="{disabled:!status,chosenClass: 'sortable-chosen',dragClass: 'sortable-drag'}">
+        <el-col :span="12" v-for="item in valueModel" class="item">
+          <el-row type="flex" align="middle">
+            <el-col :span="6" class="item-label">
+              <span v-text="item.label"></span>
+            </el-col>
+            <el-col :span="2"></el-col>
+            <el-col :span="16">
+              <el-input v-model="item.value" :disabled="!status"></el-input>
+            </el-col>
+          </el-row>
+        </el-col>
+      </draggable>
     </el-row>
 
   </div>
 </template>
 <style lang="less">
+
   .user-edit-base{
     .el-icon-check{
       color: #11b95c;
@@ -66,9 +69,18 @@
       font-size: 14px;
       color: #999;
     }
+
+    .sortable-chosen{
+      background: #eee;
+    }
+    .sortable-drag{
+      background: #fff;
+      opacity: .5;
+    }
   }
 </style>
 <script>
+  import draggable from 'vuedraggable'
   export default{
     props: {
       title: {
@@ -94,7 +106,7 @@
       }
     },
     components: {
-
+      draggable
     },
     methods: {
 
