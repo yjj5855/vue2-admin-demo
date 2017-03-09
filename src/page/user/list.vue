@@ -108,37 +108,62 @@
         <el-col style="flex: 1;">
           共 <span v-text="userBase.respData.total"></span> 条记录
         </el-col>
-        <i class="el-icon-setting"></i>
+        <i class="el-icon-setting" @click="showSort = !showSort"></i>
       </el-row>
+
+      <!--表格排序组件-->
+      <draggable-sort :show="showSort" @show="onSortChange" v-model="tableColumKeyList"/>
+
 
       <!--布局body-->
       <el-table
         v-loading="userBase.loading"
         element-loading-text="拼命加载中"
         :data="userBase.respData.list"
-        border
+        class="no-left-right-border"
         @cell-click="handleCellClick"
         style="width: 100%;margin-bottom: 10px;">
 
         <!--联系人布局-->
         <template v-if="layout != 'table'">
           <el-table-column
-            prop="date"
-            label="联系人">
+            width="400px"
+            label="姓名/性别/工号/部门/职务">
             <template scope="scope">
               <el-row type="flex" style="padding: 10px 0;">
                 <img src="" style="width: 50px;height: 50px;border-radius: 50%;margin-right: 10px;"/>
-                <el-row style="flex: 1;" type="flex" align="middle">
-                  <div>
-                    李四 / 产品规划部 / 产品经理 男 研究生 30岁 上海 2016-01-01
-
-                    <div>
-                      180021011345
-                    </div>
-                  </div>
+                <el-row style="flex: 1;" align="middle">
+                  <el-col :span="12">
+                    <div class="first-row-text">李四 男</div>
+                    <div class="second-row-text">产品规划部</div>
+                  </el-col>
+                  <el-col :span="12">
+                    <div class="first-row-text">#1511</div>
+                    <div class="second-row-text">产品经理</div>
+                  </el-col>
                 </el-row>
               </el-row>
-
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="手机号/QQ号">
+            <template scope="scope">
+              <div class="first-row-text">15099341234</div>
+              <div class="second-row-text">394483223</div>
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="座机/微信号">
+            <template scope="scope">
+              <div class="first-row-text">021-34566323</div>
+              <div class="second-row-text">lifew12424324</div>
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="邮箱/星座">
+            <template scope="scope">
+              <div>394483223@qq.com</div>
+              <div class="second-row-text">水瓶座</div>
             </template>
           </el-table-column>
         </template>
@@ -146,43 +171,11 @@
         <!--表格布局-->
         <template v-if="layout == 'table'">
           <el-table-column
-            prop="date"
-            label="日期"
-            width="150">
-          </el-table-column>
-          <el-table-column
-            prop="name"
-            label="姓名"
-            width="120">
-          </el-table-column>
-          <el-table-column
-            prop="province"
-            label="省份"
-            width="120">
-          </el-table-column>
-          <el-table-column
-            prop="city"
-            label="市区"
-            width="120">
-          </el-table-column>
-          <el-table-column
-            prop="address"
-            label="地址">
-          </el-table-column>
-          <el-table-column
-            prop="zip"
-            label="邮编"
-            width="120">
+            v-for="item in keyList" :key="item.key"
+            :prop="item.key"
+            :label="item.label">
           </el-table-column>
         </template>
-        <!--<el-table-column-->
-          <!--fixed="right"-->
-          <!--label="操作"-->
-          <!--width="100">-->
-          <!--<template scope="scope">-->
-            <!--<el-button @click="handleClick" type="success" size="small" icon="view">查看</el-button>-->
-          <!--</template>-->
-        <!--</el-table-column>-->
       </el-table>
 
       <div class="white-space"></div>
@@ -233,6 +226,7 @@
     color: #999;
     height: 30px;
     font-size: 14px;
+    border-bottom: 1px #eee solid;
   }
   .layout-header>i{
     padding: 8px 5px;
@@ -240,10 +234,27 @@
   .layout-header>i.active{
     color: #11b95c;
   }
+  .first-row-text{
+    color: #474747;
+  }
+  .second-row-text{
+    font-size: 13px;
+    color: #999;
+  }
+  /*.no-left-right-border{*/
+    /*border-left: none!important;*/
+  /*}*/
+  /*.no-left-right-border::after{*/
+    /*width: 0!important;*/
+  /*}*/
+  /*.no-left-right-border th{*/
+    /*background: #fff;*/
+  /*}*/
 </style>
 <script>
   import * as mutations from 'store/user/mutation-types'
   import ChooseBox from 'components/choose-box.vue'
+  import DraggableSort from 'components/draggable-sort.vue'
 
   function ajax (store, params) {
     return store.dispatch('FETCH_LIST_DATA', {
@@ -254,12 +265,21 @@
 
   export default{
     components: {
-      ChooseBox
+      ChooseBox,
+      DraggableSort
     },
     data () {
       return {
         // 布局相关
         layout: 'table',
+        tableColumKeyList: [
+          {key: 'date', label: '时间', show: true},
+          {key: 'name', label: '姓名', show: true},
+          {key: 'province', label: '省份', show: true},
+          {key: 'city', label: '城市', show: true},
+          {key: 'address', label: '地址', show: false},
+          {key: 'zip', label: '邮编', show: false}
+        ],
 
         // 更多按钮相关
         showMore: false,
@@ -267,12 +287,27 @@
         // 智能搜索相关
         restaurants: [],
         state4: '',
-        timeout: null
+        timeout: null,
+
+        // 字段排序显示和隐藏
+        showSort: false
       }
     },
     computed: {
       userBase () {
         return this.$store.state.user.base
+      },
+      keyList () {
+        return this.tableColumKeyList.filter(item => item.show)
+      }
+    },
+    watch: {
+      tableColumKeyList (val) {
+        this.layout = ''
+        this.$nextTick(() => {
+          this.layout = 'table'
+        })
+        console.log('tableColumKeyList 改变了', val)
       }
     },
     created () {
@@ -383,6 +418,10 @@
       handleCellClick (row, column, cell, event) {
         console.log(row, column, cell, event)
         this.$router.history.push('/user/1')
+      },
+
+      onSortChange (val) {
+        this.showSort = val
       }
     }
   }

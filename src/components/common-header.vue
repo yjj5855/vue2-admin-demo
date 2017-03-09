@@ -106,7 +106,7 @@
         return this.$store.state.app.themeColors
       },
       backgroundColor () {
-        return { 'background-color': this.themeColors.primary || '#20a0ff' }
+        return { 'background-color': this.themeColors.primary || '#1ab394' }
       },
       pathList () {
         return this.$store.state.app.pathList

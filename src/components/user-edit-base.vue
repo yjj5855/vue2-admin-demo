@@ -7,7 +7,7 @@
       </el-col>
       <!--右侧动作组件-->
       <div>
-        <div v-if="!status" @click="status = true" style="color: #11b95c">
+        <div v-if="!status" @click="status = true" class="c-primary">
           <i class="el-icon-edit"></i> 编辑
         </div>
         <div v-else>
@@ -43,10 +43,11 @@
   </div>
 </template>
 <style lang="less">
+  @import '../var.less';
 
   .user-edit-base{
-    .el-icon-check{
-      color: #11b95c;
+    .el-icon-check,.c-primary{
+      color: @--color-primary;
     }
     .el-icon-close{
       color: red;

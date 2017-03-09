@@ -9,9 +9,10 @@ import axios from 'axios'
 import ElementUI from 'element-ui'
 import './transition'
 
-import ThemeSetting from './components/theme-setting/theme.vue'
+// import ThemeSetting from './components/theme-setting/theme.vue'
 
-import 'element-ui/lib/theme-default/index.css'
+// import 'element-ui/lib/theme-default/index.css'
+// import '../theme/index.css' // 需要在index.html引入
 import './main.css'
 
 import homeRouter from './page/home'
@@ -68,26 +69,25 @@ const App = new Vue({
   router,
   store
 }).$mount('#app')
-
-App.$nextTick(() => {
-  // setTimeout(() => {
-  let cssText = window.localStorage.getItem('themeCss')
-  if (cssText) {
-    const style = document.createElement('style')
-    style.innerText = cssText
-    document.head.appendChild(style)
-  }
-  // }, 300)
-})
-
-// 等一会再初始化 优化性能
-setTimeout(() => {
-  let themeSetting = new Vue({
-    ...ThemeSetting,
-    store
-  }).$mount('#theme-setting')
-  document.addEventListener('click', () => {
-    themeSetting.active = false
-  })
-}, 5000)
-
+App
+/**
+ * 自定义主题设置
+ */
+// App.$nextTick(() => {
+//   let cssText = window.localStorage.getItem('themeCss')
+//   if (cssText) {
+//     const style = document.createElement('style')
+//     style.innerText = cssText
+//     document.head.appendChild(style)
+//   }
+// })
+// // 等一会再初始化 优化性能
+// setTimeout(() => {
+//   let themeSetting = new Vue({
+//     ...ThemeSetting,
+//     store
+//   }).$mount('#theme-setting')
+//   document.addEventListener('click', () => {
+//     themeSetting.active = false
+//   })
+// }, 5000)
