@@ -10,6 +10,7 @@
         </template>
         <el-menu-item-group>
           <el-menu-item index="/user/list" :route="{path:'/user/list'}">花名册</el-menu-item>
+          <el-menu-item index="/user/org" :route="{path:'/user/org'}">组织架构</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
       <el-submenu index="3">

@@ -17,6 +17,14 @@ export default [
     }
   },
   {
+    path: '/user/org',
+    component: resolve => {
+      require.ensure(['./org.vue'], () => {
+        resolve(require('./org.vue'))
+      }, 'user')
+    }
+  },
+  {
     path: '/user/:id',
     component: resolve => {
       require.ensure(['./detail.vue'], () => {
