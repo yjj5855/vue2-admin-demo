@@ -26,19 +26,19 @@
           <div style="padding: 10px 30px;">
             <el-form ref="form" :model="form">
               <el-form-item>
-                <el-input v-model="form.name" placeholder="请输入邀请码"></el-input>
+                <el-input type="mobile" v-model="form.account" placeholder="请输入手机号"></el-input>
               </el-form-item>
               <el-form-item>
                 <el-row :gutter="10">
-                  <el-col :span="8">
-                    <el-input v-model="form.name" placeholder="请输入验证码"></el-input>
+                  <el-col :span="24">
+                    <el-input type="password" v-model="form.password" placeholder="请输入密码"></el-input>
                   </el-col>
-                  <el-col :span="8">
-                    <el-input v-model="form.date1" :disabled="true"></el-input>
-                  </el-col>
-                  <el-col :span="8">
-                    <div>换一张</div>
-                  </el-col>
+                  <!--<el-col :span="8">-->
+                    <!--<el-input v-model="form.date1" :disabled="true"></el-input>-->
+                  <!--</el-col>-->
+                  <!--<el-col :span="8">-->
+                    <!--<div>换一张</div>-->
+                  <!--</el-col>-->
                 </el-row>
               </el-form-item>
               <el-form-item>
@@ -106,6 +106,7 @@
   }
 </style>
 <script>
+  import axios from 'axios'
   import AnimatedInteger from 'components/animated-integer'
   export default{
     data () {
@@ -118,14 +119,8 @@
           'https://demo.ibanbu.com/resources/img/bg2.jpg?76'
         ],
         form: {
-          name: '',
-          region: '',
-          date1: '2133',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
+          account: '13812345678',
+          password: 'admin'
         }
       }
     },
@@ -134,7 +129,14 @@
     },
     methods: {
       onSubmit () {
-        this.$router.replace('/')
+        axios.post('/login', this.form)
+          .then((data) => {
+            console.log(data)
+            this.$router.replace('/')
+          })
+          .catch((err) => {
+            console.error(err)
+          })
       }
     }
   }

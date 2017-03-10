@@ -6,6 +6,7 @@ import { sync } from 'vuex-router-sync'
 import 'fastclick'
 import 'raven-js'
 import axios from 'axios'
+import './libs/axiosConfig'
 import ElementUI from 'element-ui'
 import './transition'
 
