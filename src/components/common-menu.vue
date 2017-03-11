@@ -34,7 +34,7 @@
     padding-left: 0!important;
   }
   .el-menu-vertical-demo{
-    min-height: calc(100vh - 60px);
+    min-height: calc(100vh - 130px);
   }
 </style>
 <script>

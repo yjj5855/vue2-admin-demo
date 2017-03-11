@@ -22,7 +22,7 @@
   .page-content{
     padding: 0 20px;
     background: #fff;
-    min-height: calc(100vh - 50px);
+    min-height: calc(100vh - 130px);
   }
 
   .top-enter-active {

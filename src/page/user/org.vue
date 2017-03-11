@@ -1,15 +1,22 @@
 <template>
   <div class="org-svg">
-    <div></div>
+    <el-tooltip content="点击按钮后，右键另存为可以保存组织架构图" placement="bottom" effect="light">
+      <el-button @click="exportImage" style="position: absolute;top: 0;left: 0;">预览图片</el-button>
+    </el-tooltip>
 
-    <div id="infovis" style="width: 100%;height: 90vh;"></div>
+    <div id="infovis" style="width: 200%;height: calc(100vh - 130px);"></div>
+
+    <div class="fixed-box" :class="{active: showFixedBox}">
+      <i class="el-icon-close fixed-box-close" :class="{active: showFixedBox}" @click="showFixedBox = false"></i>
+      <canvas id="canvas"></canvas>
+    </div>
 
 
     <!--缩放工具-->
     <el-row type="flex" class="zoom-slider" id="zoom-slider" align="middle">
       <i class="el-icon-fa-minus-circle" style="margin-right: 15px;color: #999;"></i>
 
-      <el-slider class="zoom" :min="0.5" :max="3" :step="0.1" v-model="event.scale"></el-slider>
+      <el-slider class="zoom" :min="0.5" :max="1" :step="0.1" v-model="event.scale"></el-slider>
 
       <i class="el-icon-fa-plus-circle" style="margin-left: 15px;color: #999;"></i>
     </el-row>
@@ -19,6 +26,7 @@
 <style lang="less">
   .org-svg{
     position: relative;
+    margin: 0 -15px;
     .zoom-slider{
       position: fixed;
       bottom: 20px;
@@ -77,6 +85,33 @@
       overflow: hidden;
     }
 
+    .fixed-box{
+      z-index: 100;
+      background: #fff;
+      overflow: auto;
+      visibility: hidden;
+      position: fixed;
+      top:0;
+      left:0;
+      right:0;
+      bottom:0;
+
+      &.active{
+         visibility: visible;
+      }
+    }
+    .fixed-box-close{
+      z-index: 101;
+      background: #eee;
+      padding: 10px;
+      visibility: hidden;
+      position: fixed;
+      top:20px;
+      left:20px;
+      &.active{
+        visibility: visible;
+      }
+    }
   }
 
 </style>
@@ -169,7 +204,7 @@
       zm = null
 
   var width = window.innerWidth * 20/24,
-      height = window.innerHeight
+      height = window.innerHeight - 110
 
 
   var i = 0,
@@ -177,19 +212,15 @@
       rectW = 140,
       rectH = 70;
 
-  var tree = d3.layout.tree().nodeSize([250, 80]);
-  var diagonal = d3.svg.diagonal()
-    .projection(function (d) {
-      return [d.x + rectW / 2, d.y + rectH / 2];
-    });
-
   export default{
     data () {
       return {
         event: {
           translate: [(width-rectW)/2, 20],
           scale: 1
-        }
+        },
+
+        showFixedBox: false
       }
     },
     components: {
@@ -202,6 +233,13 @@
           .attr("transform",
             "translate(" + this.event.translate + ")"
             + " scale(" + val + ")");
+      },
+      'event.translate' (val) {
+        svg.call(zm.translate(val))
+        d3.select('#root-g')
+          .attr("transform",
+            "translate(" + val + ")"
+            + " scale(" + this.event.scale + ")");
       }
     },
     created () {
@@ -210,10 +248,15 @@
     mounted () {
       let self = this
 
+      var tree = d3.layout.tree().nodeSize([250, 80]);
+      var diagonal = d3.svg.diagonal()
+        .projection(function (d) {
+          return [d.x + rectW / 2, d.y + rectH / 2];
+        });
 
 
-      svg = d3.select("#infovis").append("svg").attr("width", width).attr("height", height)
-        .call(zm = d3.behavior.zoom().scaleExtent([0.5,3]).on("zoom", redraw)).append("g")
+      svg = d3.select("#infovis").append("svg").attr("id", 'root-svg').attr("width", width).attr("height", height)
+        .call(zm = d3.behavior.zoom().scaleExtent([0.5,1]).on("zoom", redraw)).append("g")
         .attr('id', 'root-g')
         .attr("transform", "translate(" + (width-rectW)/2 + "," + 20 + ")");
 
@@ -301,7 +344,7 @@
           .attr("stroke-width", 1)
           .style("fill", "#1ab394")
 
-        // hover 下的 设置按钮
+        // hover 下的 右边按钮
         nodeEnter.append('image')
           .attr("class", "setting-text")
           .attr('x', function (d) {
@@ -343,7 +386,7 @@
         nodeEnter.append("text")
           .attr("x", rectW / 2)
           .attr("y", 24)
-//          .attr("dy", ".35em")
+          .attr("style", "font-size: 13px;font-weight: 300")
           .attr("stroke", "#1ab394")
           .attr("text-anchor", "middle")
           .text(function (d) {
@@ -357,6 +400,7 @@
           .attr("y", rectH - 17.5 )
           .attr("dy", ".35em")
           .attr("text-anchor", "end")
+          .attr("style", "font-size: 13px;font-weight: 300")
           .text(function (d) {
             return '3000人数'
           })
@@ -368,6 +412,7 @@
           .attr("y", rectH - 17.5 )
           .attr("dy", ".35em")
           .attr("text-anchor", "start")
+          .attr("style", "font-size: 13px;font-weight: 300")
           .text(function (d) {
             return '121家公司'
           })
@@ -497,7 +542,68 @@
       }
     },
     methods: {
+      exportImage () {
+//        this.event = {
+//          scale: 0.5,
+//          translate: [(width-rectW)/2, 20]
+//        }
+        // 添加 连线的css
+        svg.selectAll('path.link')
+          .attr("style", "fill: none;stroke: #ccc;stroke-width: 1px;")
+        svg.selectAll('rect.setting,image.setting-text')
+          .style("display", "none")
 
+        this.$nextTick(()=>{
+
+          //log: true => 打印log信息
+          //ignoreMouse: true => 忽略鼠标事件
+          //ignoreAnimation: true => 忽略动画
+          //ignoreDimensions: true => 不尝试调整画布
+          //ignoreClear: true => 不清除画布
+          //offsetX: int => 在×方向上的偏移量
+          //offsetY: int => 在y方向上的偏移量
+          //scaleWidth: int => 当前绘图的缩放宽度
+          //scaleHeight: int => 当前绘图的缩放高度
+          //renderCallback: function => 第一次渲染完成后将调用的回调函数
+          //forceRedraw: function => 如果返回真，会在每个frame里调用这个函数，然后重绘
+          //useCORS: true => 是否允许跨域，如果是，则尝试用跨域图片，这样可以不用污染canvas
+          canvg('canvas', `<svg width="${width}" height="${height}">${document.querySelector('#root-svg').innerHTML}</svg>`,{
+            scaleWidth: 6000,
+            scaleHeight: 6000 * height/width,
+            renderCallback: () => {
+              console.log('画好了')
+
+              this.showFixedBox = true
+
+//              setTimeout(()=>{
+//                window.html2canvas(document.querySelector("#canvas"), {
+//                  allowTaint: true,
+//                  onrendered: function (canvas) {
+//                    var url = canvas.toDataURL()
+//
+//                    // 以下代码为下载此图片功能
+//                    var triggerDownload = document.createElement('a')
+//                    triggerDownload.setAttribute('href', url)
+//                    triggerDownload.setAttribute('download', '组织架构.png')
+//
+//                    document.body.appendChild(triggerDownload)
+//                    triggerDownload.click()
+//                    triggerDownload.remove()
+//                  }
+//                })
+//              }, 20000)
+
+            }
+          })
+
+          svg.selectAll('path.link')
+            .attr("style", "")
+          svg.selectAll('rect.setting,image.setting-text')
+            .style("display", "")
+
+
+        })
+      }
     }
   }
 </script>
