@@ -1,16 +1,17 @@
 <template>
   <div class="org-svg">
+    <div></div>
 
-    <div id="infovis" style="width: 100%;height: 100vh;"></div>
+    <div id="infovis" style="width: 100%;height: 90vh;"></div>
 
 
-
-    <el-row type="flex" class="zoom-slider" id="zoom-slider">
-      <i class="el-icon-fa-minus-square-o" style="margin-right: 15px;font-size: 36px;"></i>
+    <!--缩放工具-->
+    <el-row type="flex" class="zoom-slider" id="zoom-slider" align="middle">
+      <i class="el-icon-fa-minus-circle" style="margin-right: 15px;color: #999;"></i>
 
       <el-slider class="zoom" :min="0.5" :max="3" :step="0.1" v-model="event.scale"></el-slider>
 
-      <i class="el-icon-fa-plus-square-o" style="margin-left: 15px;font-size: 16px;"></i>
+      <i class="el-icon-fa-plus-circle" style="margin-left: 15px;color: #999;"></i>
     </el-row>
 
   </div>
@@ -19,10 +20,10 @@
   .org-svg{
     position: relative;
     .zoom-slider{
-      position: absolute;
-      bottom: 50px;
-      right: 50px;
-      width: 300px;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 200px;
 
       .zoom{
         flex: 1;
@@ -34,15 +35,22 @@
       .top-text{
         color: #1ab394;
       }
-      .setting{
+      .setting,.setting-text{
         display: none;
+      }
+      .setting-text{
+        font: normal normal normal 14px/1 FontAwesome!important;
+
+        &::after{
+          content: "\f007"
+        }
       }
       .bottom-text{
         display: block;
         font-size: 12px;
       }
       &:hover{
-        .setting{
+        .setting,.setting-text{
           display: block;
         }
         .bottom-text{
@@ -73,18 +81,30 @@
 
 </style>
 <script>
-  var zm = null
-  var svg = null
-
-  var width = window.innerWidth * 20/24,
-    height = window.innerHeight
 
   var root = {
     "name": "上海云聚力量网络科技发展投资集团公司",
     "children": [
       {
         "name": "华东大区",
-        "children": []
+        "children": [
+          {
+            "name": "上海",
+            "children": [{
+              "name": "浦东",
+              "size": 3938
+            }, {
+              "name": "黄浦",
+              "size": 3812
+            }, {
+              "name": "长宁",
+              "size": 6714
+            }, {
+              "name": "静安",
+              "size": 743
+            }]
+          }
+        ]
       },
       {
         "name": "华北大区",
@@ -145,10 +165,17 @@
     ]
   };
 
+  var svg = null,
+      zm = null
+
+  var width = window.innerWidth * 20/24,
+      height = window.innerHeight
+
+
   var i = 0,
-    duration = 750,
-    rectW = 140,
-    rectH = 70;
+      duration = 750,
+      rectW = 140,
+      rectH = 70;
 
   var tree = d3.layout.tree().nodeSize([250, 80]);
   var diagonal = d3.svg.diagonal()
@@ -196,18 +223,35 @@
       root.x0 = 0;
       root.y0 = height / 2;
 
-      function collapse(d) {
+      // Toggle children.
+      function toggle(d) {
         if (d.children) {
           d._children = d.children;
-          d._children.forEach(collapse);
           d.children = null;
+        } else {
+          d.children = d._children;
+          d._children = null;
         }
       }
 
-      root.children.forEach(collapse);
-      update(root);
+      function toggleAll(d) {
+        if (d.children) {
+          d.children.forEach(toggleAll);
+          toggle(d);
+        }
+      }
 
-//      d3.select("#body").style("height", "800px");
+      root.children.forEach(toggleAll) // 显示第2层
+
+//      for(let i1=0; i1< root.children.length ; i1++){
+//        toggle(root.children[i1]) // 显示第3层
+//        for(let i2=0; i2< root.children[i1].children.length ; i2++){
+//          toggle(root.children[i1].children[i2]) // 显示第4层
+//        }
+//      }
+
+      update(root)
+
 
       function update(source) {
 
@@ -217,7 +261,7 @@
 
         // Normalize for fixed-depth.
         nodes.forEach(function (d) {
-          d.y = d.depth * 180;
+          d.y = d.depth * 150;
         });
 
         // Update the nodes…
@@ -255,7 +299,45 @@
           .attr("y", rectH / 2)
           .attr("stroke", "#999999")
           .attr("stroke-width", 1)
-          .style("fill", "#1ab394");
+          .style("fill", "#1ab394")
+
+        // hover 下的 设置按钮
+        nodeEnter.append('image')
+          .attr("class", "setting-text")
+          .attr('x', function (d) {
+            return autoX(d) + autoWidth(d) - rectH / 3 - 10
+          })
+          .attr("y", rectH / 1.75)
+          .attr("width", rectH / 3)
+          .attr("height", rectH / 3)
+          .attr('xlink:href', 'http://www.zhangxinxu.com/study/image/svg/svg.png')
+          .on('click', function (d) {
+            d3.event.stopPropagation()
+            self.$alert('这是一段内容', '标题名称', {
+              confirmButtonText: '确定',
+              callback: action => {
+                self.$message({
+                  type: 'info',
+                  message: `action: ${ action }`
+                });
+              }
+            });
+          })
+
+        // hover 下的 左边按钮
+        nodeEnter.append('image')
+          .attr("class", "setting-text")
+          .attr('x', function (d) {
+            return autoX(d) + autoWidth(d) - rectH / 3 * 2 - 10 * 2
+          })
+          .attr("y", rectH / 1.75)
+          .attr("width", rectH / 3)
+          .attr("height", rectH / 3)
+          .attr('xlink:href', 'http://www.zhangxinxu.com/study/image/svg/svg.png')
+          .on('click', function (d) {
+            console.log(d)
+          })
+
 
         // 顶部 名称
         nodeEnter.append("text")
@@ -346,7 +428,7 @@
               source: o,
               target: o
             })
-            return newD
+            return newD.replace('C', 'L')
           })
 
         // Transition links to their new position.
@@ -392,6 +474,7 @@
         }
         return 0
       }
+
 
       // Toggle children on click.
       function click(d) {

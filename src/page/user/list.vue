@@ -252,6 +252,7 @@
   /*}*/
 </style>
 <script>
+  import axios from 'axios'
   import * as mutations from 'store/user/mutation-types'
   import ChooseBox from 'components/choose-box.vue'
   import DraggableSort from 'components/draggable-sort.vue'
@@ -311,7 +312,14 @@
       }
     },
     created () {
-      ajax(this.$store)
+//      ajax(this.$store)
+      axios.get('/v1/employee/employees/')
+        .then((data) => {
+          console.log(data)
+        })
+        .catch((err) => {
+          console.error(err)
+        })
       this.$store.commit('UPDATE_BREADCRUMB', [{name: '班步', path: '/'}, {name: '人员信息', path: '/user'}, {name: '花名册', path: '/user/list'}])
     },
     mounted () {

@@ -23,7 +23,7 @@ for(let key in config){
 axios.interceptors.request.use(function (request) {
   // let infoJson = _localStorage.getItem('infoJson') || {}
   // let token = infoJson.token;
-  request.headers.xa_token = ''
+  request.headers.xa_token = 'LRtBPNUH7rGqJJ8QPG7Pe3'
 
   return request
 })
