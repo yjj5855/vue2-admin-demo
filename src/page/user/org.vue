@@ -260,7 +260,7 @@
     data () {
       return {
         vm: null, // treeNode 需要
-        root: JSON.parse(JSON.stringify(_root)),
+        root: {},
         // 自定义svg宽度
         width: '100%',
 
@@ -297,10 +297,10 @@
     },
     created () {
       this.$store.commit('UPDATE_BREADCRUMB', [{name: '班步', path: '/'}, {name: '人员信息', path: '/user'}, {name: '组织架构', path: '/user/org'}])
+      this.root = JSON.parse(JSON.stringify(_root))
     },
     mounted () {
-      console.log(this.root)
-      this.drawOrgSvg(_root)
+      this.drawOrgSvg(JSON.parse(JSON.stringify(_root)))
     },
     methods: {
       exportImage () {
@@ -698,8 +698,6 @@
       },
       onTreeNodeChange (rootNode) {
         let newTree = JSON.parse(JSON.stringify(rootNode))
-
-        console.log('newTree',newTree)
         try{
           this.drawOrgSvg(newTree)
         }catch (err) {
