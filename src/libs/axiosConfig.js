@@ -35,14 +35,13 @@ axios.interceptors.response.use(function (response) {
     if(response.status == 200){
       return response.data;
     }else{
-
+      Promise.reject(response.data)
     }
   }else{
-
+    Promise.reject(response)
   }
   return response;
 }, function (error) {
-
   return Promise.reject(error);
 });
 

@@ -199,11 +199,11 @@
       </el-row>
     </div>
 
-    <choose-box
-      ref="chooseBox"
-      :choose-list="['BM', 'YG_STATUS']"
-      @confirm="chooseEnd">
-    </choose-box>
+    <!--<choose-box-->
+      <!--ref="chooseBox"-->
+      <!--:choose-list="['BM', 'YG_STATUS']"-->
+      <!--@confirm="chooseEnd">-->
+    <!--</choose-box>-->
   </div>
 </template>
 <style scoped>
@@ -252,21 +252,21 @@
   /*}*/
 </style>
 <script>
-  import axios from 'axios'
   import * as mutations from 'store/user/mutation-types'
-  import ChooseBox from 'components/choose-box.vue'
+//  import ChooseBox from 'components/choose-box.vue'
   import DraggableSort from 'components/draggable-sort.vue'
 
   function ajax (store, params) {
     return store.dispatch('FETCH_LIST_DATA', {
       ...store.state.user.base.paramsData,
       ...params
+    }).then((data) => {
+      console.log(data)
     })
   }
 
   export default{
     components: {
-      ChooseBox,
       DraggableSort
     },
     data () {
@@ -312,14 +312,13 @@
       }
     },
     created () {
-//      ajax(this.$store)
-      axios.get('/v1/employee/employees/')
-        .then((data) => {
-          console.log(data)
-        })
-        .catch((err) => {
-          console.error(err)
-        })
+      ajax(this.$store)
+//        .then((data) => {
+//          console.log(data)
+//        })
+//        .catch((err) => {
+//          console.error(err)
+//        })
       this.$store.commit('UPDATE_BREADCRUMB', [{name: '班步', path: '/'}, {name: '人员信息', path: '/user'}, {name: '花名册', path: '/user/list'}])
     },
     mounted () {
@@ -343,9 +342,6 @@
       },
       handleCurrentChange (val) {
         ajax(this.$store, { currentPage: val })
-      },
-      open4 () {
-        this.$refs.chooseBox.showBox()
       },
       chooseEnd (data) {
         ajax(this.$store, { ...data })

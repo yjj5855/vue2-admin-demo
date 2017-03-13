@@ -1,37 +1,82 @@
 <template>
   <div class="org-svg">
-    <el-tooltip content="点击按钮后，右键另存为可以保存组织架构图" placement="bottom" effect="light">
-      <el-button @click="exportImage" style="position: absolute;top: 0;left: 0;">预览图片</el-button>
-    </el-tooltip>
 
-    <div id="infovis" :style="{width: width}" style="height: calc(100vh - 130px);"></div>
+    <!--左边 操作-->
+    <div style="position: absolute;top: 15px;left: 20px;">
+      <el-select  placeholder="全部">
+        <el-option label="部门一" value="1"></el-option>
+        <el-option label="部门二" value="2"></el-option>
+      </el-select>
+      <el-select  placeholder="显示层级">
+        <el-option label="一级" value="1"></el-option>
+        <el-option label="二级" value="2"></el-option>
+        <el-option label="三级" value="3"></el-option>
+      </el-select>
+    </div>
+
+
+    <!--右边 操作按钮-->
+    <el-row type="flex" align="middle" style="position: absolute;top: 15px;right: 20px;">
+      <!--切换 图标-->
+      <svg @click="layout = 'svg'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" :style="{stroke:layout == 'svg'?'#1ab394':'#ccc'}" style="width: 30px;height: 30px;margin-right: 15px;">
+        <rect x="175" y="100" width="50" height="50" style="fill: none;stroke-width: 10;"/>
+        <rect x="75" y="250" width="50" height="50" style="fill: none;stroke-width: 10;"/>
+        <rect x="175" y="250" width="50" height="50" style="fill: none;stroke-width: 10;"/>
+        <rect x="275" y="250" width="50" height="50" style="fill: none;stroke-width: 10;"/>
+        <path d="M 200 150 L 200 250" style="fill: none;stroke-width: 10;"/>
+        <path d="M 100.114 250 L 100 200 L 299.718 200.508 L 300 249.508" style="fill: none;stroke-width: 10;"/>
+      </svg>
+      <svg @click="layout = 'list'" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" :style="{fill:layout == 'list'?'#1ab394':'#ccc'}" style="width: 30px;height: 30px;margin-right: 15px;">
+        <rect x="75" y="100" width="40" height="40"/>
+        <rect x="135" y="100" width="190" height="40"/>
+        <rect x="75" y="245" width="40" height="40"/>
+        <rect x="135" y="245" width="190" height="40"/>
+        <rect x="75" y="175" width="40" height="40"/>
+        <rect x="135" y="175" width="190" height="40"/>
+      </svg>
+
+      <!--编辑按钮-->
+      <el-button :plain="true">&emsp;编辑&emsp;</el-button>
+
+      <!--导出按钮-->
+      <el-tooltip content="点击按钮后，右键另存为可以保存组织架构图" placement="bottom" effect="light">
+        <el-button @click="exportImage" :plain="true">&emsp;预览&emsp;</el-button>
+      </el-tooltip>
+    </el-row>
+
+    <!--svg视图-->
+    <div v-show="layout == 'svg'" id="infovis" :style="{width: width}" style="height: calc(100vh - 130px);"></div>
+    <!--缩放工具-->
+    <el-row v-show="layout == 'svg'" type="flex" class="zoom-slider" id="zoom-slider" align="middle">
+      <i class="el-icon-fa-minus-circle" style="margin-right: 15px;color: #999;transform: rotateZ(90deg);"></i>
+      <el-slider class="zoom" :min="0.5" :max="1" :step="0.1" v-model="event.scale"></el-slider>
+      <i class="el-icon-fa-plus-circle" style="margin-left: 15px;color: #999;"></i>
+    </el-row>
+
+    <!--编辑视图-->
+    <div v-show="layout == 'list'" :style="{width: width}" style="height: calc(100vh - 130px);padding-top: 70px;">
+      <tree-node v-model="vm" :node="root" @on-node-change="onTreeNodeChange"></tree-node>
+    </div>
 
     <div class="fixed-box" :class="{active: showFixedBox}">
       <i class="el-icon-close fixed-box-close" :class="{active: showFixedBox}" @click="showFixedBox = false"></i>
       <canvas id="canvas"></canvas>
     </div>
 
-
-    <!--缩放工具-->
-    <el-row type="flex" class="zoom-slider" id="zoom-slider" align="middle">
-      <i class="el-icon-fa-minus-circle" style="margin-right: 15px;color: #999;"></i>
-
-      <el-slider class="zoom" :min="0.5" :max="1" :step="0.1" v-model="event.scale"></el-slider>
-
-      <i class="el-icon-fa-plus-circle" style="margin-left: 15px;color: #999;"></i>
-    </el-row>
-
   </div>
 </template>
-<style lang="less">
+<style lang="less" rel="stylesheet/less">
   .org-svg{
     position: relative;
     margin: 0 -15px;
     .zoom-slider{
       position: fixed;
       bottom: 20px;
-      right: 20px;
+      right: 50px;
       width: 200px;
+
+      transform: rotateZ(90deg);
+      transform-origin: bottom right;
 
       .zoom{
         flex: 1;
@@ -114,11 +159,10 @@
       }
     }
   }
-
 </style>
 <script>
-
-  var root = {
+  import TreeNode from 'components/tree-node.vue'
+  var _root = {
     "name": "上海云聚力量网络科技发展投资集团公司",
     "children": [
       {
@@ -212,24 +256,28 @@
       rectW = 140,
       rectH = 70;
 
-  var clickLink = {}
-
   export default{
     data () {
       return {
+        vm: null, // treeNode 需要
+        root: JSON.parse(JSON.stringify(_root)),
         // 自定义svg宽度
         width: '100%',
 
         event: {
-          translate: [(width-rectW)/2, 20],
+          translate: [(width-rectW)/2, 150],
           scale: 1
         },
 
-        showFixedBox: false
+        // 导出图片遮罩
+        showFixedBox: false,
+
+        // 布局切换
+        layout: 'svg'
       }
     },
     components: {
-
+      TreeNode
     },
     watch: {
       'event.scale' (val) {
@@ -251,7 +299,8 @@
       this.$store.commit('UPDATE_BREADCRUMB', [{name: '班步', path: '/'}, {name: '人员信息', path: '/user'}, {name: '组织架构', path: '/user/org'}])
     },
     mounted () {
-      this.drawOrgSvg(root)
+      console.log(this.root)
+      this.drawOrgSvg(_root)
     },
     methods: {
       exportImage () {
@@ -324,14 +373,14 @@
             return [d.x + rectW / 2, d.y + rectH / 2];
           });
 
-
+        d3.select("#infovis").html('')
         svg = d3.select("#infovis").append("svg").attr("id", 'root-svg').attr("width", width).attr("height", height)
           .call(zm = d3.behavior.zoom().scaleExtent([0.5,1]).on("zoom", redraw)).append("g")
           .attr('id', 'root-g')
-          .attr("transform", "translate(" + (width-rectW)/2 + "," + 20 + ")");
+          .attr("transform", "translate(" + this.event.translate.toString()+ ")");
 
         //necessary so that zoom knows where to zoom and unzoom from
-        zm.translate([(width-rectW)/2, 20]);
+        zm.translate(this.event.translate);
 
         root.x0 = 0;
         root.y0 = height / 2;
@@ -431,7 +480,7 @@
             .attr("y", rectH / 1.75)
             .attr("width", rectH / 3)
             .attr("height", rectH / 3)
-            .attr('xlink:href', 'http://www.zhangxinxu.com/study/image/svg/svg.png')
+            .attr('xlink:href', 'static/org.svg')
             .on('click', function (d) {
               d3.event.stopPropagation()
               self.$alert('这是一段内容', '标题名称', {
@@ -454,7 +503,7 @@
             .attr("y", rectH / 1.75)
             .attr("width", rectH / 3)
             .attr("height", rectH / 3)
-            .attr('xlink:href', 'http://www.zhangxinxu.com/study/image/svg/svg.png')
+            .attr('xlink:href', 'static/org.svg')
             .on('click', function (d) {
               console.log(d)
             })
@@ -646,6 +695,18 @@
             "translate(" + d3.event.translate + ")"
             + " scale(" + d3.event.scale + ")");
         }
+      },
+      onTreeNodeChange (rootNode) {
+        let newTree = JSON.parse(JSON.stringify(rootNode))
+
+        console.log('newTree',newTree)
+        try{
+          this.drawOrgSvg(newTree)
+        }catch (err) {
+          console.error(err)
+        }
+
+        console.log('this.root',JSON.parse(JSON.stringify(rootNode)))
       }
     }
   }

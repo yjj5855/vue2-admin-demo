@@ -1,5 +1,5 @@
 <template>
-  <sticky :top="'50px'" :width="'16.66667%'" :z="2">
+  <sticky :top="'50px'" :width="'16.66667%'" :z="2" :bottom="'0px'">
     <el-menu :unique-opened="true" theme="light" :default-active="$route.path" class="el-menu-vertical-demo" @select="handleSelect" @open="handleOpen" @close="handleClose">
       <el-menu-item index="/" :route="{path:'/'}">
         <i class="el-icon-fa-home"></i>首页
@@ -34,7 +34,7 @@
     padding-left: 0!important;
   }
   .el-menu-vertical-demo{
-    min-height: calc(100vh - 130px);
+    height: 100%;
   }
 </style>
 <script>

@@ -16,6 +16,10 @@
         type: String,
         default: '0px'
       },
+      bottom: {
+        type: String,
+        default: 'none'
+      },
       width: {
         type: String,
         default: '100%'
@@ -60,6 +64,7 @@
             'z-index': self.z,
 
             top: self.top,
+            bottom: self.bottom,
             width: self.width
           }
         } else {
