@@ -272,12 +272,13 @@
         // 布局相关
         layout: 'table',
         tableColumKeyList: [
-          {key: 'date', label: '时间', show: true},
+          {key: 'entryDate', label: '时间', show: true},
           {key: 'name', label: '姓名', show: true},
           {key: 'province', label: '省份', show: true},
           {key: 'city', label: '城市', show: true},
           {key: 'address', label: '地址', show: false},
-          {key: 'zip', label: '邮编', show: false}
+          {key: 'zipCode', label: '邮编', show: false},
+          {key: 'userId', label: '用户ID', show: false}
         ],
 
         // 更多按钮相关
