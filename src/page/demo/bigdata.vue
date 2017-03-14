@@ -144,36 +144,7 @@
           pageSize: 100,
           total: 1000,
 
-          list: new Array(1000).fill({
-            age: 27,
-            avatar: null,
-            birthday: '1990-02-13',
-            depaUuid: '运营部',
-            email: '651380735@qq.com',
-            exigAddress: null,
-            exigPerson: null,
-            exigTel: null,
-            exteNumber: '',
-            idNumber: '100016',
-            idType: '2',
-            improvePersonInfoFlag: false,
-            inDate: '2015-02-28',
-            mariStatus: null,
-            mobile: '13100000016',
-            name: 'aa',
-            sex: '女',
-            showName: 'aa',
-            spelling: 'aa',
-            statusForJsp: '正式',
-            uuid: '',
-            workAge: 2,
-            workScheType: '常规考勤'
-          }).map((item, index) => {
-            return {
-              ...item,
-              uuid: 'uuid' + index
-            }
-          })
+          list: []
         },
         errorList: []
       }
@@ -204,14 +175,43 @@
       }
     },
     created () {
+      this.$store.commit('UPDATE_BREADCRUMB', [{name: '班步', path: '/'}, {name: 'demo', path: '/demo'}, {name: '大数据导入', path: '/bigdata'}])
+    },
+    mounted () {
+      this.$set(this.listData, 'list', new Array(1000).fill({
+        age: 27,
+        avatar: null,
+        birthday: '1990-02-13',
+        depaUuid: '运营部',
+        email: '651380735@qq.com',
+        exigAddress: null,
+        exigPerson: null,
+        exigTel: null,
+        exteNumber: '',
+        idNumber: '100016',
+        idType: '2',
+        improvePersonInfoFlag: false,
+        inDate: '2015-02-28',
+        mariStatus: null,
+        mobile: '13100000016',
+        name: 'aa',
+        sex: '女',
+        showName: 'aa',
+        spelling: 'aa',
+        statusForJsp: '正式',
+        uuid: '',
+        workAge: 2,
+        workScheType: '常规考勤'
+      }).map((item, index) => {
+        return {
+          ...item,
+          uuid: 'uuid' + index
+        }
+      }))
       this.$set(this, 'errorList', new Array(this.totalPage).fill(0))
       this.$nextTick(() => {
         this.va()
       })
-      this.$store.commit('UPDATE_BREADCRUMB', [{name: '班步', path: '/'}, {name: 'demo', path: '/demo'}, {name: '大数据导入', path: '/bigdata'}])
-    },
-    mounted () {
-
     },
     methods: {
       handleCurrentChange (val) {
@@ -219,21 +219,25 @@
       },
       va () {
         let startTime = new Date().getTime()
-        let errorList = new Array(this.listData.list.length).fill({})
         // 循环验证大数据
-        this.listData.list.map((item, index) => {
+        let errList = this.listData.list.map((item, index) => {
+          let err = {}
           for (let key in item) {
             if (regList[key].test(item[key])) {
-              errorList[index][key] = true
+              err[key] = true
             } else {
-              errorList[index][key] = false
+              err[key] = false
             }
           }
+          return err
         })
-        this.$set(this, 'errorList', errorList)
-        this.$message.success('验证用时' + (new Date().getTime() - startTime) + '毫秒')
+        this.$set(this, 'errorList', errList)
+        this.$nextTick(() => {
+          this.$message.success('验证用时' + (new Date().getTime() - startTime) + '毫秒')
+        })
       },
       vaRow (item, index) {
+        let startTime = new Date().getTime()
         let error = {}
         for (let key in item) {
           if (regList[key].test(item[key])) {
@@ -243,6 +247,9 @@
           }
         }
         this.$set(this.errorList, index, error)
+        this.$nextTick(() => {
+          this.$message.success('验证用时' + (new Date().getTime() - startTime) + '毫秒')
+        })
       },
       tableRowClassName (row, index) {
         for (let key in this.tableErrorData[index]) {
