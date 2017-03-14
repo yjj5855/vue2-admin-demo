@@ -35,11 +35,10 @@
         </el-dropdown-menu>
       </el-dropdown>
 
-
     </el-row>
 
     <!--面包屑-吸顶-->
-    <sticky :z="3">
+    <sticky :z="4">
       <el-row type="flex" align="middle" justify="space-between" class="breadcrumb">
         <el-col :span="12">
           <el-breadcrumb separator="/">
