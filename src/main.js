@@ -3,7 +3,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from './store'
 import { sync } from 'vuex-router-sync'
-import 'fastclick'
+import va from './libs/va'
 import 'raven-js'
 import axios from 'axios'
 import './libs/axiosConfig'
@@ -26,6 +26,7 @@ axios.defaults.withCredentials = true
 
 Vue.use(VueRouter)
 Vue.use(ElementUI)
+Vue.use(va)
 
 const routes = [
   {

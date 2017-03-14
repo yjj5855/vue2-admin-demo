@@ -238,19 +238,32 @@
       },
       vaRow (item, index) {
         let startTime = new Date().getTime()
-        let error = {}
         for (let key in item) {
           if (regList[key].test(item[key])) {
-            error[key] = true
+            this.errorList[index][key] = true
           } else {
-            error[key] = false
+            this.errorList[index][key] = false
           }
         }
-        this.$set(this.errorList, index, error)
         this.$nextTick(() => {
           this.$message.success('验证用时' + (new Date().getTime() - startTime) + '毫秒')
         })
       },
+//      vaRow (item, index) {
+//        let startTime = new Date().getTime()
+//        let error = {}
+//        for (let key in item) {
+//          if (regList[key].test(item[key])) {
+//            error[key] = true
+//          } else {
+//            error[key] = false
+//          }
+//        }
+//        this.$set(this.errorList, index, error)
+//        this.$nextTick(() => {
+//          this.$message.success('验证用时' + (new Date().getTime() - startTime) + '毫秒')
+//        })
+//      },
       tableRowClassName (row, index) {
         for (let key in this.tableErrorData[index]) {
           if (this.tableErrorData[index][key] === false) {

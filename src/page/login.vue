@@ -136,6 +136,7 @@
           })
           .catch((err) => {
             console.error(err)
+            this.$message.error('登录失败')
           })
       }
     }

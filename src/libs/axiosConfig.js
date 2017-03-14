@@ -8,7 +8,7 @@ const config = {
 
   // 基础url前缀
   // baseURL: 'http://116.236.230.131:55002',
-  baseURL: 'http://172.16.3.60:8080',
+  baseURL: window.env && window.env.API_HOST || 'http://172.16.3.60:8081',
 
   //设置超时时间
   timeout: 20000,
@@ -21,26 +21,35 @@ for(let key in config){
 }
 
 axios.interceptors.request.use(function (request) {
-  // let infoJson = _localStorage.getItem('infoJson') || {}
-  // let token = infoJson.token;
-  request.headers.xa_token = 'LRtBPNUH7rGqJJ8QPG7Pe3'
-
+  let token = localStorage.getItem('xa_token')
+  if(token && (!request.params  || request.params.send_token !== false)){
+    if(request.headers){
+      request.headers.xa_token = token
+    }else{
+      request.headers = {
+        xa_token : token
+      }
+    }
+  }else{
+    if(request.params){
+      delete request.params.send_token;
+    }
+  }
   return request
 })
 
 // response过滤
 axios.interceptors.response.use(function (response) {
+  if(response.headers && response.headers.xa_token){
+    localStorage.setItem('xa_token', response.headers.xa_token)
+  }
   // 这里提前处理返回的数据
   if(typeof response == 'object'){
     if(response.status == 200){
       return response.data;
-    }else{
-      Promise.reject(response.data)
     }
-  }else{
-    Promise.reject(response)
   }
-  return response;
+  return response
 }, function (error) {
   return Promise.reject(error);
 });

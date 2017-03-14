@@ -260,8 +260,6 @@
     return store.dispatch('FETCH_LIST_DATA', {
       ...store.state.user.base.paramsData,
       ...params
-    }).then((data) => {
-      console.log(data)
     })
   }
 
@@ -313,12 +311,12 @@
     },
     created () {
       ajax(this.$store)
-//        .then((data) => {
-//          console.log(data)
-//        })
-//        .catch((err) => {
-//          console.error(err)
-//        })
+        .then((data) => {
+          console.log(data)
+        })
+        .catch((err) => {
+          console.error(err)
+        })
       this.$store.commit('UPDATE_BREADCRUMB', [{name: '班步', path: '/'}, {name: '人员信息', path: '/user'}, {name: '花名册', path: '/user/list'}])
     },
     mounted () {
