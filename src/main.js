@@ -19,6 +19,7 @@ import './main.css'
 import homeRouter from './page/home'
 import userRouter from './page/user'
 import demoRouter from './page/demo'
+import settingRouter from './page/setting'
 
 require('promise.prototype.finally').shim()
 
@@ -43,7 +44,8 @@ const routes = [
     children: [
       ...homeRouter,
       ...userRouter,
-      ...demoRouter
+      ...demoRouter,
+      ...settingRouter
     ]
   },
   {

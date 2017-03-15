@@ -13,6 +13,8 @@
           <el-menu-item index="/user/org" :route="{path:'/user/org'}">组织架构</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
+
+      <!--demo-->
       <el-submenu index="3">
         <template slot="title">
           <i class="el-icon-message"></i>demo
@@ -23,6 +25,16 @@
           <el-menu-item index="/wifi" :route="{path:'/wifi'}">动态标签</el-menu-item>
           <el-menu-item index="/time" :route="{path:'/time'}">上下班时间设置</el-menu-item>
           <el-menu-item index="/bigdata" :route="{path:'/bigdata'}">大数据导入</el-menu-item>
+        </el-menu-item-group>
+      </el-submenu>
+
+      <!--setting-->
+      <el-submenu index="4">
+        <template slot="title">
+          <i class="el-icon-fa-unlock-alt"></i>账户管理
+        </template>
+        <el-menu-item-group>
+          <el-menu-item index="/setting" :route="{path:'/setting'}">菜单设置</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
 
