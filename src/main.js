@@ -57,8 +57,16 @@ const routes = [
     }
   },
   {
+    path: '/404',
+    component: resolve => {
+      require.ensure(['./page/404.vue'], () => {
+        resolve(require('./page/404.vue'))
+      }, '404')
+    }
+  },
+  {
     path: '*',
-    redirect: '/'
+    redirect: '/404'
   }
 ]
 
