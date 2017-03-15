@@ -1,4 +1,5 @@
 import axios from 'axios'
+import env from '../env/env'
 require('promise.prototype.finally').shim()
 
 const config = {
@@ -8,10 +9,15 @@ const config = {
 
   // 基础url前缀
   // baseURL: 'http://116.236.230.131:55002',
-  baseURL: window.env && window.env.API_HOST || 'http://172.16.3.60:8081',
+  baseURL: window.env && window.env.API_HOST || env.API_HOST,
 
   //设置超时时间
   timeout: 20000,
+
+  //状态码 处理  status >= 200 && status < 300; // default
+  validateStatus: function (status) {
+    return status >= 200 && status < 300;
+  }
 
 }
 
@@ -51,7 +57,15 @@ axios.interceptors.response.use(function (response) {
   }
   return response
 }, function (error) {
-  return Promise.reject(error);
+  if(error && error.response && error.response.status == 401 && error.response.data){
+    return Promise.reject(error.response.data)
+  }else{
+    return Promise.reject({ reasons: [{
+      field: "",
+      message: "接口请求失败",
+      msg_id: "error.0000"
+    }]})
+  }
 });
 
 

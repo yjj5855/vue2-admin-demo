@@ -131,12 +131,10 @@
       onSubmit () {
         axios.post('/login', this.form)
           .then((data) => {
-            console.log(data)
             this.$router.replace('/')
           })
           .catch((err) => {
-            console.error(err)
-            this.$message.error('登录失败')
+            this.$message.error(err.reasons && err.reasons[0].message || '登录失败')
           })
       }
     }

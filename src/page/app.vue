@@ -5,7 +5,7 @@
       </transition>
       <el-row>
         <transition name="left" appear v-if="!destroy">
-          <el-col :span="4">
+          <el-col :span="4" class="page-menu">
             <common-menu/>
           </el-col>
         </transition>
@@ -19,10 +19,15 @@
     </div>
 </template>
 <style scoped>
+  .page-menu{
+    background: #fff;
+    min-height: calc(100vh - 130px);
+  }
   .page-content{
     padding: 0 20px;
     background: #fff;
     min-height: calc(100vh - 130px);
+    border-left: 1px #e4e4e4 solid;
   }
 
   .top-enter-active {
