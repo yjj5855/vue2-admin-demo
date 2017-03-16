@@ -6,7 +6,7 @@
       </el-menu-item>
 
       <!--循环菜单-->
-      <el-submenu :index="index+''" v-for="(menu,index) in menuList">
+      <el-submenu :index="index+''" v-for="(menu,index) in menuList" v-show="menu.onOff">
         <template slot="title">
           <i :class="menu.icon"></i>{{menu.name}}
         </template>
