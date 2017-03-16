@@ -59,13 +59,13 @@
     },
     methods: {
       handleOpen (key, keyPath) {
-        console.log('handleOpen', key, keyPath)
+//        console.log('handleOpen', key, keyPath)
       },
       handleClose (key, keyPath) {
-        console.log('handleClose', key, keyPath)
+//        console.log('handleClose', key, keyPath)
       },
       handleSelect (index, indexPath) {
-        console.log('handleSelect', typeof index)
+//        console.log('handleSelect', typeof index)
         this.$router.history.push(index)
       }
     },
