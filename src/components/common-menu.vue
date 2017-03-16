@@ -4,18 +4,19 @@
       <el-menu-item index="/" :route="{path:'/'}">
         <i class="el-icon-fa-home"></i>首页
       </el-menu-item>
-      <el-submenu index="2">
+
+      <!--循环菜单-->
+      <el-submenu :index="index+''" v-for="(menu,index) in menuList">
         <template slot="title">
-            <i class="el-icon-fa-user"></i>员工管理
+          <i :class="menu.icon"></i>{{menu.name}}
         </template>
-        <el-menu-item-group>
-          <el-menu-item index="/user/list" :route="{path:'/user/list'}">花名册</el-menu-item>
-          <el-menu-item index="/user/org" :route="{path:'/user/org'}">组织架构</el-menu-item>
+        <el-menu-item-group v-if="menu.children.length > 0">
+          <el-menu-item :index="item.index" :route="item.path" v-for="item in menu.children">{{item.name}}</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
 
       <!--demo-->
-      <el-submenu index="3">
+      <el-submenu index="999">
         <template slot="title">
           <i class="el-icon-message"></i>demo
         </template>
@@ -27,17 +28,6 @@
           <el-menu-item index="/bigdata" :route="{path:'/bigdata'}">大数据导入</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
-
-      <!--setting-->
-      <el-submenu index="4">
-        <template slot="title">
-          <i class="el-icon-fa-unlock-alt"></i>账户管理
-        </template>
-        <el-menu-item-group>
-          <el-menu-item index="/setting" :route="{path:'/setting'}">菜单设置</el-menu-item>
-        </el-menu-item-group>
-      </el-submenu>
-
       <el-menu-item index="/login"><i class="el-icon-setting"></i>退出登录</el-menu-item>
     </el-menu>
   </sticky>
@@ -55,10 +45,17 @@
 
   export default {
     data: function () {
-      return {}
+      return {
+
+      }
     },
     components: {
       sticky
+    },
+    computed: {
+      menuList () {
+        return this.$store.state.app.menuList
+      }
     },
     methods: {
       handleOpen (key, keyPath) {

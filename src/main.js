@@ -21,6 +21,8 @@ import userRouter from './page/user'
 import demoRouter from './page/demo'
 import settingRouter from './page/setting'
 
+import './transition/my-transition'
+
 require('promise.prototype.finally').shim()
 
 axios.defaults.withCredentials = true
@@ -34,6 +36,7 @@ const routes = [
     path: '/',
     beforeEnter: (to, from, next) => {
       // next('/login')
+      // TODO 验证权限
       next()
     },
     component: resolve => {

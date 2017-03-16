@@ -14,7 +14,7 @@
     <div class="white-space"></div>
     <div class="white-space"></div>
     <el-row :gutter="100" class="card-box">
-      <el-col :span="12" class="card-item"  v-for="item in cardList">
+      <el-col :span="12" class="card-item" v-for="(item,index) in cardList">
         <el-card class="card-item-box">
           <el-row :gutter="20">
             <el-col :span="6" class="card-item-box__left">
@@ -69,13 +69,22 @@
     }
 
     .card-box{
+      margin-left: 0!important;
+      margin-right: 0!important;
       padding: 0 50px;
     }
     .card-item{
       margin-bottom: 50px;
     }
     .card-item-box{
+      transition: all 0.3s ease;
       height: 205px;
+      box-shadow: none;
+
+      &:hover{
+        transform: translate3d(0, -2px, 0);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+      }
 
       .el-card__body{
         padding-bottom: 5px;
