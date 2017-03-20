@@ -1,6 +1,6 @@
-# vue2-demo
+# vue2-admin-demo
 
-> A Vue.js project
+> [A Vue.js project](https://yjj5855.github.io/vue2-admin-demo/dist/index.html?#/)
 
 ## Build Setup
 
