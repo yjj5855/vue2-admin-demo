@@ -46,18 +46,26 @@
           </el-breadcrumb>
         </el-col>
 
-        <div>
+        <el-row type="flex" align="middle" justify="space-between">
+          <span class="breadcrumb-icon">
+              <i class="el-icon-fa-bell-o"></i>
+          </span>
+          <span class="breadcrumb-badge">12</span>&emsp;
           <span class="breadcrumb-text">人员总计：500人</span>&emsp;
           <span class="breadcrumb-text">本月入职：15人</span>&emsp;
           <span class="breadcrumb-text">本月离职：15人</span>&emsp;
           <span class="breadcrumb-text">意见反馈</span>&emsp;
-          <span class="breadcrumb-text">帮助</span>
-        </div>
+          <span class="breadcrumb-text">帮助</span>&emsp;
+          <span class="breadcrumb-icon">
+              <i class="el-icon-fa-gear"></i>
+          </span>
+        </el-row>
       </el-row>
     </sticky>
   </div>
 </template>
-<style scoped>
+<style scoped lang="less" rel="stylesheet/less">
+  @import "../var.less";
   .common-menu{
     height: 80px;
     padding: 0 20px;
@@ -83,6 +91,19 @@
   .breadcrumb-text{
     font-size: 13px;
     color: #999;
+  }
+  .breadcrumb-badge{
+    font-size: 13px;
+    color: #fff;
+    background-color: @--color-danger;
+    padding: 0 5px;
+    border-radius: 13px;
+  }
+  .breadcrumb-icon{
+    color: #999;
+    i{
+      font-size: 20px!important;
+    }
   }
 </style>
 <script>
