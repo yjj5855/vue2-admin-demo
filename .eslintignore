@@ -1,2 +1,4 @@
 build/*.js
 config/*.js
+src/page/user/org.vue
+src/libs/*.js

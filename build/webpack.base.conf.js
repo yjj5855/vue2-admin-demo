@@ -48,7 +48,7 @@ module.exports = {
         include: [
           path.join(projectRoot, 'src')
         ],
-        exclude: /node_modules|org\.vue/
+        exclude: /node_modules/
       },
       {
         test: /\.js$/,
@@ -56,7 +56,7 @@ module.exports = {
         include: [
           path.join(projectRoot, 'src')
         ],
-        exclude: /node_modules|plugins|libs/
+        exclude: /node_modules/
       }
     ],
     loaders: [
