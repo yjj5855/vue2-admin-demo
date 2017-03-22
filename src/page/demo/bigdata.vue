@@ -41,11 +41,11 @@
         width="150"
         :prop="item.key"
         :label="item.label">
-        <template scope="scope">
-          {{ scope.row[item.key] }}
-          <i class="el-icon-circle-check" v-if="tableErrorData[scope.$index] && tableErrorData[scope.$index][item.key] == true"></i>
-          <i class="el-icon-circle-cross" v-else></i>
-        </template>
+        <!--<template scope="scope">-->
+          <!--{{ scope.row[item.key] }}-->
+          <!--<i class="el-icon-circle-check" v-if="tableErrorData[scope.$index] && tableErrorData[scope.$index][item.key] == true"></i>-->
+          <!--<i class="el-icon-circle-cross" v-else></i>-->
+        <!--</template>-->
       </el-table-column>
       <el-table-column
         fixed="right"
@@ -208,7 +208,7 @@
           uuid: 'uuid' + index
         }
       }))
-      this.$set(this, 'errorList', new Array(this.totalPage).fill(0))
+      this.$set(this, 'errorList', new Array(this.totalPage).fill(false))
       this.$nextTick(() => {
         this.va()
       })

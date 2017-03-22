@@ -45,7 +45,7 @@
       color: #999;
 
       a{
-        color: @--color-primary;
+        color: @color-primary;
       }
     }
   }

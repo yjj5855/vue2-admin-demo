@@ -55,12 +55,12 @@
       color: #999;
       font-size: 12px;
       span{
-        color: @--color-warning;
+        color: @color-warning;
       }
     }
     .el-button--default{
-      color: @--color-primary;
-      border-color: @--color-primary;
+      color: @color-primary;
+      border-color: @color-primary;
     }
 
     .card-box{
@@ -102,7 +102,7 @@
       height: 40px;
       line-height: 40px;
       font-size: 13px;
-      border-top: 1px #e4e4e4 solid;
+      border-top: @border-base;
       color: #999;
 
       .flex-1{
@@ -113,7 +113,7 @@
         font-size: 12px;
       }
       .el-icon-check{
-        color: @--color-primary;
+        color: @color-primary;
       }
     }
 

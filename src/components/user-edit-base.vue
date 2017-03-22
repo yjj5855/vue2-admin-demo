@@ -47,7 +47,7 @@
 
   .user-edit-base{
     .el-icon-check,.c-primary{
-      color: @--color-primary;
+      color: @color-primary;
     }
     .el-icon-close{
       color: red;
@@ -75,7 +75,7 @@
       background: #eee;
     }
     .sortable-drag{
-      background: #fff;
+      background: @color-white;
       opacity: .5;
     }
   }

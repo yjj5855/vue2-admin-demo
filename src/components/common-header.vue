@@ -70,24 +70,24 @@
   .common-menu{
     height: 80px;
     padding: 0 20px;
-    border-bottom: 1px solid #e7eaec !important;
+    border-bottom: @border-base !important;
     z-index: 3;
     color: #fff;
-    background: @--color-primary;
+    background: @color-primary;
 
     &.theme-white{
-      background: #fff;
+      background: @color-white;
       .common-menu__title{
-        color: #999;
+        color: @color-extra-light-black;
       }
       .common-menu__subTitle{
-        color: #666;
+        color: @color-light-black;
       }
       .common-menu__sub_right{
-        color: #aaa;
+        color: @color-extra-light-black;
       }
       .common-menu__user{
-        color: @--color-primary;
+        color: @color-primary;
       }
     }
   }
@@ -104,7 +104,7 @@
     height: 50px;
     padding: 0 20px;
     background: #fff;
-    border-bottom: 1px solid #e7eaec !important;
+    border-bottom: @border-base !important;
     z-index: 3;
   }
   .breadcrumb-text{
@@ -114,7 +114,7 @@
   .breadcrumb-badge{
     font-size: 13px;
     color: #fff;
-    background-color: @--color-danger;
+    background-color: @color-danger;
     padding: 0 5px;
     border-radius: 13px;
   }

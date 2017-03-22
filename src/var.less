@@ -1,40 +1,58 @@
 @charset "UTF-8";
-@import (once) "../element-variables.css";
 
-/* Transition
+/* 班步样式
  -------------------------- */
-@--all-transition: var(--all-transition);
-@--fade-transition: var(--fade-transition);
-@--fade-linear-transition: var(--fade-linear-transition);
-@--md-fade-transition: var(--md-fade-transition);
-@--border-transition-base: var(--border-transition-base);
-@--color-transition-base: var(--color-transition-base);
+
+/* Border
+  -------------------------- */
+@border-width-base: 1px;
+@border-style-base: solid;
+@border-color-base: #e7eaec;
+@border-base: @border-width-base @border-style-base @border-color-base;
+@border-radius-base: 4px;
+@border-radius-small: 2px;
+@border-radius-circle: 100%;
 
 /* Colors
 -------------------------- */
-@--color-primary: var(--color-primary);
+@color-primary: #1ab394;
 
-@--color-success: var(--color-success);
-@--color-warning: var(--color-warning);
-@--color-danger: var(--color-danger);
-@--color-info: var(--color-info);
+@color-success: #13ce66;
+@color-warning: #f7ba2a;
+@color-danger: #ff4949;
+@color-info: #50bfff;
 
-@--color-secondary: var(--color-secondary);
-@--color-white: var(--color-white);
-@--color-dark-white: var(--color-dark-white);
-@--color-black: var(--color-black);
+@color-secondary: lighten(@color-primary, 10%);
+@color-white: #fff;
+@color-dark-white: darken(@color-white, 10%);
+@color-black: #000;
 
-@--color-base-black: var(--color-base-black);
-@--color-light-black: var(--color-light-black);
-@--color-extra-light-black: var(--color-extra-light-black);
+@color-base-black: #222;
+@color-light-black: #666;
+@color-extra-light-black: #999;
 
-@--color-base-silver: var(--color-base-silver);
-@--color-light-silver: var(--color-light-silver);
-@--color-extra-light-silver: var(--color-extra-light-silver);
 
-@--color-base-gray: var(--color-base-gray);
-@--color-light-gray: var(--color-light-gray);
-@--color-extra-light-gray: var(--color-extra-light-gray);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//@color-base-silver: lighten(@color-base-black h(+3) s(16%) l(58%));
+//@color-light-silver: lighten(@color-base-black h(+3) s(23%) l(67%));
+//@color-extra-light-silver: lighten(@color-base-black s(26%) l(80%));
+//
+//@color-base-gray: lighten(@color-base-black s(28%) l(86%));
+//@color-light-gray: lighten(@color-base-black h(+10) s(33%) l(92%));
+//@color-extra-light-gray: lighten(@color-base-black h(+6) s(33%) l(95%));
 
 /* Link
 -------------------------- */

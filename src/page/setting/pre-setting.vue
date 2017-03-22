@@ -75,12 +75,12 @@
     }
 
     .step-item{
-      color: @--color-primary;
+      color: @color-primary;
       border-radius: 100%;
       width: 100px;
       height: 100px;
       background: #fff;
-      border: 1px @--color-primary solid;
+      border: 1px @color-primary solid;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -88,7 +88,7 @@
       font-weight: 300;
     }
     .el-icon-arrow-right{
-      color: @--color-primary;
+      color: @color-primary;
       font-size: 12px;
       font-weight: lighter;
       margin-right: -10px;
