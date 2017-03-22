@@ -9,15 +9,23 @@ export default [
     }
   },
   {
-    path: '/user/base',
+    path: '/user/list',
     component: resolve => {
-      require.ensure(['./base.vue'], () => {
-        resolve(require('./base.vue'))
+      require.ensure(['./list.vue'], () => {
+        resolve(require('./list.vue'))
       }, 'user')
     }
   },
   {
-    path: '/user/base/:id',
+    path: '/user/org',
+    component: resolve => {
+      require.ensure(['./org.vue'], () => {
+        resolve(require('./org.vue'))
+      }, 'user')
+    }
+  },
+  {
+    path: '/user/:id',
     component: resolve => {
       require.ensure(['./detail.vue'], () => {
         resolve(require('./detail.vue'))

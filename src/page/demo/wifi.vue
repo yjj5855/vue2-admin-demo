@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wifi">
     <div style="margin: 15px 30px;padding: 8px;background: #fff;">
       <el-form ref="form" :model="form" label-width="120px">
         <el-form-item label="wifi名称(SSID)">
@@ -43,16 +43,16 @@
     </div>
   </div>
 </template>
-<style>
-  .el-tag+.el-tag {
+<style scoped>
+  .wifi .el-tag+.el-tag {
     margin-left: 10px;
     /*margin-bottom: 10px;*/
   }
-  .input-new-tag{
+  .wifi .input-new-tag{
     width: 78px;
     margin-left: 10px;
   }
-  .button-new-tag{
+  .wifi .button-new-tag{
     margin-left: 10px;
     height: 24px;
     line-height: 22px;
@@ -60,7 +60,7 @@
     padding-bottom: 0;
   }
 
-  .input-edit-tag input{
+  .wifi .input-edit-tag input{
     background: #8391a5;
     border: none;
     color: #fff;

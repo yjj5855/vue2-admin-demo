@@ -4,6 +4,7 @@
     <el-breadcrumb separator="/">
       <el-breadcrumb-item :to="{ path: item.path }" v-for="item in pathList">{{item.name}}</el-breadcrumb-item>
     </el-breadcrumb>
+
   </div>
 </template>
 <style scoped>

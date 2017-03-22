@@ -31,5 +31,13 @@ export default [
         resolve(require('./time.vue'))
       }, 'demo')
     }
+  },
+  {
+    path: '/bigdata',
+    component: resolve => {
+      require.ensure(['./bigdata.vue'], () => {
+        resolve(require('./bigdata.vue'))
+      }, 'demo')
+    }
   }
 ]

@@ -23,7 +23,8 @@ module.exports = {
   },
   externals: {
     requestAnimationFrame: 'window.requestAnimationFrame',
-    TWEEN: 'window.TWEEN'
+    TWEEN: 'window.TWEEN',
+    echarts: 'window.echarts'
   },
   resolve: {
     extensions: ['', '.js', '.vue', '.json'],
@@ -55,7 +56,7 @@ module.exports = {
         include: [
           path.join(projectRoot, 'src')
         ],
-        exclude: /node_modules|plugins|libs/
+        exclude: /node_modules/
       }
     ],
     loaders: [
@@ -102,10 +103,10 @@ module.exports = {
     formatter: require('eslint-friendly-formatter')
   },
   vue: {
-    loaders: utils.cssLoaders({ sourceMap: useCssSourceMap }),
+    loaders: utils.cssLoaders({ sourceMap: useCssSourceMap, extract: true }),
     postcss: [
       require('autoprefixer')({
-        browsers: ['last 2 versions']
+        browsers: ['ie > 8', 'last 2 version']
       })
     ]
   }

@@ -1,17 +1,53 @@
 
 html{
-  font-family: arial, 'Hiragino Sans GB', 'Microsoft Yahei', 'SimSun', \5b8b\4f53, Tahoma, Arial, Helvetica, STHeiti;
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  /*font-family: arial, 'Hiragino Sans GB', 'Microsoft Yahei', 'SimSun', \5b8b\4f53, Tahoma, Arial, Helvetica, STHeiti;*/
 }
 body{
-  min-width: 1200px;
+  min-width: 1366px;
   margin: 0;
-  background: #f0f3f3;
+  background: #ffffff;
 }
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
-  font-weight: 100;
+  font-weight: 300;
   color: #242a30;
 }
+
+/*分页组件 没有padding*/
 .el-pagination{
-  padding: 0;
+  padding: 0!important;
+}
+
+/*留白*/
+.white-space{
+  min-height: 15px;
+  width: 100%;
+}
+
+/*设置图表z-index不能太大*/
+div[_echarts_instance_] div{
+  z-index: 2!important;
+}
+
+/*全局的头部*/
+.box-header{
+  height: 50px;
+  border-bottom: 1px #eee solid;
+  color: #999;
+  background: #fff;
+}
+.box-header__title{
+  color: #474747
+}
+
+
+/*fa icon*/
+[class^=el-icon-][class^="el-icon-fa"], [class*=" el-icon-"][class*=" el-icon-fa"]{
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome!important;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

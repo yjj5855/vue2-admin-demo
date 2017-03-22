@@ -25,7 +25,7 @@
     </div>
     <div class="tree-node-children">
       <tree-node v-for="(child, $index) in children" v-show="!hideChildren"
-                 :vm="myVm" @on-myVm-change="setMyVm" :node="child" :idx="$index">
+                 v-model="valueModel" :node="child" :idx="$index">
       </tree-node>
     </div>
   </div>
@@ -65,40 +65,34 @@
 </style>
 <script>
   import Vue from 'vue'
+
   export default {
     name: 'tree-node', // 递归组件需指明 name
     props: {
-      vm: Object, // 正在拖动的节点实例（TreeNode 组件通用，须双向绑定）
+      value: Object, // 正在拖动的节点实例（TreeNode 组件通用，须双向绑定）
       node: Object, // 节点数据，形如 { name: 'xxx', children: [] }
       idx: Number // v-for 的索引，用于相邻节点的判别
     },
     data: function () {
       return {
-        myVm: this.vm,
         hideChildren: false,
         unwatchRootNode: () => {}
       }
     },
-    watch: {
-      vm (val) {
-        this.myVm = val // 新增result的watch，监听变更并同步到myResult上
-      },
-      myVm (val, oldVal) {
-        this.$emit('on-myVm-change', val) // ③组件内对myResult变更后向外部发送事件通知
-      }
-    },
-    created () {
-      if (typeof this.idx === 'undefined') {
-        this.unwatchRootNode = this.$watch('node', val => { this.$emit('on-node-change', val) }, { deep: true })
-      }
-    },
     beforeDestroy () {
       if (typeof this.idx === 'undefined') {
-        console.log('销毁监听')
         this.unwatchRootNode()
       }
     },
     computed: {
+      valueModel: {
+        get: function () {
+          return this.value
+        },
+        set: function (val) {
+          this.$emit('input', val)
+        }
+      },
       children () { // 为每个子节点前后都生成空节点，便于实现兄弟节点间的“插入排序”
         // 举例：原本是 [N1, N2, N3]
         let { children } = this.node
@@ -112,15 +106,15 @@
         return _children
       },
       isParent () { // 拖放限制 1：判断“我”是否为被拖动节点的父节点
-        return this === (this.myVm && this.myVm.$parent)
+        return this === (this.value && this.value.$parent)
       },
       isNextToMe () { // 拖放限制 2：判断“我”是否为被拖动节点的相邻节点
-        return this.$parent === this.myVm && this.myVm.$parent && Math.abs(this.idx - this.myVm.idx) === 1
+        return this.$parent === this.value && this.value.$parent && Math.abs(this.idx - this.value.idx) === 1
       },
       isMeOrMyAncestor () { // 拖放限制 3：判断被拖动节点是否为“我”自身或“我”的祖先
         var p = this
         while (p) {
-          if (this.myVm === p) return true
+          if (this.value === p) return true
           p = p.$parent
         }
       },
@@ -133,7 +127,7 @@
         this.$el.style.backgroundColor = ''
       },
       handleDragStart () {
-        this.myVm = this // 设置本组件为当前正在拖动的实例，此举将同步 sync 到所有 TreeNode 实例
+        this.valueModel = this // 设置本组件为当前正在拖动的实例，此举将同步 sync 到所有 TreeNode 实例
         this.$el.style.backgroundColor = 'silver'
       },
       handleDrop () {
@@ -141,17 +135,17 @@
         if (!this.isAllowToDrop) return
 
         // 无论如何都直接删除被拖动节点
-        let index = this.myVm.$parent.node.children.indexOf(this.myVm.node)
-        this.myVm.$parent.node.children.splice(index, 1)
+        let index = this.value.$parent.node.children.indexOf(this.value.node)
+        this.value.$parent.node.children.splice(index, 1)
 
         // 情况 1：拖入空节点，成其兄弟（使用 splice 插入节点）
         if (!this.node.name) {
-          return this.$parent.node.children.splice(this.idx / 2, 0, this.myVm.node)
+          return this.$parent.node.children.splice(this.idx / 2, 0, this.value.node)
         }
 
         // 情况2：拖入普通节点，成为其子
         if (!this.node.children) Vue.set(this.node, 'children', []) // 须用 $set 引入双向绑定
-        this.node.children.push(this.myVm.node)
+        this.node.children.push(this.value.node)
       },
       handleDragEnter () { // 允许拖放才会显示样式
         if (!this.isAllowToDrop) return
@@ -162,13 +156,20 @@
       },
       handleDragEnd () {
         this.clearBgColor()
+        if (typeof this.idx === 'undefined') {
+          this.$emit('on-node-change', this.node)
+        } else {
+          this.$parent && this.$parent.onDragEnd()
+        }
       },
-      setMyVm (val) {
-        this.myVm = val
+      onDragEnd () {
+        if (typeof this.idx === 'undefined') {
+          this.$emit('on-node-change', this.node)
+        } else {
+          this.$parent && this.$parent.onDragEnd()
+        }
       },
-
       showDialog (type, node) {
-        this.myVm = this
         switch (type) {
           case 'add':
             this.$prompt(`请输入部门名称`, '提示', {
@@ -212,8 +213,8 @@
               cancelButtonText: '取消',
               type: 'warning'
             }).then(() => {
-              let index = this.myVm.$parent.node.children.indexOf(this.myVm.node)
-              this.myVm.$parent.node.children.splice(index, 1)
+              let index = this.$parent.node.children.indexOf(this.node)
+              this.$parent.node.children.splice(index, 1)
               this.$message({
                 type: 'success',
                 message: '删除成功!'
