@@ -104,8 +104,8 @@
         show: true,
         svgList: ['3000-6000', '6000-9000', '9000-12000', '12000-15000', '15000-20000', '20000-40000'],
 
-        lineCharts: null,
-        barCharts: null,
+        lineCharts: {},
+        barCharts: {},
         tableData: [
           {name: '上海云才网络科技有限公司', count: '180人'},
           {name: '上海云才网络科技有限公司', count: '180人'},

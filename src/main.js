@@ -33,7 +33,6 @@ Vue.use(va)
 
 const routes = [
   {
-    name: 'app',
     path: '/',
     beforeEnter: (to, from, next) => {
       // next('/login')

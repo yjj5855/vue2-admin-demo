@@ -3,7 +3,10 @@ export default [
   {
     path: '/',
     component: resolve => {
-      require.ensure(['./index.vue'], () => {
+      // import('./index.vue').then(module => {
+      //   resolve(module)
+      // })
+      require.ensure([], () => {
         resolve(require('./index.vue'))
       }, 'app')
     }
