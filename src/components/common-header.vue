@@ -1,13 +1,14 @@
 <template>
   <div>
     <!--最顶部-->
-    <el-row type="flex" align="middle"  class="common-menu" :style="backgroundColor">
+    <el-row type="flex" align="middle"  class="common-menu theme-white">
       <el-col style="flex: 1;">
-        <div style="font-size: 20px;font-weight: 300;">人力资源智能云平台班步VIP版</div>
+        <div class="common-menu__title" style="font-size: 20px;font-weight: 300;">人力资源智能云平台班步VIP版</div>
         <div>
           <el-dropdown>
             <span class="el-dropdown-link">
-              上海云才网络科技有限公司 切换<i class="el-icon-arrow-down el-icon--right"></i>
+              <span class="common-menu__subTitle">上海云才网络科技有限公司</span>
+              <span class="common-menu__sub_right">切换<i class="el-icon-arrow-down el-icon--right"></i></span>
             </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>黄金糕</el-dropdown-item>
@@ -23,15 +24,15 @@
       <!--头像-->
       <img class="avatar" src="../assets/logo.png"/>
       <el-dropdown>
-      <span class="el-dropdown-link">
-        用户XX<i class="el-icon-arrow-down el-icon--right"></i>
-      </span>
+        <span class="el-dropdown-link common-menu__user">
+          王小布 <i class="el-icon-arrow-down el-icon--right"></i>
+        </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>黄金糕</el-dropdown-item>
           <el-dropdown-item>狮子头</el-dropdown-item>
           <el-dropdown-item>螺蛳粉</el-dropdown-item>
           <el-dropdown-item disabled>双皮奶</el-dropdown-item>
-          <el-dropdown-item divided>蚵仔煎</el-dropdown-item>
+          <el-dropdown-item divided>退出登录</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
 
@@ -65,14 +66,32 @@
   </div>
 </template>
 <style scoped lang="less" rel="stylesheet/less">
-  @import "../var.less";
+  @import "../var";
   .common-menu{
     height: 80px;
     padding: 0 20px;
     border-bottom: 1px solid #e7eaec !important;
     z-index: 3;
-    color: #fff
+    color: #fff;
+    background: @--color-primary;
+
+    &.theme-white{
+      background: #fff;
+      .common-menu__title{
+        color: #999;
+      }
+      .common-menu__subTitle{
+        color: #666;
+      }
+      .common-menu__sub_right{
+        color: #aaa;
+      }
+      .common-menu__user{
+        color: @--color-primary;
+      }
+    }
   }
+
   .el-dropdown {
     color: #fff;
   }
@@ -126,7 +145,7 @@
         return this.$store.state.app.themeColors
       },
       backgroundColor () {
-        return { 'background-color': this.themeColors.primary || '#1ab394' }
+        return { 'background-color': '#fff' || this.themeColors.primary || '#1ab394' }
       },
       pathList () {
         return this.$store.state.app.pathList
