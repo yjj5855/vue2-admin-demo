@@ -98,6 +98,7 @@
   import echarts from 'components/echarts.vue'
   import actionIcon from 'components/action-icon.vue'
   import { LineOrBarOption } from '../../libs/echarts-template'
+  import { introIndexPage } from '../../libs/intro'
   export default{
     data () {
       return {
@@ -152,6 +153,9 @@
           }
         ]
       })
+    },
+    mounted () {
+      introIndexPage()
     },
     components: {
       svgCircle,

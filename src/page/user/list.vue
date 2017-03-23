@@ -183,7 +183,7 @@
       <el-row type="flex" align="middle" justify="space-between">
         <el-col style="flex:1">
           <el-button type="info">新增员工</el-button>
-          <el-button type="success">员工信息导入</el-button>
+          <el-button type="success" id="import-user-btn">员工信息导入</el-button>
           <el-button type="success">导出当前结果</el-button>
         </el-col>
 
@@ -255,6 +255,7 @@
   import * as mutations from 'store/user/mutation-types'
 //  import ChooseBox from 'components/choose-box.vue'
   import DraggableSort from 'components/draggable-sort.vue'
+  import { importUser } from '../../libs/intro'
 
   function ajax (store, params) {
     return store.dispatch('FETCH_LIST_DATA', {
@@ -322,6 +323,10 @@
     },
     mounted () {
       this.restaurants = this.loadAll()
+
+      setTimeout(() => {
+        importUser()
+      }, 1000)
     },
     methods: {
       handleClick () {
