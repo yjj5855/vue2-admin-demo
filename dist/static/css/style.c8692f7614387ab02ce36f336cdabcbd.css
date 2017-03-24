@@ -118,7 +118,7 @@ div[_echarts_instance_] div {
   width: 100px;
   height: 107px;
   background-size: cover;
-  background-image: url(/Users/yangjiajun/vue2-admin-demo/dist/static/img/avatar.69f978c.png);
+  background-image: url(https://yjj5855.github.io/vue2-admin-demo/dist/static/img/avatar.69f978c.png);
 }
 .introjs-tooltip.png .introjs-arrow {
   display: none!important;
@@ -973,7 +973,7 @@ body{
       align-items: center;
   -ms-flex-pack: center;
       justify-content: center;
-  background-image: url(/Users/yangjiajun/vue2-admin-demo/dist/static/img/404.b77e004.jpg);
+  background-image: url(https://yjj5855.github.io/vue2-admin-demo/dist/static/img/404.b77e004.jpg);
   background-repeat: no-repeat;
   background-position: 0% 40%;
 }
@@ -1002,4 +1002,4 @@ body{
   color: #1ab394;
 }
 
-/*# sourceMappingURL=style.37a1ee754f88e52e11ec03cf7991ff29.css.map*/
+/*# sourceMappingURL=style.c8692f7614387ab02ce36f336cdabcbd.css.map*/

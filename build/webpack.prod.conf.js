@@ -17,7 +17,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     path: config.build.assetsRoot,
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
     chunkFilename: utils.assetsPath('js/[name].[chunkhash].js'),
-    publicPath: path.join(__dirname, '../dist/')
+    publicPath: 'https://yjj5855.github.io/vue2-admin-demo/dist/'
   },
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
