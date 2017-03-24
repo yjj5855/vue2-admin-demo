@@ -133,6 +133,29 @@ div[_echarts_instance_] div {
 .introjs-tooltip.png .introjs-tooltipbuttons {
   bottom: -60px;
 }
+.introjs-tooltip.png .introjs-button {
+  font-size: 16px;
+  background: none;
+  border-color: #eee;
+  color: #fff;
+  text-shadow: none;
+}
+.introjs-tooltip.png .introjs-button:hover {
+  border-color: #fff;
+  text-decoration: none;
+  box-shadow: none;
+}
+.introjs-tooltip.png .introjs-button.introjs-disabled {
+  color: #a2a2a2;
+  border-color: #a2a2a2;
+}
+.introjs-tooltip.png .introjs-skipbutton {
+  background: none;
+  border: none;
+  color: #fff!important;
+  text-shadow: none;
+  float: left;
+}
 
 .bb-index[data-v-19bd5eec]{
 }
@@ -1002,4 +1025,4 @@ body{
   color: #1ab394;
 }
 
-/*# sourceMappingURL=style.c8692f7614387ab02ce36f336cdabcbd.css.map*/
+/*# sourceMappingURL=style.dd8cbdacb3f7fb75a16032e2df9bdbd8.css.map*/
