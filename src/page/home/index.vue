@@ -98,7 +98,7 @@
   import echarts from 'components/echarts.vue'
   import actionIcon from 'components/action-icon.vue'
   import { LineOrBarOption } from '../../libs/echarts-template'
-  import { introIndexPage } from '../../libs/intro'
+  import intro from '../../libs/intro'
   export default{
     data () {
       return {
@@ -155,7 +155,8 @@
       })
     },
     mounted () {
-      introIndexPage()
+      // TODO 判断有没有展示过引导
+      intro.home()
     },
     components: {
       svgCircle,

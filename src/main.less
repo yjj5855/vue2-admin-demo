@@ -1,0 +1,152 @@
+@import (reference) "./var";
+
+html{
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  /*font-family: arial, 'Hiragino Sans GB', 'Microsoft Yahei', 'SimSun', \5b8b\4f53, Tahoma, Arial, Helvetica, STHeiti;*/
+}
+body{
+  min-width: 1366px;
+  margin: 0;
+  background: #ffffff;
+}
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 300;
+  color: #242a30;
+}
+
+/*分页组件 没有padding*/
+.el-pagination{
+  padding: 0!important;
+}
+
+/*留白*/
+.white-space{
+  min-height: 15px;
+  width: 100%;
+}
+
+/*设置图表z-index不能太大*/
+div[_echarts_instance_] div{
+  z-index: 2!important;
+}
+
+/*全局的头部*/
+.box-header{
+  height: 50px;
+  border-bottom: 1px #eee solid;
+  color: #999;
+  background: #fff;
+}
+.box-header__title{
+  color: #474747
+}
+
+
+/*fa icon*/
+[class^=el-icon-][class^="el-icon-fa"], [class*=" el-icon-"][class*=" el-icon-fa"]{
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome!important;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 气泡框 */
+.introjs-tooltip.zidingyi{
+  top: 63px!important;
+  right: 50%!important;
+  background-color: lightyellow;
+  border: 8px solid #666;
+
+  &:before {
+    content: " ";
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    left: auto;
+    right: -8px;
+    top: -36px;
+    bottom: auto;
+    border-width: 18px;
+    border-style: solid;
+    border-image: initial;
+    border-color: transparent #666 #666 transparent;
+  }
+  &:after {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: auto;
+    right: 0px;
+    top: -16px;
+    bottom: auto;
+    border: 8px solid;
+    border-color: transparent lightyellow lightyellow transparent;
+  }
+  .introjs-arrow{
+    display: none!important;
+  }
+
+  .introjs-bullets{
+
+  }
+
+  .introjs-tooltipbuttons{
+
+  }
+}
+
+// 头像引导
+.introjs-tooltip.png{
+  position: fixed;
+  top: 20px!important;
+  left: 200px!important;
+  right: 0!important;
+
+  margin: 10px;
+  padding: 10px 30px;
+  border-radius: 15px;
+  color: white;
+  background-color: @color-primary;
+
+  &:before {
+    box-sizing: border-box;
+    content: '';
+    display: block;
+    width: 1.5em;
+    height: 1em;
+    position: absolute;
+    left: -0.5em;
+    bottom: 0;
+    border-right: 1em solid @color-primary;
+    border-bottom-right-radius: 100%;
+    z-index: -1;
+  }
+
+  &:after {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    left: -130px;
+    width: 100px;
+    height: 107px;
+    background-size: cover;
+    background-image: url('./assets/avatar.png');
+  }
+
+  .introjs-arrow{
+    display: none!important;
+  }
+  .introjs-bullets,.introjs-tooltipbuttons{
+    position: absolute;
+    bottom: -30px;
+    right: 0;
+    left: 0;
+  }
+  .introjs-tooltipbuttons {
+    bottom: -60px;
+  }
+}

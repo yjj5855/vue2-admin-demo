@@ -255,7 +255,7 @@
   import * as mutations from 'store/user/mutation-types'
 //  import ChooseBox from 'components/choose-box.vue'
   import DraggableSort from 'components/draggable-sort.vue'
-  import { importUser } from '../../libs/intro'
+  import intro from '../../libs/intro'
 
   function ajax (store, params) {
     return store.dispatch('FETCH_LIST_DATA', {
@@ -325,7 +325,7 @@
       this.restaurants = this.loadAll()
 
       setTimeout(() => {
-        importUser()
+        intro.importUser()
       }, 1000)
     },
     methods: {

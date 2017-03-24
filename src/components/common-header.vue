@@ -56,7 +56,7 @@
           <span class="breadcrumb-text">本月入职：15人</span>&emsp;
           <span class="breadcrumb-text">本月离职：15人</span>&emsp;
           <span class="breadcrumb-text">意见反馈</span>&emsp;
-          <span class="breadcrumb-text">帮助</span>&emsp;
+          <span class="breadcrumb-text" @click="onHelpClick">帮助</span>&emsp;
           <span class="breadcrumb-icon">
               <i class="el-icon-fa-gear"></i>
           </span>
@@ -127,6 +127,7 @@
 </style>
 <script>
   import sticky from './sticky.vue'
+  import intro from '../libs/intro'
 
   export default {
     data: function () {
@@ -154,6 +155,11 @@
     methods: {
       handleSelect (key, keyPath) {
         console.log(key, keyPath)
+      },
+      onHelpClick () {
+        if (this.$route.name) {
+          intro[this.$route.name]()
+        }
       }
     }
   }

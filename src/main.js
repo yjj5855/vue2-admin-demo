@@ -14,7 +14,7 @@ import './transition'
 
 // import 'element-ui/lib/theme-default/index.css'
 // import '../theme/index.css' // 需要在index.html引入
-import './main.css'
+import './main.less'
 
 import homeRouter from './page/home'
 import userRouter from './page/user'
