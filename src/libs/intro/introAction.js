@@ -6,7 +6,7 @@ export function importUser () {
       {
         element: '#import-user-btn',
         intro: '点击按钮，导入员工数据',
-        position: 'bottom'
+        position: 'auto'
       }
     ]
   }))

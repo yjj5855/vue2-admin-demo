@@ -21,6 +21,8 @@ import userRouter from './page/user'
 import demoRouter from './page/demo'
 import settingRouter from './page/setting'
 
+import intro from './libs/intro' // 网页引导模块
+
 import './transition/my-transition'
 
 require('promise.prototype.finally').shim()
@@ -77,6 +79,16 @@ const router = new VueRouter({
   // mode: 'history',
   scrollBehavior: () => ({ y: 0 }),
   routes
+})
+
+// 全局路由钩子
+router.beforeEach((to, from, next) => {
+  if (to.name) {
+    setTimeout(() => {
+      intro[to.name]()
+    }, 2000)
+  }
+  next()
 })
 
 sync(store, router)

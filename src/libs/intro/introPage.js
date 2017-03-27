@@ -46,17 +46,17 @@ export function home () {
       {
         element: '.el-icon-fa-eye',
         intro: '点击这个眼睛，可以在图表中显示数据',
-        position: 'right'
+        position: 'auto'
       },
       {
         element: '.el-icon-fa-expand',
         intro: '点击这个图标，可以放大到整个窗口查看',
-        position: 'right'
+        position: 'auto'
       },
       {
         element: '.el-icon-fa-download',
         intro: '点击这个图标，可以把图表下载为图片',
-        position: 'right'
+        position: 'auto'
       }
     ]
   }))
