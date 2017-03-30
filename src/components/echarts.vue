@@ -1,6 +1,6 @@
 <template>
   <div class="echart-box">
-    <div class="echart" ref="chart">
+    <div class="echart" :style="{height: height,width: width}" ref="chart">
 
     </div>
     <div class="echart-center">
@@ -11,8 +11,7 @@
 </template>
 <style scoped>
   .echart{
-    width: 100%;
-    height: 350px;
+
   }
   .echart-box{
     position: relative;
@@ -38,6 +37,14 @@
       notMerge: {
         type: Boolean,
         default: true
+      },
+      height: {
+        type: String,
+        default: '350px'
+      },
+      width: {
+        type: String,
+        default: '100%'
       }
     },
     data () {

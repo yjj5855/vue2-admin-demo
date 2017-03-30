@@ -39,5 +39,13 @@ export default [
         resolve(require('./bigdata.vue'))
       }, 'demo')
     }
+  },
+  {
+    path: '/calendar',
+    component: resolve => {
+      require.ensure(['./calendar.vue'], () => {
+        resolve(require('./calendar.vue'))
+      }, 'demo')
+    }
   }
 ]
