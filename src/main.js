@@ -21,7 +21,7 @@ import userRouter from './page/user'
 import demoRouter from './page/demo'
 import settingRouter from './page/setting'
 
-import intro from './libs/intro' // 网页引导模块
+// import intro from './libs/intro' // 网页引导模块
 
 import './transition/my-transition'
 
@@ -83,11 +83,11 @@ const router = new VueRouter({
 
 // 全局路由钩子
 router.beforeEach((to, from, next) => {
-  if (to.name) {
-    setTimeout(() => {
-      intro[to.name]()
-    }, 2000)
-  }
+  // if (to.name) {
+  //   setTimeout(() => {
+  //     intro[to.name]()
+  //   }, 2000)
+  // }
   next()
 })
 

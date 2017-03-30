@@ -5,13 +5,13 @@
       </transition>
       <el-row>
         <transition name="left" appear v-if="!destroy">
-          <el-col :span="4" class="page-menu">
+          <el-col :span="menuSpan" class="page-menu">
             <common-menu/>
           </el-col>
         </transition>
 
         <transition name="right" appear v-if="!destroy">
-          <el-col :span="20" class="page-content">
+          <el-col :span="contentSpan" class="page-content">
             <router-view></router-view>
           </el-col>
         </transition>
@@ -106,7 +106,8 @@
   export default{
     data () {
       return {
-        msg: 'hello vue',
+        menuSpan: 4,
+        contentSpan: 20,
         destroy: false
       }
     },
