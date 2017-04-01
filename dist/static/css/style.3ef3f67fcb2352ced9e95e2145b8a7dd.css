@@ -655,6 +655,67 @@ span[data-v-7e5904dd]{
 -------------------------- */
 /* Link
 -------------------------- */
+.custom-fields .box-header__title {
+  -ms-flex: 1;
+      flex: 1;
+  color: #999;
+  font-size: 12px;
+}
+.custom-fields .box-header__title span {
+  color: #f7ba2a;
+}
+.custom-fields .text-center {
+  text-align: center;
+}
+.custom-fields .block-box {
+  margin-bottom: 50px;
+  background: #ffffff;
+}
+.custom-fields .block-box .block-box__title {
+  height: 50px;
+  line-height: 50px;
+  padding-left: 20px;
+  border-bottom: 1px #e6e6e6 solid;
+}
+.custom-fields .row-box {
+  position: relative;
+  height: 50px;
+  line-height: 50px;
+  padding-left: 20px;
+  background: #ffffff;
+}
+.custom-fields .row-box:hover {
+  background: #f9f9f9;
+}
+.custom-fields .row-box:hover .row-box__action {
+  display: block;
+}
+.custom-fields .row-box .row-box__title {
+  font-size: 14px;
+}
+.custom-fields .row-box .row-box__action {
+  display: none;
+  position: absolute;
+  right: 10px;
+  top: 0;
+}
+.custom-fields .row-box .row-box__action i {
+  cursor: pointer;
+  padding: 18px;
+}
+.custom-fields .el-collapse {
+  margin-bottom: 30px;
+}
+
+@charset "UTF-8";
+/* 班步样式
+ -------------------------- */
+/* Border
+  -------------------------- */
+/* Colors
+-------------------------- */
+/* Link
+-------------------------- */
 .setting .box-header__title {
   -ms-flex: 1;
       flex: 1;
@@ -1116,4 +1177,4 @@ body{
   color: #1ab394;
 }
 
-/*# sourceMappingURL=style.28e2042eb3749f5b353c1d5b03257ca9.css.map*/
+/*# sourceMappingURL=style.3ef3f67fcb2352ced9e95e2145b8a7dd.css.map*/
