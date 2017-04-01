@@ -108,11 +108,9 @@ const state = {
   customFields: [
     {
       name: '工作信息',
-      show: true,
       children: [
         {
           name: '岗位信息',
-          show: true,
           children: [
             { name: '部门', must: true, show: true },
             { name: '岗位', must: true, show: true },
@@ -122,7 +120,6 @@ const state = {
         },
         {
           name: '员工状态',
-          show: true,
           children: [
             { name: '状态', must: true, show: true },
             { name: '入职日期', must: true, show: true },
@@ -134,12 +131,11 @@ const state = {
         },
         {
           name: '工资卡',
-          show: true,
           children: [
             { name: '工资卡号', must: false, show: true },
-            { name: '账户姓名', must: false, show: true },
-            { name: '开户城市', must: false, show: true },
-            { name: '开户行', must: false, show: true }
+            { name: '账户姓名', must: false, show: false },
+            { name: '开户城市', must: false, show: false },
+            { name: '开户行', must: false, show: false }
           ]
         }
       ]
