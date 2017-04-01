@@ -22,6 +22,7 @@ module.exports = {
     chunkFilename: '[name].js'
   },
   externals: {
+    zepto: 'window.$',
     requestAnimationFrame: 'window.requestAnimationFrame',
     TWEEN: 'window.TWEEN',
     echarts: 'window.echarts'

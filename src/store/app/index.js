@@ -29,8 +29,10 @@ const state = {
       ],
       desc: '支持员工入，离职办理，员工信息录入，查询，搜索，更新，跟踪',
       stateList: [
-        {name: '创建组织架构', state: true},
-        {name: '导入员工', state: true}
+        {name: '组织设置', state: true, must: true},
+        {name: '导入员工', state: true, must: true},
+        {name: '自定义字段', state: false, must: false, pathName: 'custom-fields'},
+        {name: '智能提醒', state: false, must: false}
       ]
     },
     {
@@ -42,7 +44,8 @@ const state = {
       children: [],
       desc: '多种考勤方案的设置，员工可以使用班步APP打卡考勤，考勤数据自动上传至云端',
       stateList: [
-        {name: '考勤方案设置', state: true}
+        {name: '考勤方案', state: false},
+        {name: '法定节假日', state: false}
       ]
     },
     {
@@ -54,8 +57,7 @@ const state = {
       children: [],
       desc: '设置员工的社保方案，员工会产生对应的社保账单',
       stateList: [
-        {name: '社保方案设置', state: false},
-        {name: '公积金对账', state: false}
+        {name: '缴纳方案', state: false}
       ]
     },
     {
@@ -67,8 +69,8 @@ const state = {
       children: [],
       desc: '维护员工的工资福利信息，系统每月根据员工的考勤状况自动计算工资',
       stateList: [
-        {name: '工资福利信息维护', state: false},
-        {name: '司龄/生日祝福', state: false}
+        {name: '工资模板', state: false},
+        {name: '薪资结算', state: false}
       ]
     },
     {
@@ -80,23 +82,24 @@ const state = {
       children: [],
       desc: '编辑招聘需求，录入员工简历，发起面试通知，反馈面试结果',
       stateList: [
-        {name: '面试管理', state: false},
-        {name: '人才库', state: false}
+        {name: '岗位职级', state: false},
+        {name: '通知设置', state: false}
       ]
     },
     {
-      name: '账户管理',
+      name: '其他功能',
       icon: 'el-icon-fa-unlock-alt',
       type: 'submenu',
       onOff: true,
       disabled: true,
       children: [
-        {name: '菜单设置', type: 'menu-item', index: '/setting', route: {path: '/setting'}}
+        {name: '菜单设置', type: 'menu-item', index: '/setting', route: {path: '/setting'}},
+        {name: '功能设置', type: 'menu-item', index: '/feature-setting', route: {path: '/feature-setting'}}
       ],
       desc: '专业的解决方案，帮助提高企业的效率，减少企业的用工风险',
       stateList: [
-        {name: '企业初始化设置', state: false},
-        {name: '公休日设置', state: false}
+        {name: '智能提醒设置', state: false},
+        {name: 'APP', state: false}
       ]
     }
   ]
