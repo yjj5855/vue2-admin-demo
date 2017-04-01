@@ -102,6 +102,51 @@ const state = {
         {name: 'APP', state: false}
       ]
     }
+  ],
+
+  // 自定义字段
+  customFields: [
+    {
+      name: '工作信息',
+      show: true,
+      children: [
+        {
+          name: '岗位信息',
+          show: true,
+          children: [
+            { name: '部门', must: true, show: true },
+            { name: '岗位', must: true, show: true },
+            { name: '职级', must: false, show: true },
+            { name: '工号', must: false, show: true }
+          ]
+        },
+        {
+          name: '员工状态',
+          show: true,
+          children: [
+            { name: '状态', must: true, show: true },
+            { name: '入职日期', must: true, show: true },
+            { name: '司龄', must: false, show: true },
+            { name: '试用期', must: true, show: true },
+            { name: '转正日期', must: false, show: true },
+            { name: '离职日期', must: false, show: true }
+          ]
+        },
+        {
+          name: '工资卡',
+          show: true,
+          children: [
+            { name: '工资卡号', must: false, show: true },
+            { name: '账户姓名', must: false, show: true },
+            { name: '开户城市', must: false, show: true },
+            { name: '开户行', must: false, show: true }
+          ]
+        }
+      ]
+    },
+    {
+      name: '个人信息'
+    }
   ]
 }
 
