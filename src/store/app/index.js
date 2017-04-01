@@ -29,8 +29,8 @@ const state = {
       ],
       desc: '支持员工入，离职办理，员工信息录入，查询，搜索，更新，跟踪',
       stateList: [
-        {name: '组织设置', state: true, must: true},
-        {name: '导入员工', state: true, must: true},
+        {name: '组织设置', state: true, must: true, pathName: 'userOrg'},
+        {name: '导入员工', state: true, must: true, pathName: 'userList'},
         {name: '自定义字段', state: false, must: false, pathName: 'custom-fields'},
         {name: '智能提醒', state: false, must: false}
       ]

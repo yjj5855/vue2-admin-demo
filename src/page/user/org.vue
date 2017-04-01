@@ -55,7 +55,7 @@
 
     <!--编辑视图-->
     <div v-show="layout == 'list'" :style="{width: width}" style="height: calc(100vh - 130px);padding-top: 70px;">
-      <tree-node v-model="vm" :node="root" @on-node-change="onTreeNodeChange"></tree-node>
+      <tree-node id="root-tree-node" v-model="vm" :node="root" @on-node-change="onTreeNodeChange"></tree-node>
     </div>
 
     <div class="fixed-box" :class="{active: showFixedBox}">
@@ -162,6 +162,8 @@
 </style>
 <script>
   import TreeNode from 'components/tree-node.vue'
+  import intro from '../../libs/intro'
+
   var _root = {
     "name": "上海云聚力量网络科技发展投资集团公司",
     "children": [
@@ -300,6 +302,12 @@
       this.root = JSON.parse(JSON.stringify(_root))
     },
     mounted () {
+      if (this.$route.params && this.$route.params.from === 'feature-setting') {
+        this.layout = 'list'
+        setTimeout(() => {
+          intro.createOrg()
+        }, 1000)
+      }
       this.drawOrgSvg(JSON.parse(JSON.stringify(_root)))
     },
     methods: {

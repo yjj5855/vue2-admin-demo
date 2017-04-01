@@ -732,6 +732,99 @@ span[data-v-7e5904dd]{
 -------------------------- */
 /* Link
 -------------------------- */
+.feature-setting {
+  margin: 0 -20px;
+}
+.feature-setting .box-header {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.feature-setting .box-header__title {
+  -ms-flex: 1;
+      flex: 1;
+  color: #999;
+  font-size: 12px;
+}
+.feature-setting .box-header__title span {
+  color: #f7ba2a;
+}
+.feature-setting .el-button--default {
+  color: #1ab394;
+  border-color: #1ab394;
+}
+.feature-setting .list-item {
+  padding: 40px;
+}
+.feature-setting .list-item:nth-child(odd) {
+  background: #fbfbfb;
+}
+.feature-setting .list-item__title {
+  color: #222;
+  margin-bottom: 30px;
+}
+.feature-setting .list-item__title__desc {
+  margin-left: 15px;
+  color: #a2a2a2;
+  font-size: 14px;
+}
+.feature-setting .item__icon {
+  display: inline-block;
+  margin-right: 60px;
+  color: #222;
+  font-size: 14px;
+  text-align: center;
+  text-decoration: none;
+}
+.feature-setting .item__icon img {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  margin-bottom: 10px;
+}
+.feature-setting .item__icon .color-gray-2 {
+  color: #a2a2a2;
+}
+.feature-setting .el-switch {
+  -ms-transform: scale(0.8);
+      transform: scale(0.8);
+}
+.feature-setting .el-step.active .el-step__head {
+  background: #1ab394 !important;
+}
+.feature-setting .el-step.active .el-step__title {
+  color: #1ab394 !important;
+}
+.feature-setting .el-step__head {
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  border-color: #1ab394 !important;
+}
+.feature-setting .el-step__title {
+  line-height: 20px;
+}
+.feature-setting .el-step__line {
+  left: 9px;
+  top: 20px;
+  border-left: 2px #1ab394 dashed;
+  background-color: transparent;
+}
+.feature-setting .el-step__line .el-step__line-inner {
+  display: none;
+}
+.feature-setting .el-step__icon {
+  display: none;
+}
+
+@charset "UTF-8";
+/* 班步样式
+ -------------------------- */
+/* Border
+  -------------------------- */
+/* Colors
+-------------------------- */
+/* Link
+-------------------------- */
 .pre-setting {
   padding: 0 100px;
 }
@@ -1023,4 +1116,4 @@ body{
   color: #1ab394;
 }
 
-/*# sourceMappingURL=style.6644c73e6540815b064b25d7c3af973f.css.map*/
+/*# sourceMappingURL=style.28e2042eb3749f5b353c1d5b03257ca9.css.map*/

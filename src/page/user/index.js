@@ -9,6 +9,7 @@ export default [
     }
   },
   {
+    name: 'userList',
     path: '/user/list',
     component: resolve => {
       require.ensure(['./list.vue'], () => {
@@ -17,6 +18,7 @@ export default [
     }
   },
   {
+    name: 'userOrg',
     path: '/user/org',
     component: resolve => {
       require.ensure(['./org.vue'], () => {
@@ -25,6 +27,7 @@ export default [
     }
   },
   {
+    name: 'userDetail',
     path: '/user/:id',
     component: resolve => {
       require.ensure(['./detail.vue'], () => {

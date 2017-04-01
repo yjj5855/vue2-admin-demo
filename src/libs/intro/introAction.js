@@ -11,3 +11,15 @@ export function importUser () {
     ]
   }))
 }
+
+export function createOrg () {
+  return introStart(getIntroOptions({
+    steps: [
+      {
+        element: '.tree-node-name',
+        intro: '鼠标移动到这里，点击加号，开始创建组织架构',
+        position: 'auto'
+      }
+    ]
+  }))
+}
