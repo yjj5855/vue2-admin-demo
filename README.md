@@ -53,6 +53,13 @@ http://element.eleme.io/#/zh-CN/component/installation
 
 # webpack 2.0
 https://doc.webpack-china.org/guides/
+
+# echarts 3.0
+http://echarts.baidu.com/option.html#title
+
+# d3.js 3.0 (组织架构图)
+http://www.kancloud.cn/wizardforcel/d3-api-ref/101209
+
 ```
 
 # 编译兼容element-ui的font-awesome
