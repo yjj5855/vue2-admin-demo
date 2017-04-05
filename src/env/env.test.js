@@ -1,3 +1,3 @@
 export default {
-  API_HOST: 'http://172.16.3.60:8081'
+  API_HOST: 'http://139.196.58.18:8081'
 }
