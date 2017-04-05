@@ -94,11 +94,13 @@
     </el-row>
 
     <el-row>
-      <el-col :span="24">
-        <el-button type="primary" :loading="true">提交</el-button>
+      <el-col :span="24" class="text-center">
+        <el-button type="primary" :loading="submitStatus" @click="submit">{{submitStatus?'提交中':'提交'}}</el-button>
       </el-col>
     </el-row>
 
+    <div class="white-space"></div>
+    <div class="white-space"></div>
   </div>
 </template>
 <style lang="less" rel="stylesheet/less">
@@ -179,7 +181,9 @@
         customFieldList: JSON.parse(JSON.stringify(this.$store.state.app.customFields)),
 
         showModel: [],
-        hideModel: []
+        hideModel: [],
+
+        submitStatus: false
       }
     },
     computed: {
@@ -295,6 +299,16 @@
       },
       onMove (evt) {
         return !evt.draggedContext.element.must
+      },
+      submit () {
+        this.submitStatus = true
+        setTimeout(() => {
+          this.$message({
+            message: '提交成功',
+            type: 'success'
+          })
+          this.submitStatus = false
+        }, 2000)
       }
     }
   }
