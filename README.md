@@ -6,7 +6,7 @@
 
 ``` bash
 # 安装node环境 V7.4.0或以上
-[下载地址](https://nodejs.org/en)
+下载地址 https://nodejs.org/en
 
 # 全局安装淘宝镜像工具
 npm install cnpm -g
@@ -36,8 +36,26 @@ cnpm install element-theme -g
 et
 ```
 
+## 第三方文档
 
-# 编译兼容element的font-awesome
+```
+# vue2.0
+https://cn.vuejs.org/
+
+# vue-router
+https://router.vuejs.org/zh-cn/
+
+# vuex
+https://vuex.vuejs.org/zh-cn/intro.html
+
+# element-ui
+http://element.eleme.io/#/zh-CN/component/installation
+
+# webpack 2.0
+https://doc.webpack-china.org/guides/
+```
+
+# 编译兼容element-ui的font-awesome
 ```
 @fa-css-prefix:       el-icon-fa; //修改为兼容element的class名称
 
