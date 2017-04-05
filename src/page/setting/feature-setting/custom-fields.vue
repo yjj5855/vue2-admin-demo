@@ -21,72 +21,69 @@
     </el-row>
 
     <el-row :gutter="50">
-      <el-col :span="12">
+      <el-col :span="24">
         <el-tabs v-model="activeName">
-          <el-tab-pane :label="item.name" :name="'tab_'+index" v-for="(item, index) in showModel">
+          <el-tab-pane :label="nameItem" :name="'tab_'+iii" v-for="(nameItem, iii) in ['工作信息','个人信息']">
 
-            <draggable v-model="item.children" :options="{group:item.name}">
-              <el-collapse v-for="(block, ii) in item.children" :value="block.name">
-                <el-collapse-item :name="block.name">
-                  <template slot="title">
-                    {{block.name}}
-                  </template>
-                  <draggable v-model="block.children" :options="{group:block.name}" :move="onMove">
-                    <div class="row-box" v-for="(row, i) in block.children" :must="row.must">
-                      <div class="row-box__title">{{row.name}} {{row.must?'(必填)':''}}</div>
-                      <div class="row-box__action">
-                        <i class="el-icon-edit" @click.stop="editCustomField(row)"></i>
-                        <i class="el-icon-fa-bars"></i>
-                        <i class="el-icon-delete2" v-if="!row.must" @click.stop="deleteCustomField(block.children, i, hideModel[index].children[ii])"></i>
-                        <i class="el-icon-delete2" v-else style="color: #a0a0a0"></i>
-                      </div>
-                    </div>
-                    <div class="row-box text-center" v-if="block.children.length == 0" style="padding-right: 20px;">
-                      暂无字段
-                    </div>
-                  </draggable>
-                </el-collapse-item>
-              </el-collapse>
+            <el-row :gutter="50">
+              <el-col :span="12" v-for="(item, index) in [showModel[iii]]">
+                <draggable v-model="item.children" :options="{group:item.name}">
+                  <el-collapse v-for="(block, ii) in item.children" :value="block.name">
+                    <el-collapse-item :name="block.name">
+                      <template slot="title">
+                        {{block.name}}
+                      </template>
+                      <draggable v-model="block.children" :options="{group:block.name}" :move="onMove">
+                        <div class="row-box" v-for="(row, i) in block.children" :must="row.must">
+                          <div class="row-box__title">{{row.name}} {{row.must?'(必填)':''}}</div>
+                          <div class="row-box__action">
+                            <i class="el-icon-edit" @click.stop="editCustomField(row)"></i>
+                            <i class="el-icon-fa-bars"></i>
+                            <i class="el-icon-delete2" v-if="!row.must" @click.stop="deleteCustomField(block.children, i, hideModel[index].children[ii])"></i>
+                            <i class="el-icon-delete2" v-else style="color: #a0a0a0"></i>
+                          </div>
+                        </div>
+                        <div class="row-box text-center" v-if="block.children.length == 0" style="padding-right: 20px;">
+                          暂无字段
+                        </div>
+                      </draggable>
+                    </el-collapse-item>
+                  </el-collapse>
 
 
-              <!--<div class="block-box" v-for="block in item.children">-->
-                <!--<div class="block-box__title">{{block.name}}</div>-->
+                  <!--<div class="block-box" v-for="block in item.children">-->
+                  <!--<div class="block-box__title">{{block.name}}</div>-->
 
-                <!--<draggable v-model="block.children" :options="{group:block.name}">-->
+                  <!--<draggable v-model="block.children" :options="{group:block.name}">-->
                   <!--<div class="row-box"  v-for="row in block.children">-->
-                    <!--<div class="row-box__title">{{row.name}}</div>-->
+                  <!--<div class="row-box__title">{{row.name}}</div>-->
                   <!--</div>-->
-                <!--</draggable>-->
-              <!--</div>-->
-            </draggable>
+                  <!--</draggable>-->
+                  <!--</div>-->
+                </draggable>
+              </el-col>
 
-          </el-tab-pane>
-        </el-tabs>
-      </el-col>
+              <el-col :span="12" v-for="(item, index) in [hideModel[iii]]">
+                <draggable v-model="item.children" :options="{group: 'hide_'+item.name}">
+                  <el-collapse v-for="block in item.children" :value="block.name" >
+                    <el-collapse-item :name="block.name">
+                      <template slot="title">
+                        {{block.name}}
+                      </template>
+                      <draggable v-model="block.children" :options="{group:block.name}">
+                        <div class="row-box"  v-for="row in block.children">
+                          <div class="row-box__title">{{row.name}}</div>
+                        </div>
+                        <div class="row-box text-center" @click="addCustomField(block.children)">
+                          <i class="el-icon-plus"></i>
+                        </div>
+                      </draggable>
+                    </el-collapse-item>
+                  </el-collapse>
+                </draggable>
+              </el-col>
 
-      <el-col :span="12">
-        <el-tabs v-model="activeName">
-          <el-tab-pane :label="item.name" :name="'tab_'+index" v-for="(item, index) in hideModel">
-
-            <draggable v-model="item.children" :options="{group: 'hide_'+item.name}">
-
-              <el-collapse v-for="block in item.children" :value="block.name" >
-                <el-collapse-item :name="block.name">
-                  <template slot="title">
-                    {{block.name}}
-                  </template>
-                  <draggable v-model="block.children" :options="{group:block.name}">
-                    <div class="row-box"  v-for="row in block.children">
-                      <div class="row-box__title">{{row.name}}</div>
-                    </div>
-                    <div class="row-box text-center" @click="addCustomField(block.children)">
-                      <i class="el-icon-plus"></i>
-                    </div>
-                  </draggable>
-                </el-collapse-item>
-              </el-collapse>
-
-            </draggable>
+            </el-row>
 
           </el-tab-pane>
         </el-tabs>
