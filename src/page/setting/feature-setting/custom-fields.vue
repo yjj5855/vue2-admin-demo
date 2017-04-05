@@ -93,6 +93,12 @@
       </el-col>
     </el-row>
 
+    <el-row>
+      <el-col :span="24">
+        <el-button type="primary" :loading="true">提交</el-button>
+      </el-col>
+    </el-row>
+
   </div>
 </template>
 <style lang="less" rel="stylesheet/less">

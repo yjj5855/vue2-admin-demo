@@ -39,7 +39,7 @@ et
 ## 第三方文档
 
 ```
-# vue2.0
+# vue 2.0
 https://cn.vuejs.org/
 
 # vue-router
