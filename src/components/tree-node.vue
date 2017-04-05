@@ -65,7 +65,7 @@
 </style>
 <script>
   import Vue from 'vue'
-  
+
   export default {
     name: 'tree-node', // 递归组件需指明 name
     props: {
@@ -77,11 +77,6 @@
       return {
         hideChildren: false,
         unwatchRootNode: () => {}
-      }
-    },
-    created () {
-      if (typeof this.idx === 'undefined') {
-        this.unwatchRootNode = this.$watch('node', val => { this.$emit('on-node-change', val) }, { deep: true })
       }
     },
     beforeDestroy () {
@@ -161,8 +156,19 @@
       },
       handleDragEnd () {
         this.clearBgColor()
+        if (typeof this.idx === 'undefined') {
+          this.$emit('on-node-change', this.node)
+        } else {
+          this.$parent && this.$parent.onDragEnd()
+        }
       },
-
+      onDragEnd () {
+        if (typeof this.idx === 'undefined') {
+          this.$emit('on-node-change', this.node)
+        } else {
+          this.$parent && this.$parent.onDragEnd()
+        }
+      },
       showDialog (type, node) {
         switch (type) {
           case 'add':

@@ -22,51 +22,70 @@ module.exports = {
     chunkFilename: '[name].js'
   },
   externals: {
+    zepto: 'window.$',
     requestAnimationFrame: 'window.requestAnimationFrame',
-    TWEEN: 'window.TWEEN'
+    TWEEN: 'window.TWEEN',
+    echarts: 'window.echarts'
   },
+
+  // 已修改
   resolve: {
-    extensions: ['', '.js', '.vue', '.json'],
-    fallback: [path.join(__dirname, '../node_modules')],
+    extensions: ['.js', '.vue', '.json'],
+    modules: [
+        "node_modules"
+    ],
     alias: {
       'vue$': 'vue/dist/vue.common.js',
-      'src': path.resolve(__dirname, '../src'),
-      'assets': path.resolve(__dirname, '../src/assets'),
-      'components': path.resolve(__dirname, '../src/components'),
-      'store': path.resolve(__dirname, '../src/store')
+      'src': path.resolve(__dirname, '../src/'),
+      'assets': path.resolve(__dirname, '../src/assets/'),
+      'components': path.resolve(__dirname, '../src/components/'),
+      'store': path.resolve(__dirname, '../src/store/')
     }
   },
-  resolveLoader: {
-    fallback: [path.join(__dirname, '../node_modules')]
-  },
+
   module: {
-    preLoaders: [
+    rules: [
       {
+        enforce: "pre",
         test: /\.vue$/,
-        loader: 'eslint',
+        use: [{
+          loader: 'eslint-loader',
+          options: {
+            formatter: require('eslint-friendly-formatter')   // 编译后错误报告格式
+          }
+        }],
         include: [
           path.join(projectRoot, 'src')
         ],
         exclude: /node_modules/
       },
       {
+        enforce: "pre",
         test: /\.js$/,
-        loader: 'eslint',
+        loader: ['babel-loader','eslint-loader'],
         include: [
           path.join(projectRoot, 'src')
         ],
-        exclude: /node_modules|plugins|libs/
-      }
-    ],
-    loaders: [
+        exclude: /node_modules/
+      },
+
+
       {
         test: /\.vue$/,
-        loader: 'vue',
+        loader: 'vue-loader',
+        options: {
+          loaders: utils.cssLoaders({ sourceMap: useCssSourceMap, extract: true }),
+          postcss: [
+            require('autoprefixer')({
+              browsers: ['ie > 8', 'last 2 version']
+            })
+          ]
+        },
         exclude: /static/,
       },
       {
         test: /\.js$/,
-        loader: 'babel',
+        loader: 'babel-loader',
         include: [
           path.join(projectRoot, 'src')
         ],
@@ -74,11 +93,11 @@ module.exports = {
       },
       {
         test: /\.json$/,
-        loader: 'json'
+        loader: 'json-loader'
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        loader: 'url',
+        loader: 'url-loader',
         query: {
           limit: 10000,
           name: utils.assetsPath('img/[name].[hash:7].[ext]')
@@ -86,27 +105,16 @@ module.exports = {
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        loader: 'url',
+        loader: 'url-loader',
         query: {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
       }
-    ],
-    devServer: {
-      historyApiFallback: true,
-      noInfo: true
-    },
-  },
-  eslint: {
-    formatter: require('eslint-friendly-formatter')
-  },
-  vue: {
-    loaders: utils.cssLoaders({ sourceMap: useCssSourceMap, extract: true }),
-    postcss: [
-      require('autoprefixer')({
-        browsers: ['last 2 versions']
-      })
     ]
+  },
+  devServer: {
+    historyApiFallback: true,
+    noInfo: true
   }
 }

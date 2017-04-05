@@ -2,8 +2,9 @@
 export default [
   {
     path: '/',
+    name: 'home',
     component: resolve => {
-      require.ensure(['./index.vue'], () => {
+      require.ensure([], () => {
         resolve(require('./index.vue'))
       }, 'app')
     }

@@ -11,7 +11,7 @@
 
   /* Colors
   -------------------------- */
-  --color-primary: #20a0ff;
+  --color-primary: #1ab394;
 
   --color-success: #13ce66;
   --color-warning: #f7ba2a;
@@ -519,11 +519,11 @@
   /* Menu
   --------------------------*/
   --menu-item-color: var(--link-color);
-  --menu-item-fill: var(--color-extra-light-gray);
+  --menu-item-fill: var(--color-white);
   --menu-item-hover-fill: var(--disabled-border-base);
 
   --dark-menu-item-color: var(--link-color);
-  --dark-menu-item-fill: var(--color-light-black);
+  --dark-menu-item-fill: var(--color-white);
   --dark-menu-item-hover-fill: var(--link-color);
 
   /* Rate

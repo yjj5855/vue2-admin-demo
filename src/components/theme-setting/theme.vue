@@ -50,7 +50,7 @@
   .popout {
     position: fixed;
     bottom: 3rem;
-    right: 3rem;
+    left: 3rem;
     z-index: 5;
   }
   .popout .btn {
@@ -102,13 +102,14 @@
     box-shadow: 0 0 5px rgba(0,0,0,0.15);
     position: absolute;
     bottom: 0;
-    right: 0;
+    left: 0;
     width: 340px;
     text-align: left;
     overflow: hidden;
     visibility: hidden;
     transform: scale(0);
-    transform-origin: 100% 100%;
+    /*控制缩放的方向*/
+    transform-origin: 0 100%;
     transition: transform 0.2s, visibility 0s 0.2s, opacity 0.2s;
     opacity: 0;
   }
@@ -136,7 +137,7 @@
     color: #aaa;
   }
   .popout .panel-footer {
-    text-align: right;
+    text-align: left;
     padding: 10px 20px;
     background-color: #fff;
     border-top: 1px #f1f1f1 solid;
