@@ -153,6 +153,131 @@ div[_echarts_instance_] div {
   float: left;
 }
 
+@charset "UTF-8";
+/* 班步样式
+ -------------------------- */
+/* Border
+  -------------------------- */
+/* Colors
+-------------------------- */
+/* Link
+-------------------------- */
+.login-box {
+  width: 400px;
+  position: absolute;
+  top: 0;
+  right: 100px;
+  bottom: 0;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.3);
+}
+.login-box .password-desc {
+  line-height: 1.2;
+  margin-bottom: 11px;
+  color: #fff;
+}
+.login-box .password-desc .el-icon-fa-lightbulb-o {
+  color: #f7ba2a;
+  font-size: 26px!important;
+  margin-right: 5px;
+}
+.login-body__bottom {
+  color: #e4e4e4;
+  font-size: 14px;
+  padding-bottom: 11px;
+  margin-bottom: 11px;
+  border-bottom: 1px solid #e7eaec;
+}
+.login-body__bottom span {
+  color: #1ab394;
+}
+.login-footer {
+  font-size: 14px;
+  color: #fff;
+  padding: 0 30px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@charset "UTF-8";
+/* 班步样式
+ -------------------------- */
+/* Border
+  -------------------------- */
+/* Colors
+-------------------------- */
+/* Link
+-------------------------- */
+.password-strength[data-v-d6e2e5c0] {
+  line-height: 22px;
+}
+.password-strength .strength-item[data-v-d6e2e5c0] {
+  color: #ffffff;
+  background: #bfbfbf;
+  text-align: center;
+}
+.password-strength .strength-item[data-v-d6e2e5c0]:nth-child(2) {
+  background: #afafaf;
+}
+.password-strength .strength-item.lv_1[data-v-d6e2e5c0] {
+  background: #ff4949;
+}
+.password-strength .strength-item.lv_2[data-v-d6e2e5c0] {
+  background: #f7ba2a;
+}
+.password-strength .strength-item.lv_3[data-v-d6e2e5c0] {
+  background: #13ce66;
+}
+
 .bb-index[data-v-19bd5eec]{
 }
 
@@ -1085,14 +1210,14 @@ span[data-v-7e5904dd]{
   height: 100%;
 }
 
-body{
+body {
   margin: 0;
 }
-.flex-1{
+.flex-1 {
   -ms-flex: 1;
       flex: 1;
 }
-.el-carousel__container{
+.el-carousel__container {
   height: 100vh;
 }
 .el-carousel__item:nth-child(2n) {
@@ -1101,32 +1226,41 @@ body{
 .el-carousel__item:nth-child(2n+1) {
   background-color: #3a3c40;
 }
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
 }
-.fade-enter, .fade-leave-active {
-  opacity: 0
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
 }
-.login-box{
-  width: 400px;
+.entry-enter-active,
+.entry-leave-active {
+  transition: all .5s;
+}
+.entry-enter,
+.entry-leave-active {
+  -ms-transform: translateX(500px);
+      transform: translateX(500px);
+}
+.entry-page {
+  background: #f0f3f3;
   position: absolute;
   top: 0;
-  right: 100px;
+  right: 0;
   bottom: 0;
-  z-index: 2;
-  background: rgba(255,255,255, 0.3);
+  left: 0;
+  height: 100vh;
+  width: 100%;
 }
-.login-footer{
-  font-size: 14px;color: #fff;padding: 0 30px;
-}
-.img-cover{
+.entry-page .img-cover {
   position: absolute;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
   padding: 20px;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0, 0, 0, 0.4);
 }
 
 @charset "UTF-8";
@@ -1177,4 +1311,4 @@ body{
   color: #1ab394;
 }
 
-/*# sourceMappingURL=style.3ef3f67fcb2352ced9e95e2145b8a7dd.css.map*/
+/*# sourceMappingURL=style.3b6402402a1ee658d28d603001308d22.css.map*/

@@ -16,6 +16,8 @@ import './transition'
 // import '../theme/index.css' // 需要在index.html引入
 import './style/main.less'
 
+import entryRouter from './page/entry/index'
+
 import homeRouter from './page/home'
 import userRouter from './page/user'
 import demoRouter from './page/demo'
@@ -54,13 +56,24 @@ const routes = [
     ]
   },
   {
-    path: '/login',
+    path: '/entry',
     component: resolve => {
-      require.ensure(['./page/login.vue'], () => {
-        resolve(require('./page/login.vue'))
-      }, 'login')
-    }
+      require.ensure(['./page/entry.vue'], () => {
+        resolve(require('./page/entry.vue'))
+      }, 'entry')
+    },
+    children: [
+      ...entryRouter
+    ]
   },
+  // {
+  //   path: '/login',
+  //   component: resolve => {
+  //     require.ensure(['./page/login.vue'], () => {
+  //       resolve(require('./page/login.vue'))
+  //     }, 'login')
+  //   }
+  // },
   {
     path: '/404',
     component: resolve => {

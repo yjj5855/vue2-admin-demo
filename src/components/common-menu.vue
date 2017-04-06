@@ -29,7 +29,7 @@
           <el-menu-item index="/calendar" :route="{path:'/calendar'}">日历控件</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
-      <el-menu-item index="/login"><i class="el-icon-setting"></i>退出登录</el-menu-item>
+      <el-menu-item index="/entry"><i class="el-icon-setting"></i>退出登录</el-menu-item>
     </el-menu>
   </sticky>
 </template>
