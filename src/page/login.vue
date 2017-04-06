@@ -32,6 +32,8 @@
                 <el-row :gutter="10">
                   <el-col :span="24">
                     <el-input type="password" v-model="form.password" placeholder="请输入密码"></el-input>
+                    <div class="white-space"></div>
+                    <password-strength :text="form.password"/>
                   </el-col>
                   <!--<el-col :span="8">-->
                     <!--<el-input v-model="form.date1" :disabled="true"></el-input>-->
@@ -108,6 +110,7 @@
 <script>
   import axios from 'axios'
   import AnimatedInteger from 'components/animated-integer'
+  import PasswordStrength from 'components/password-strength'
   export default{
     data () {
       return {
@@ -125,7 +128,8 @@
       }
     },
     components: {
-      AnimatedInteger
+      AnimatedInteger,
+      PasswordStrength
     },
     methods: {
       onSubmit () {
