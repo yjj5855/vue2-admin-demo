@@ -15,7 +15,7 @@
               class="table-item--input"
               v-model="scope.row.columns[index].value"
               @blur="onInputBlur(scope.row, index)"
-              @dblclick.native="onInputDbclick(scope.row, index)"
+              @click.native="onInputDbclick(scope.row, index)"
               :disabled="!scope.row.columns[index].editStatus"
             ></el-input>
           </div>
@@ -71,8 +71,8 @@
 
             columns: [
               {name: '姓名', disabled: true, value: '张三', editStatus: false},
-              {name: '部门', disabled: false, value: 1.0, editStatus: false},
-              {name: '工资', disabled: true, value: 0, editStatus: false}
+              {name: '基本工资', disabled: false, value: 1.0, editStatus: false},
+              {name: '实发工资', disabled: true, value: 0, editStatus: false}
             ]
           },
           {
@@ -81,8 +81,8 @@
 
             columns: [
               {name: '姓名', disabled: true, value: '李四', editStatus: false},
-              {name: '部门', disabled: false, value: 2.0, editStatus: false},
-              {name: '工资', disabled: true, value: 0, editStatus: false}
+              {name: '基本工资', disabled: false, value: 2.0, editStatus: false},
+              {name: '实发工资', disabled: true, value: 0, editStatus: false}
             ]
           }
         ],
@@ -118,13 +118,11 @@
           let rowIndex = this.tableData.findIndex(item => item.uuid === row.uuid)
 
           this.$set(this.tableData, rowIndex, {
-            uuid: 1,
-            emplUuid: 'EFWWEJFJ234',
-
+            ...this.tableData[rowIndex],
             columns: [
-              {name: '姓名', disabled: true, value: '张三', editStatus: false},
-              {name: '部门', disabled: false, value: row.columns[index].value, editStatus: false},
-              {name: '工资', disabled: true, value: row.columns[index].value * row.columns[index].value, editStatus: false}
+              this.tableData[rowIndex].columns[0],
+              this.tableData[rowIndex].columns[1],
+              {name: '实发工资', disabled: true, value: +row.columns[index].value + 1, editStatus: false}
             ]
           })
           this.loading = false
