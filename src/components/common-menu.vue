@@ -27,6 +27,7 @@
           <el-menu-item index="/time" :route="{path:'/time'}">上下班时间设置</el-menu-item>
           <el-menu-item index="/bigdata" :route="{path:'/bigdata'}">大数据导入</el-menu-item>
           <el-menu-item index="/calendar" :route="{path:'/calendar'}">日历控件</el-menu-item>
+          <el-menu-item index="/editTable" :route="{path:'/editTable'}">可编辑表格</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
       <el-menu-item index="/entry"><i class="el-icon-setting"></i>退出登录</el-menu-item>
