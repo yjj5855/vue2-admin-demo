@@ -70,7 +70,7 @@
             emplUuid: 'EFWWEJFJ234',
 
             columns: [
-              {name: '姓名', disabled: true, value: '张三', editStatus: false},
+              {name: '姓名', key: 'name', disabled: true, value: '张三', editStatus: false},
               {name: '基本工资', disabled: false, value: 1.0, editStatus: false},
               {name: '实发工资', disabled: true, value: 0, editStatus: false}
             ]

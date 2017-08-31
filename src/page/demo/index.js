@@ -55,5 +55,13 @@ export default [
         resolve(require('./editTable.vue'))
       }, 'demo')
     }
+  },
+  {
+    path: '/handsontable',
+    component: resolve => {
+      require.ensure(['./handsontable.vue'], () => {
+        resolve(require('./handsontable.vue'))
+      }, 'demo')
+    }
   }
 ]
