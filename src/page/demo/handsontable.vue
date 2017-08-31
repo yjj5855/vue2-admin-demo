@@ -10,7 +10,7 @@
 
 </style>
 <script>
-  import Handsontable from 'handsontable'
+//  import Handsontable from 'handsontable'
   import HotTable from 'vue-handsontable-official'
 
   let dataObject = [
@@ -257,7 +257,7 @@
     },
     data () {
       return {
-        tableData: Handsontable.helper.createSpreadsheetData(200, 20),
+        tableData: window.Handsontable.helper.createSpreadsheetData(200, 20),
         handsontable: null,
 
         // vue组件使用
