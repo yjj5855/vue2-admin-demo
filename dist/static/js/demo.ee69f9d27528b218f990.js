@@ -86551,6 +86551,14 @@ exports.default = {
           data: 'currencyCode',
           type: 'text'
         }, {
+          data: 'currencyCode',
+          editor: 'select',
+          selectOptions: currencyCodes
+        }, {
+          data: 'currencyCode',
+          type: 'dropdown',
+          source: currencyCodes
+        }, {
           data: 'currency',
           type: 'text'
         }, {
@@ -86575,7 +86583,7 @@ exports.default = {
         height: 441,
         maxRows: 22,
         rowHeaders: true,
-        colHeaders: ['ID', 'Country', 'Code', 'Currency', 'Level', 'Units', 'Date', 'Change'],
+        colHeaders: ['ID', 'Country', 'Code', 'CodeSelect', 'CodeDropdown', 'Currency', 'Level', 'Units', 'Date', 'Change'],
         fixedRowsBottom: 2
       }
     };
@@ -113632,4 +113640,4 @@ module.exports = function(module) {
 
 /***/ })
 ]));
-//# sourceMappingURL=demo.01e68b0f81ede7573f26.js.map
+//# sourceMappingURL=demo.ee69f9d27528b218f990.js.map

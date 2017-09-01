@@ -10,7 +10,7 @@
 
 </style>
 <script>
-//  import Handsontable from 'handsontable'
+  import Handsontable from 'handsontable'
   import HotTable from 'vue-handsontable-official'
 
   let dataObject = [
@@ -257,7 +257,7 @@
     },
     data () {
       return {
-        tableData: window.Handsontable.helper.createSpreadsheetData(200, 20),
+        tableData: Handsontable.helper.createSpreadsheetData(200, 20),
         handsontable: null,
 
         // vue组件使用
@@ -277,6 +277,16 @@
             {
               data: 'currencyCode',
               type: 'text'
+            },
+            {
+              data: 'currencyCode',
+              editor: 'select',
+              selectOptions: currencyCodes
+            },
+            {
+              data: 'currencyCode',
+              type: 'dropdown',
+              source: currencyCodes
             },
             {
               data: 'currency',
@@ -312,6 +322,8 @@
             'ID',
             'Country',
             'Code',
+            'CodeSelect',
+            'CodeDropdown',
             'Currency',
             'Level',
             'Units',
@@ -324,7 +336,10 @@
     },
     computed: {},
     created () {
-
+//      setInterval(() => {
+//        this.hotSettings.data[0].onedChng += 0.0001
+//        console.log(this.hotSettings.data[0].onedChng)
+//      }, 2000)
     },
     mounted () {
 //      this.handsontable = new Handsontable(this.$refs.handsontable, {
