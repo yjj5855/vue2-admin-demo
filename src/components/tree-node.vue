@@ -10,57 +10,106 @@
        @dragenter.stop="handleDragEnter"
        @dragleave.stop="handleDragLeave"
        @dragend.prevent="handleDragEnd">
-    <div class="tree-node-name" :class="{ 'has-name': node.name }">
-      <span @click.stop.parent="hideChildren = !hideChildren">
-        <span v-if="node.name && node.children && node.children.length > 0" class="el-tree-node__expand-icon" :class="{ expanded: !hideChildren }"></span>
-        <span class="el-tree-node__label">{{ node.name }}</span>
-      </span>
-      <span class="tree-node-action" v-if="node.name">
-        <el-button-group>
-          <el-button type="primary" size="mini" icon="plus" @click="showDialog('add')"></el-button>
-          <el-button type="primary" size="mini" icon="edit" @click="showDialog('edit')"></el-button>
-          <el-button type="primary" size="mini" icon="delete" @click="showDialog('delete')"></el-button>
-        </el-button-group>
-      </span>
+    <div class="tree-node-name" :style="{'padding-left': level * 16 + 'px'}" :class="{ 'has-name': node.name, ['idx_'+idx]: true }">
+      <div @click="emitEvent('nodeRow')">
+        <span v-if="node.name && idx >= 0" class="el-icon-iconfont-paixu"></span>
+        <span @click.parent="emitEvent('nodeName')">
+          <span class="el-tree-node__label">{{ node.name }}</span>
+          <i v-if="node.name && node.children && node.children.length > 0" :class="{'el-icon-arrow-down': hideChildren, 'el-icon-arrow-up': !hideChildren }"></i>
+        </span>
+        <span class="tree-node-action" v-if="node.name">
+          <i class="el-icon-plus" @click="emitEvent('add')"></i>
+          <i class="el-icon-fa-copy" @click="emitEvent('copy')" v-if="idx !== undefined"></i>
+          <i class="el-icon-delete" @click="emitEvent('delete')" v-if="idx !== undefined"></i>
+        </span>
+      </div>
     </div>
     <div class="tree-node-children">
-      <tree-node v-for="(child, $index) in children" v-show="!hideChildren"
-                 v-model="valueModel" :node="child" :idx="$index">
+      <tree-node
+        v-show="!hideChildren"
+        v-for="(child, $index) in children"
+        v-model="valueModel" :node="child" :idx="$index" :level="level+1">
       </tree-node>
     </div>
   </div>
 </template>
-<style scoped>
+<style lang="less" rel="stylesheet/less" scoped>
+  @import "../var";
   .tree-node { /* 普通节点 */
     /*display: list-item;*/
     /*list-style: none;*/
     /*border-left: 1px dashed #ccc;*/
   }
   .tree-node.empty-node { /* 空节点 */
-    height: 8px;
+    height: 5px;
     list-style-type: none;
   }
   .tree-node-children { /* 层次缩进 */
-    margin-left: 1.5em;
-  }
-  .tree-node-name .tree-node-action{
-    margin-left: 15px;
-    font-size: 14px;
-    display: none;
+    /*margin-left: 1.5em;*/
+
   }
   .tree-node-name.has-name{
     min-height: 22px;
     line-height: 22px;
+    position: relative;
+
+    &.idx_undefined{
+      background: transparent!important;
+      color: @color-primary!important;
+
+      .tree-node-action{
+        display: inline-block!important;
+        height: 14px!important;
+      }
+    }
+
+    .tree-node-action{
+      margin-left: 15px;
+      font-size: 14px;
+      display: none;
+
+      i{
+        cursor: pointer;
+        color: @color-primary;
+        margin-right: 15px;
+
+        &.el-icon-iconfont-tianjia{
+          font-size: 16px!important;
+        }
+      }
+    }
+    .el-icon-iconfont-paixu{
+      cursor: move;
+      visibility: hidden;
+      font-size: 12px;
+      color: @color-primary;
+    }
+
+    &:hover{
+      background: rgba(26, 179, 148, .1);
+      color: @color-primary;
+      box-shadow: 0 2px 10px -2px rgba(26, 179, 148, 0.3);
+
+      .tree-node-action{
+        display: inline-block;
+        height: 14px;
+      }
+      .el-icon-iconfont-paixu{
+        visibility: visible;
+      }
+    }
+    .el-tree-node__label{
+      margin-left: 5px;
+      line-height: 34px;
+    }
   }
-  .tree-node-name.has-name:hover{
-    background: #eee;
-  }
-  .tree-node-name:hover .tree-node-action{
-    display: inline-block;
-    height: 14px;
-  }
-  .el-tree-node__label{
-    margin-left: 5px;
+
+  .el-icon-arrow-down,.el-icon-arrow-up{
+    line-height: 34px;
+    &:before{
+      font-size: 12px!important;
+      color: @color-extra-light-black;
+    }
   }
 </style>
 <script>
@@ -71,7 +120,11 @@
     props: {
       value: Object, // 正在拖动的节点实例（TreeNode 组件通用，须双向绑定）
       node: Object, // 节点数据，形如 { name: 'xxx', children: [] }
-      idx: Number // v-for 的索引，用于相邻节点的判别
+      idx: Number, // v-for 的索引，用于相邻节点的判别
+      level: {
+        type: Number,
+        default: 0
+      } // 层级
     },
     data: function () {
       return {
@@ -126,9 +179,10 @@
       clearBgColor () { // 清理样式
         this.$el.style.backgroundColor = ''
       },
-      handleDragStart () {
+      handleDragStart (ev) {
         this.valueModel = this // 设置本组件为当前正在拖动的实例，此举将同步 sync 到所有 TreeNode 实例
         this.$el.style.backgroundColor = 'silver'
+        ev.dataTransfer.effectAllowed = 'move'
       },
       handleDrop () {
         this.clearBgColor() // 此时 this 为目的地节点，vm 才是被拖动节点
@@ -138,93 +192,128 @@
         let index = this.value.$parent.node.children.indexOf(this.value.node)
         this.value.$parent.node.children.splice(index, 1)
 
+        let dropNode = null
+//        console.log('正在拖动的节点' + this.value.node.name)
         // 情况 1：拖入空节点，成其兄弟（使用 splice 插入节点）
         if (!this.node.name) {
-          return this.$parent.node.children.splice(this.idx / 2, 0, this.value.node)
+//          console.log('拖入了空节点， ')
+          // TODO 获取上一个节点
+//          console.log(this.idx / 2)
+          if (this.idx / 2 === 0) {
+            dropNode = this.$parent.node
+          } else {
+            dropNode = this.$parent.node.children[this.idx / 2 - 1]
+          }
+
+          // 插入节点
+          this.$parent.node.children.splice(this.idx / 2, 0, this.value.node)
+
+          if (typeof this.idx === 'undefined') {
+            this.$emit('on-node-change', this.node)
+            this.$emit('on-change', { dragNode: this.value.node, dropNode: dropNode })
+          } else {
+            this.$parent && this.$parent.onDragEnd({ dragNode: this.value.node, dropNode: dropNode })
+          }
+          return
         }
 
         // 情况2：拖入普通节点，成为其子
-        if (!this.node.children) Vue.set(this.node, 'children', []) // 须用 $set 引入双向绑定
+        if (!this.node.children || this.node.children.length === 0) {
+          Vue.set(this.node, 'children', []) // 须用 $set 引入双向绑定
+          dropNode = this.node
+//          console.log('拖入了没有子节点的节点' + this.node.name)
+        } else {
+          dropNode = this.node.children[this.node.children.length - 1]
+//          console.log('拖入了有子节点的节点, 最后一个子节点为' + this.node.children[this.node.children.length - 1].name)
+        }
         this.node.children.push(this.value.node)
+
+        if (typeof this.idx === 'undefined') {
+          this.$emit('on-node-change', this.node)
+        } else {
+          this.$parent && this.$parent.onDragEnd({ dragNode: this.value.node, dropNode: dropNode })
+        }
       },
       handleDragEnter () { // 允许拖放才会显示样式
         if (!this.isAllowToDrop) return
-        this.$el.style.backgroundColor = 'yellow'
+        this.$el.style.backgroundColor = 'rgba(26, 179, 148, 0.1)'
       },
       handleDragLeave () {
         this.clearBgColor()
       },
       handleDragEnd () {
         this.clearBgColor()
+      },
+      onDragEnd (changeInfo) {
         if (typeof this.idx === 'undefined') {
           this.$emit('on-node-change', this.node)
+          this.$emit('on-change', changeInfo)
         } else {
-          this.$parent && this.$parent.onDragEnd()
+          this.$parent && this.$parent.onDragEnd(changeInfo)
         }
       },
-      onDragEnd () {
+      onAddBtnClick (data) {
         if (typeof this.idx === 'undefined') {
-          this.$emit('on-node-change', this.node)
+          this.$emit('on-add-btn-click', data)
         } else {
-          this.$parent && this.$parent.onDragEnd()
+          this.$parent && this.$parent.onAddBtnClick(data)
         }
       },
-      showDialog (type, node) {
+      onEditBtnClick (data) {
+        if (typeof this.idx === 'undefined') {
+          this.$emit('on-edit-btn-click', data)
+        } else {
+          this.$parent && this.$parent.onEditBtnClick(data)
+        }
+      },
+      onCopyBtnClick (data) {
+        if (typeof this.idx === 'undefined') {
+          this.$emit('on-copy-btn-click', data)
+        } else {
+          this.$parent && this.$parent.onCopyBtnClick(data)
+        }
+      },
+      onDelBtnClick (data) {
+        if (typeof this.idx === 'undefined') {
+          this.$emit('on-del-btn-click', data)
+        } else {
+          this.$parent && this.$parent.onDelBtnClick(data)
+        }
+      },
+      onNodeNameClick (data) {
+        if (typeof this.idx === 'undefined') {
+          this.$emit('on-node-name-click', data)
+        } else {
+          this.$parent && this.$parent.onNodeNameClick(data)
+        }
+      },
+      onNodeRowClick (data) {
+        if (typeof this.idx === 'undefined') {
+          this.$emit('on-node-row-click', data)
+        } else {
+          this.$parent && this.$parent.onNodeRowClick(data)
+        }
+      },
+      emitEvent (type, node) {
         switch (type) {
           case 'add':
-            this.$prompt(`请输入部门名称`, '提示', {
-              confirmButtonText: '确定',
-              cancelButtonText: '取消'
-            }).then(({ value }) => {
-              if (!this.node.children) Vue.set(this.node, 'children', []) // 须用 $set 引入双向绑定
-              this.node.children.push({name: value})
-              this.$message({
-                type: 'success',
-                message: `新增了部门【${value}】`
-              })
-            }).catch(() => {
-              this.$message({
-                type: 'info',
-                message: '取消输入'
-              })
-            })
+            this.onAddBtnClick(this.node)
             break
           case 'edit':
-            let oldName = this.node.name
-            this.$prompt(`请输入部门【${oldName}】的新名称`, '提示', {
-              confirmButtonText: '确定',
-              cancelButtonText: '取消'
-            }).then(({ value }) => {
-              this.node.name = value
-              this.$message({
-                type: 'success',
-                message: `部门【${oldName}】改为了: 【${value}】`
-              })
-            }).catch(() => {
-              this.$message({
-                type: 'info',
-                message: '取消输入'
-              })
-            })
+            this.onEditBtnClick(this.node)
+            break
+          case 'copy':
+            this.onCopyBtnClick(this.node)
             break
           case 'delete':
-            this.$confirm('此操作将永久删除该部门, 是否继续?', '提示', {
-              confirmButtonText: '确定',
-              cancelButtonText: '取消',
-              type: 'warning'
-            }).then(() => {
-              let index = this.$parent.node.children.indexOf(this.node)
-              this.$parent.node.children.splice(index, 1)
-              this.$message({
-                type: 'success',
-                message: '删除成功!'
-              })
-            }).catch(() => {
-              this.$message({
-                type: 'info',
-                message: '已取消删除'
-              })
-            })
+            this.onDelBtnClick(this.node)
+            break
+          case 'nodeRow':
+            this.onNodeRowClick(this.node)
+            break
+          case 'nodeName':
+            this.hideChildren = !this.hideChildren
+            this.onNodeNameClick(this.node)
             break
         }
       }

@@ -2,7 +2,15 @@
   <div class="banbu-tree" style="background: #fff">
     <el-row>
       <el-col :span="12">
-        <tree-node v-model="vm" :node="treeData" @on-node-change="onNodeChange"></tree-node>
+        <tree-node
+          v-model="vm"
+          :node="treeData"
+          @on-node-change="onNodeChange"
+          @on-copy-btn-click="copyOrg"
+          @on-add-btn-click="addOrg"
+          @on-del-btn-click="delOrg"
+        >
+        </tree-node>
       </el-col>
       <el-col class="check-tree" :span="12">
         <el-tree
@@ -105,8 +113,16 @@
     },
     methods: {
       onNodeChange (rootNode) {
-//        console.log(JSON.parse(JSON.stringify(rootNode)))
         this.$set(this, 'treeData', JSON.parse(JSON.stringify(rootNode)))
+      },
+      copyOrg (node) {
+        console.log('拷贝', node)
+      },
+      addOrg (node) {
+        console.log('添加', node)
+      },
+      delOrg (node) {
+        console.log('删除', node)
       }
     },
     created () {
