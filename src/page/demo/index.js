@@ -63,5 +63,13 @@ export default [
         resolve(require('./handsontable.vue'))
       }, 'demo')
     }
+  },
+  {
+    path: '/scroll',
+    component: resolve => {
+      require.ensure([], () => {
+        resolve(require('./scroll.vue'))
+      }, 'demo')
+    }
   }
 ]
