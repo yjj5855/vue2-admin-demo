@@ -8,11 +8,8 @@
 # 安装node环境 V7.4.0或以上
 下载地址 https://nodejs.org/en
 
-# 全局安装淘宝镜像工具
-npm install cnpm -g
-
-# 通过淘宝镜像安装依赖
-cnpm install
+# 安装依赖
+npm install --registry=https://registry.npm.taobao.org
 
 # 复制本地配置文件
 cp src/env/env.test.js src/env/env.js
@@ -39,7 +36,7 @@ et
 ## 第三方文档
 
 ```
-# vue2.0
+# vue 2.0
 https://cn.vuejs.org/
 
 # vue-router

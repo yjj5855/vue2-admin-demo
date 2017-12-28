@@ -47,5 +47,21 @@ export default [
         resolve(require('./calendar.vue'))
       }, 'demo')
     }
+  },
+  {
+    path: '/editTable',
+    component: resolve => {
+      require.ensure(['./editTable.vue'], () => {
+        resolve(require('./editTable.vue'))
+      }, 'demo')
+    }
+  },
+  {
+    path: '/handsontable',
+    component: resolve => {
+      require.ensure(['./handsontable.vue'], () => {
+        resolve(require('./handsontable.vue'))
+      }, 'demo')
+    }
   }
 ]

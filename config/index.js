@@ -19,7 +19,7 @@ module.exports = {
   },
   dev: {
     env: require('./dev.env'),
-    port: 8088,
+    port: 8089,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     themeSubDirectory: 'theme',
